@@ -1,3 +1,39 @@
-<div role="button" class="rounded-md bg-slate-950 w-full h-full" style="background-image: url('https://i1.sndcdn.com/artworks-000245638163-7dx5p1-t500x500.jpg');">
+<div role="button" class="relative rounded-md overflow-hidden h-full w-full">
+
+  <div class="w-full h-full blur-md" style="background-image: url('https://i1.sndcdn.com/artworks-000245638163-7dx5p1-t500x500.jpg');">
+
+  </div>
+
+  <div  class=" w-full h-full absolute top-0" (click)="this.visitar()">
+
+    <div class="fade-gradient absolute w-full h-full flex flex-col p-2 justify-between">
+      <div class="flex flex-row text-xs text-white">
+
+        <div class=" flex flex-wrap flex-1  h-5 gap-x-1 ">
+          <span class="bg-green-500 px-1 font-semibold rounded-md leading-5">
+            NSFW
+          </span>
+          <span class="bg-blue-500 px-1 font-semibold rounded-md leading-5">
+            Nuevo
+          </span>
+
+          <span *ngFor="let icon of this.icons" class="size-5 flex justify-center items-center rounded-md" [ngClass]="icon.color">
+              <i class="{{icon.icon}}"></i>
+          </span>
+        </div>
+
+        <button (click)="$event.stopPropagation();" class="size-5 flex justify-center items-center">
+          <i class="pi pi-ellipsis-v "></i>
+        </button>
+
+
+      </div>
+
+      <span *ngIf="true" class="text-lg font-semibold line-clamp-2 text-white">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe cumque eum qui blanditiis minima sed sapiente unde expedita iure quidem.
+      </span>
+    </div>
+
+  </div>
 
 </div>

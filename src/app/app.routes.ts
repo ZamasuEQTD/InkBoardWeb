@@ -4,5 +4,9 @@ import { HomePageComponent } from './features/home/pages/home-page/home-page.com
 export const routes: Routes = [
   {
     path: '' , component: HomePageComponent
+  },
+  {
+    path:'**',
+    redirectTo: ''
   }
 ];
