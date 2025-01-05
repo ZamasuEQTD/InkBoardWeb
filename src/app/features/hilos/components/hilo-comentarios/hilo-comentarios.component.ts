@@ -1,9 +1,37 @@
 import { Component } from '@angular/core';
+import { Comentario } from '../../../comentarios/interfaces/comentario.interface';
+import { ComentarioComponent } from "../../../comentarios/components/comentario/comentario.component";
 
 @Component({
   selector: 'app-hilo-comentarios',
-  imports: [],
+  imports: [ComentarioComponent],
   templateUrl: './hilo-comentarios.component.html',
   styleUrl: './hilo-comentarios.component.css',
 })
-export class HiloComentariosComponent { }
+export class HiloComentariosComponent {
+  comentarios : Comentario[] = Array(20).fill({
+    id :"jej",
+    color : "amarillo",
+    created_at :  new Date("2025-01-05T13:37:00"),
+    destacado : false,
+    es_autor: false,
+    texto : "goooooooooosssoooood",
+    respuestas : [],
+    responde : [ ],
+    autor_id : "",
+    recibir_notificaciones :false,
+    es_op: false,
+    media : {
+      es_spoiler : false,
+      provider : "video",
+      url : "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+    },
+    detalles: {
+      tag : ""
+    },
+    autor : {
+      nombre:"Anonimo",
+      rango: "ANON"
+    }
+  });
+}

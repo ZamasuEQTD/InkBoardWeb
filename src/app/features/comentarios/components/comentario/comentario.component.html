@@ -1,0 +1,53 @@
+<div class="w-full bg-gray-100 rounded-xl p-2 flex flex-col">
+  <div class="flex flex-row justify-between items-center mb-1">
+
+    <div class="flex flex-row items-center gap-x-1">
+
+      <div class="size-12 rounded-md bg-red-600 flex justify-center items-center " >
+        <span class="text-white text-sm font-bold"> {{this.comentario.detalles.dados ?? (this.comentario.es_op? "OP" : this.comentario.autor.rango)}} </span>
+      </div>
+
+      <div class="flex flex-wrap gap-x-1 gap-y-[2px] items-center mb">
+        <span class="text-sm font-semibold">{{this.comentario.autor.nombre}}</span>
+
+        @if (this.comentario.es_op) {
+          <div class="bg-white text-xs px-2 py-1 rounded-lg"> OP </div>
+        }
+
+        @if (this.comentario.destacado) {
+          <div class="bg-yellow-200 text-xs px-2 py-1 rounded-lg">Destacado</div>
+        }
+
+        <div  class="bg-white text-xs px-2 py-1 rounded-lg"> {{this.comentario.detalles.tag}} </div>
+
+        @if (this.comentario.detalles.tag_unico) {
+          <div class="bg-red-500 text-white text-xs px-2 py-1 rounded-lg"> {{this.comentario.detalles.tag_unico}} </div>
+        }
+
+      </div>
+
+    </div>
+
+    <div class="items-center flex flex-row gap-x-1">
+
+      <span class="text-sm text-gray-400"> {{this.comentario.created_at | tiempoTranscurrido}} </span>
+
+      <button>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
+        </svg>
+      </button>
+    </div>
+
+  </div>
+
+  <div id="respuestas-comentario-wrap" class="flex flex-wrap gap-x-1 gap-y-1">
+
+    @for (tag of this.comentario.respuestas; track $index) {
+      <span class=" text-blue-600">{{tag}}</span>
+    }
+  </div>
+
+  <span> {{this.comentario.texto}} </span>
+</div>
