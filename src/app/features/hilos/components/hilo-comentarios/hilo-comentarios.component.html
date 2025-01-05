@@ -6,6 +6,10 @@
       @for (comentario of comentarios; track $index) {
         <app-comentario [comentario]="comentario"></app-comentario>
       }
+
+      @for (_ of comentarios; track $index) {
+        <app-comentario-skeleton></app-comentario-skeleton>
+      }
     </div>
 
   </div>

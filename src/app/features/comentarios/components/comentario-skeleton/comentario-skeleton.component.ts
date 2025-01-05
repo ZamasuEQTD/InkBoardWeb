@@ -4,6 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-comentario-skeleton',
   imports: [],
   templateUrl: './comentario-skeleton.component.html',
-  styleUrl: './comentario-skeleton.component.css',
+  styleUrls:['./comentario-skeleton.component.css', '../comentario/comentario.component.css'],
 })
 export class ComentarioSkeletonComponent { }

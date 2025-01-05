@@ -1,3 +1,13 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer utilities {
+  .portada-container {
+    @apply rounded-md h-full w-full;
+  }
+}
+
 :host {
   display: block;
 }
@@ -6,3 +16,4 @@
 .fade-gradient {
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.5) 100%);
 }
+

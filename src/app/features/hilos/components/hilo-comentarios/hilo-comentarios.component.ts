@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { Comentario } from '../../../comentarios/interfaces/comentario.interface';
 import { ComentarioComponent } from "../../../comentarios/components/comentario/comentario.component";
+import { ComentarioSkeletonComponent } from "../../../comentarios/components/comentario-skeleton/comentario-skeleton.component";
 
 @Component({
   selector: 'app-hilo-comentarios',
-  imports: [ComentarioComponent],
+  imports: [ComentarioComponent, ComentarioSkeletonComponent],
   templateUrl: './hilo-comentarios.component.html',
   styleUrl: './hilo-comentarios.component.css',
 })
@@ -27,7 +28,7 @@ export class HiloComentariosComponent {
       url : "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
     },
     detalles: {
-      tag : ""
+      tag : "FASFASFS"
     },
     autor : {
       nombre:"Anonimo",

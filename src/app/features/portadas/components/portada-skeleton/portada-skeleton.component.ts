@@ -7,7 +7,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     CommonModule
   ],
   templateUrl: './portada-skeleton.component.html',
-  styleUrl: './portada-skeleton.component.css',
+  styleUrls: ['./portada-skeleton.component.css', '../portada/portada.component.css']
 })
 export class PortadaSkeletonComponent {
   iconsCount :number = Math.floor(Math.random() * (5 - 1) + 1);
