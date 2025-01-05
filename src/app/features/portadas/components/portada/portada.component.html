@@ -23,8 +23,8 @@
 
         </div>
 
-        <button (click)="$event.stopPropagation();" class="size-5 flex justify-center items-center">
-          <i class="pi pi-ellipsis-v"></i>
+        <button (click)="$event.stopPropagation();menu.toggle($event)" class="size-5 flex justify-center items-center">
+          <i class="fa-solid fa-ellipsis-vertical"></i>
         </button>
 
       </div>
@@ -39,3 +39,7 @@
 
 </div>
 
+
+<p-menu #menu [popup]="true" [model]="this.opciones">
+
+</p-menu>

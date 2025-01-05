@@ -1,12 +1,17 @@
+import { MenuItem } from 'primeng/api';
 import { CommonModule } from '@angular/common';
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Portada } from '../interfaces/portada.interface';
 
+import { MenuModule } from 'primeng/menu';
+
+
 @Component({
   selector: 'portada',
   imports: [
     CommonModule,
+    MenuModule
   ],
   templateUrl: './portada.component.html',
   styleUrl: './portada.component.css',
@@ -38,10 +43,28 @@ export class PortadaComponent implements OnInit{
   }
 
 
+  public opciones : MenuItem[] = [
+    {
+      label: "Denunciar"
+    },
+    {
+      label: "Seguir"
+    },
+    {
+      label: "Ocultar"
+    },
+    {
+      label: "Poner en favoritos"
+    },
+    {
+      label: "Eliminar",
+    },
+    {
+      label: "Ver usuario"
+    }
+  ];
 
   visitar() : void {
-    console.log("hjj")
-
     this.router.navigateByUrl(`hilo/${''}`)
   }
 }

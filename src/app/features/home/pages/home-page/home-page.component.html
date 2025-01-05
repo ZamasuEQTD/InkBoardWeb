@@ -1,9 +1,4 @@
 <app-header class="sticky z-10 top-0"></app-header>
-
-<div class="card flex justify-center">
-  <p-button label="Check" />
-</div>
-
 <div id="home-portadas-grid" class="grid gap-1 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5  xl:grid-cols-6 min-h-screen px-1 py-1">
   @for (portada of portadas; track $index) {
     <portada [portada]="portada" class="portada-responsive-container"></portada>
