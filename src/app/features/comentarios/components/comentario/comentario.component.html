@@ -43,11 +43,12 @@
   </div>
 
   <div id="respuestas-comentario-wrap" class="flex flex-wrap gap-x-1 gap-y-1">
-
     @for (tag of this.comentario.respuestas; track $index) {
       <span class=" text-blue-600">{{tag}}</span>
     }
   </div>
+
+  <video src="{{this.comentario.media.url}}" controls="controls"></video>
 
   <span> {{this.comentario.texto}} </span>
 </div>

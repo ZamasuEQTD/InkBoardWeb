@@ -2,7 +2,7 @@ import { MenuItem } from 'primeng/api';
 import { CommonModule } from '@angular/common';
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Portada } from '../interfaces/portada.interface';
+import { Portada } from '../../interfaces/portada.interface';
 
 import { MenuModule } from 'primeng/menu';
 

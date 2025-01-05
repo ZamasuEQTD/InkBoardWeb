@@ -1,0 +1,66 @@
+<div class="w-full px-2 py-2 bg-white border-solid border-t-2 border-gray-300">
+  <form action="">
+
+    <input class="mb-1" type="file" name="" id="" (change)="this.onFileSelected($event)" #fileInputRef hidden>
+
+    @if (this.media) {
+      @if (this.media.contenido.type === 'video' || this.media.contenido.type === 'image' || this.media.contenido.type === 'youtube') {
+        <div class="bg-gray-200 p-2 inline-flex rounded-xl mb-2 relative overflow-hidden ">
+
+          <div class="sm:size-28  size-24 inline-flex rounded-s ">
+
+            <div class="rounded-lg overflow-hidden flex justify-center h-full w-full ">
+              @switch (this.media.contenido.type) {
+                @case ('image') {
+                  <img  class="rounded-md" [src]="this.media!.contenido.provider" alt="">
+                }
+                @case ('video') {
+                  <video class="rounded-md" [src]="this.media!.contenido.provider"></video>
+                }
+                @case ('youtube') {
+                  <img  class="rounded-md" [src]='this.media!.contenido.provider! | youtubeThumbnail' alt="">
+                }
+              }
+            </div>
+
+          </div>
+
+          @if (this.media.ocultar) {
+            <div class="absolute w-full h-full  top-0 right-0 bg-black-100 bg-opacity-20 backdrop-blur-lg"></div>
+          }
+
+        </div>
+      } @else {
+
+      }
+    }
+
+
+    <div class="flex flex-row gap-x-2 items-center ">
+
+      <div class="rounded-md bg-gray-200 flex-1 flex flex-row items-center p-2 box-border ">
+
+        <div class="flex flex-row flex-1 gap-x-1">
+
+          <button class="size-8  flex justify-center items-center"  (click)="fileInputRef.click()" type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bolt"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><circle cx="12" cy="12" r="4"/></svg>
+          </button>
+
+          <textarea  #myTextareaRef rows="3" name="" id="" placeholder="Escribe tu comentario" class="flex-1 p-0 rounded-none"></textarea>
+
+        </div>
+
+        <button class="size-8 flex justify-center items-center text-gray-800" (click)="$event.preventDefault()" type="submit">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+            <path d="M3.105 2.288a.75.75 0 0 0-.826.95l1.414 4.926A1.5 1.5 0 0 0 5.135 9.25h6.115a.75.75 0 0 1 0 1.5H5.135a1.5 1.5 0 0 0-1.442 1.086l-1.414 4.926a.75.75 0 0 0 .826.95 28.897 28.897 0 0 0 15.293-7.155.75.75 0 0 0 0-1.114A28.897 28.897 0 0 0 3.105 2.288Z" />
+          </svg>
+        </button>
+
+      </div>
+
+
+    </div>
+
+  </form>
+
+</div>

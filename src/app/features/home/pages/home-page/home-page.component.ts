@@ -1,23 +1,21 @@
 import { ChangeDetectionStrategy, Component,  } from '@angular/core';
 
 
-import { PortadaSkeletonComponent } from "../../../portadas/components/portada-skeleton/portada-skeleton.component";
 import { HeaderComponent } from "../../../core/components/header/header.component";
-import { Portada } from '../../../portadas/components/interfaces/portada.interface';
-import { PortadaComponent } from "../../../portadas/components/portada/portada.component";
+import { Portada } from '../../../portadas/interfaces/portada.interface';
+import { PortadasGridComponent } from "../../../portadas/components/portadas-grid/portadas-grid.component";
+
 @Component({
   selector: 'app-home-page',
   imports: [
-    PortadaSkeletonComponent,
     HeaderComponent,
-    PortadaComponent,
+    PortadasGridComponent
 ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomePageComponent {
-  l : number[] = Array(29).fill(1);
 
   private _portadas: Portada[] = [{
     id: "1",

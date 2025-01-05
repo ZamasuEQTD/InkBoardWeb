@@ -1,0 +1,12 @@
+<div class="grid gap-1 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5  xl:grid-cols-6 min-h-screen px-1 py-1">
+  @for (portada of portadas; track $index) {
+    <portada [portada]="portada" class="portada-responsive-container"></portada>
+  }
+
+  @if(this.cargando) {
+    @for (portada of this.l; track $index) {
+      <portada-skeleton class="portada-responsive-container"></portada-skeleton>
+    }
+  }
+
+</div>
