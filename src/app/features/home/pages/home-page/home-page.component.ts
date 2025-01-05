@@ -1,4 +1,7 @@
 import { ChangeDetectionStrategy, Component,  } from '@angular/core';
+
+import { ButtonModule } from 'primeng/button';
+
 import { PortadaSkeletonComponent } from "../../../portadas/components/portada-skeleton/portada-skeleton.component";
 import { HeaderComponent } from "../../../core/components/header/header.component";
 import { Portada } from '../../../portadas/components/interfaces/portada.interface';
@@ -9,6 +12,7 @@ import { PortadaComponent } from "../../../portadas/components/portada/portada.c
     PortadaSkeletonComponent,
     HeaderComponent,
     PortadaComponent,
+    ButtonModule
 ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css',
