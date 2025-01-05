@@ -1,18 +1,14 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component,  } from '@angular/core';
 import { PortadaSkeletonComponent } from "../../../portadas/components/portada-skeleton/portada-skeleton.component";
 import { HeaderComponent } from "../../../core/components/header/header.component";
 import { Portada } from '../../../portadas/components/interfaces/portada.interface';
 import { PortadaComponent } from "../../../portadas/components/portada/portada.component";
-//import { PortadaComponent } from "../../components/portada/portada.component";
-
 @Component({
   selector: 'app-home-page',
   imports: [
-    CommonModule,
     PortadaSkeletonComponent,
     HeaderComponent,
-    PortadaComponent
+    PortadaComponent,
 ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css',

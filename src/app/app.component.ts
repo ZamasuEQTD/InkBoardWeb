@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { PrimeNG } from 'primeng/config';
 
 @Component({
     selector: 'app-root',
@@ -10,16 +9,8 @@ import { PrimeNG } from 'primeng/config';
 })
 export class AppComponent {
   title = 'InkBoard';
+  constructor() {
 
-  constructor(private primeng: PrimeNG) {
-    this.primeng.theme.set({
-            options: {
-                cssLayer: {
-                    name: 'primeng',
-                    order: 'tailwind-base, primeng, tailwind-utilities'
-                }
-            }
-        })
-    }
+  }
 
 }

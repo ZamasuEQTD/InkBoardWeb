@@ -1,15 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuModule } from 'primeng/menu';
-import {MenuItem, PrimeIcons} from 'primeng/api';
 import { Portada } from '../interfaces/portada.interface';
 
 @Component({
   selector: 'portada',
   imports: [
     CommonModule,
-    MenuModule
   ],
   templateUrl: './portada.component.html',
   styleUrl: './portada.component.css',
