@@ -1,23 +1,23 @@
 <div role="button" class="relative rounded-md overflow-hidden h-full w-full" (click)="this.visitar()">
 
-  <div class="w-full h-full blur-md" style="background-image: url('https://i1.sndcdn.com/artworks-000245638163-7dx5p1-t500x500.jpg');"></div>
+  <div [ngClass]="{ 'blur-md': this.portada.miniatura.es_spoiler}" class="w-full h-full" style="background-image: url('https://i1.sndcdn.com/artworks-000245638163-7dx5p1-t500x500.jpg');"></div>
 
   <div  class=" w-full h-full absolute top-0" >
 
-    <div class="fade-gradient absolute w-full h-full flex flex-col p-2 justify-between">
+    <div class="fade-gradient absolute w-full h-full flex flex-col p-1 justify-between">
       <div class="flex flex-row text-xs text-white">
 
-        <div class=" flex flex-wrap flex-1  h-5 gap-1 ">
+        <div class=" flex flex-wrap flex-1 gap-[0.125rem] ">
 
           <span class="bg-green-500 px-1 font-semibold rounded-md leading-5">
-            NSFW
+            {{this.portada.subcategoria}}
           </span>
 
           <span class="bg-blue-500 px-1 font-semibold rounded-md leading-5">
             Nuevo
           </span>
 
-          <span *ngFor="let icon of this.icons" class="size-5 flex justify-center items-center rounded-md" [ngClass]="icon.color">
+          <span *ngFor="let icon of this.icons; " class="size-5 flex justify-center items-center rounded-md" [ngClass]="icon.color">
               <i class="{{icon.icon}}"></i>
           </span>
 
@@ -27,11 +27,10 @@
           <i class="pi pi-ellipsis-v"></i>
         </button>
 
-
       </div>
 
       <span *ngIf="true" class="text-lg font-semibold line-clamp-2 text-white">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe cumque eum qui blanditiis minima sed sapiente unde expedita iure quidem.
+        {{this.portada.titulo}}
       </span>
 
     </div>

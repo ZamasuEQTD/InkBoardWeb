@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuModule } from 'primeng/menu';
 import {MenuItem, PrimeIcons} from 'primeng/api';
+import { Portada } from '../interfaces/portada.interface';
 
 @Component({
-  selector: 'home-portada',
+  selector: 'portada',
   imports: [
     CommonModule,
     MenuModule
@@ -13,26 +14,33 @@ import {MenuItem, PrimeIcons} from 'primeng/api';
   templateUrl: './portada.component.html',
   styleUrl: './portada.component.css',
 })
-export class PortadaComponent {
+export class PortadaComponent implements OnInit{
+
+
+  @Input() portada!:Portada;
 
   private router : Router = inject(Router);
 
-  public get icons() : IconTag[] {
-    return [
+  public icons: IconTag[] = []
+
+  ngOnInit(): void {
+    this.icons =  [
       {
         color : 'bg-yellow-500',
-        icon: PrimeIcons.THUMBTACK
+        icon: 'fa-solid fa-thumbtack'
       },
       {
         color : 'bg-blue-500',
-        icon: PrimeIcons.CHART_PIE
+        icon: 'fa-solid fa-chart-simple'
       },
       {
         color : 'bg-blue-500',
-        icon: PrimeIcons.USER
+        icon: 'fa-solid fa-dice-two'
       },
     ];
   }
+
+
 
   visitar() : void {
     console.log("hjj")
