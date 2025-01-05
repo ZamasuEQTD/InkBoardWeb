@@ -15,7 +15,13 @@
   @tailwind utilities;
 }
 
+@layer utilities {
+  .fullscreen-on-mobile {
+    @apply min-h-screen w-full sm:min-h-0;
+  }
+}
+
+
 html, body { height: 100%; }
 
 body { margin: 0; font-family: 'Poppins', Roboto, "Helvetica Neue", sans-serif; word-break: break-word; overflow-wrap: break-word; }
-

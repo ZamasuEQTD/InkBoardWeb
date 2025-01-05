@@ -1,14 +1,15 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { DrawerModule } from 'primeng/drawer';
 import { MenuModule } from 'primeng/menu';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-drawer-button',
   imports: [
     DrawerModule,
-    MenuModule
-  ],
+    MenuModule,
+],
   templateUrl: './drawer-button.component.html',
   styleUrl: './drawer-button.component.css',
 })
@@ -21,7 +22,11 @@ export class DrawerButtonComponent {
     label: 'Seguidos  '
   }]
 
-  public toggle(){
+  ref?: DynamicDialogRef;
+
+  private dialogService: DialogService = inject(DialogService);
+
+  toggle(){
     this.show = !this.show;
 
     if(this.show){
