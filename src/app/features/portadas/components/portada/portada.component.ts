@@ -65,7 +65,7 @@ export class PortadaComponent implements OnInit{
   ];
 
   visitar() : void {
-    this.router.navigateByUrl(`hilo/${''}`)
+    this.router.navigateByUrl(`hilo/${this.portada.id}`)
   }
 }
 
