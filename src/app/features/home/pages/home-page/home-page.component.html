@@ -1,8 +1,11 @@
-<app-header></app-header>
+<app-header class="sticky z-10 top-0"></app-header>
+
 <div id="home-portadas-grid" class="grid gap-1 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5  xl:grid-cols-6 min-h-screen px-1 py-1">
-  <portada *ngFor="let portada of this.portadas" [portada]="portada" class=" h-[50vw] sm:h-[calc(100vw/3)] md:h-[calc(100vw/4)] lg:h-[calc(100vw/5)] xl:h-[calc(100vw/6)]"></portada>
+
+  <portada *ngFor="let portada of this.portadas" [portada]="portada" class="portada-responsive-container"></portada>
 
   <ng-container *ngIf="this.loading">
-    <portada-skeleton *ngFor="let _ of this.l" class=" h-[50vw] sm:h-[calc(100vw/3)] md:h-[calc(100vw/4)] lg:h-[calc(100vw/5)] xl:h-[calc(100vw/6)]"></portada-skeleton>
+    <portada-skeleton *ngFor="let _ of this.l" class="portada-responsive-container"></portada-skeleton>
   </ng-container>
+
 </div>

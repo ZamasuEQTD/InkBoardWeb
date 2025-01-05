@@ -1,3 +1,17 @@
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components {
+  .portada-responsive-container {
+    @apply h-[50vw] sm:h-[calc(100vw/3)] md:h-[calc(100vw/4)] lg:h-[calc(100vw/5)] xl:h-[calc(100vw/6)];
+  }
+
+}
+
 :host {
   display: block;
 }
