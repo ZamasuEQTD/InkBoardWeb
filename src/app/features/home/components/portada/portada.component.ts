@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { MenuModule } from 'primeng/menu';
 import {MenuItem, PrimeIcons} from 'primeng/api';
 
 @Component({
   selector: 'home-portada',
   imports: [
-    CommonModule
+    CommonModule,
+    MenuModule
   ],
   templateUrl: './portada.component.html',
   styleUrl: './portada.component.css',
@@ -21,15 +22,16 @@ export class PortadaComponent {
       {
         color : 'bg-yellow-500',
         icon: PrimeIcons.THUMBTACK
-      }
+      },
+      {
+        color : 'bg-blue-500',
+        icon: PrimeIcons.CHART_PIE
+      },
+      {
+        color : 'bg-blue-500',
+        icon: PrimeIcons.USER
+      },
     ];
-  }
-
-  test(event : MouseEvent):void {
-
-    event.stopPropagation();
-
-    console.log("test")
   }
 
   visitar() : void {
