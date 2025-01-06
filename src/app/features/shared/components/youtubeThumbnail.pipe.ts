@@ -1,11 +1,11 @@
 import { Pipe, type PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'youtubeThumbnail',
+  name: 'youtubeThumbnail'
 })
 export class YoutubeThumbnailPipe implements PipeTransform {
 
-    transform(url: string, quality: 'default' | 'medium' | 'high' = 'default'): string {
+  transform(url: string, quality: 'default' | 'medium' | 'high' = 'default'): string {
     // Extraer el ID del video de la URL
     const videoId = this.extractVideoId(url);
 
@@ -25,10 +25,9 @@ export class YoutubeThumbnailPipe implements PipeTransform {
   }
 
   private extractVideoId(url: string): string | null {
-    // Expresión regular para extraer el ID del video de una URL de YouTube
-    const regex = /(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+    // Expresión regular para extraer el ID del video de una URL de YouTube (incluyendo Shorts)
+    const regex = /(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/|youtube\.com\/shorts\/)([a-zA-Z0-9_-]{11})/;
     const match = url.match(regex);
     return match ? match[1] : null;
   }
-
 }
