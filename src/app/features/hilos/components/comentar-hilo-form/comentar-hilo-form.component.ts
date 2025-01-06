@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ContenidoCensurable } from '../../../shared/interfaces/contenido-censurable.interface';
 import { YoutubeThumbnailPipe } from "../../../shared/pipes/youtubeThumbnail.pipe";
+import { Media } from '../../../shared/interfaces/media.interface';
 
 @Component({
   selector: 'app-comentar-hilo-form',
@@ -42,6 +43,10 @@ export class ComentarHiloFormComponent {
     this.fileInput.nativeElement.value = '';
 
     this.media = undefined;
+  }
+
+  toggleOcultar(){
+    this.media!.ocultar = !this.media?.ocultar;
   }
 
 }
