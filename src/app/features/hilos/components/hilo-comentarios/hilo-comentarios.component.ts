@@ -24,9 +24,9 @@ export class HiloComentariosComponent {
     recibir_notificaciones :false,
     es_op: false,
     media : {
-      provider : "youtube",
+      provider : "video",
       es_spoiler : false,
-      url : "https://www.youtube.com/watch?v=St32aLCNMmQ"
+      url : "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
     },
     detalles: {
       tag : "FASFASFS"

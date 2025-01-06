@@ -1,14 +1,14 @@
 @if (this.isDimensionable) {
-  <div class="rounded-2xl overflow-hidden">
+  <div class="rounded-2xl overflow-hidden flex">
     @switch (this.media.provider) {
       @case ('youtube') {
-        <iframe [src]="this.media.url" title="YouTube video player" allowfullscreen></iframe>
+        <app-youtube-player [url]="this.media.url"></app-youtube-player>
       }
       @case ('video') {
-        <video [src]="this.media.url" controls="controls"></video>
+        <video [src]="this.media.url"  [poster]="this.media.previsualizacion" controls="controls"></video>
       }
       @case ('image') {
-        <img [src]="this.media.url" alt="">
+        <img [src]="this.media.url" alt="imagen no visible">
       }
     }
   </div>
