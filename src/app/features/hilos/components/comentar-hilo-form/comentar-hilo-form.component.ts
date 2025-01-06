@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, signal, ViewChild } from '@angular/core';
 import { ContenidoCensurable } from '../../../shared/interfaces/contenido-censurable.interface';
 import { YoutubeThumbnailPipe } from "../../../shared/pipes/youtubeThumbnail.pipe";
 import { Media } from '../../../shared/interfaces/media.interface';
@@ -13,7 +13,8 @@ export class ComentarHiloFormComponent {
   @ViewChild('fileInputRef') fileInput!: ElementRef;
   @ViewChild('myTextareaRef') myTextarea!: ElementRef;
 
-  public media?: ContenidoCensurable<PickedMedia>;
+
+  public media = signal<ContenidoCensurable<PickedMedia> | undefined>(undefined);
 
 
   onFileSelected(event: any) {
@@ -26,13 +27,13 @@ export class ComentarHiloFormComponent {
     const reader = new FileReader();
 
     reader.onload = (e: ProgressEvent<FileReader>) => {
-      this.media  = {
+      this.media.set({
         ocultar:false,
         contenido: {
           provider :  reader.result! as string,
           type : file.type.split('/')[0]
         }
-      }
+      });
     }
 
     reader.readAsDataURL(event.target.files[0]);
@@ -42,11 +43,14 @@ export class ComentarHiloFormComponent {
   public eliminarMedia() :void {
     this.fileInput.nativeElement.value = '';
 
-    this.media = undefined;
+    this.media.set(undefined);
   }
 
   toggleOcultar(){
-    this.media!.ocultar = !this.media?.ocultar;
+    this.media.update((e) => ({
+      ...e!,
+      ocultar: !e!.ocultar
+    }));
   }
 
 }

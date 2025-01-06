@@ -3,31 +3,30 @@
 
     <input class="mb-1" type="file" name="" id="" (change)="this.onFileSelected($event)" #fileInputRef hidden>
 
-    @if (this.media) {
-      @if (this.media.contenido.type === 'video' || this.media.contenido.type === 'image' || this.media.contenido.type === 'youtube') {
+    @if (this.media()) {
+      @if (this.media()!.contenido.type === 'video' || this.media()!.contenido.type === 'image' || this.media()!.contenido.type === 'youtube') {
 
         <div class="inline-flex mb-2 relative">
 
           <div class="sm:size-28  size-24 inline-flex rounded-s bg-gray-200 p-2 rounded-xl overflow-hidden">
 
             <div class="rounded-lg overflow-hidden flex justify-center h-full w-full relative object-cover">
-              @switch (this.media.contenido.type) {
+
+              @switch (this.media()!.contenido.type) {
                 @case ('image') {
-                  <img  class="rounded-md" [src]="this.media!.contenido.provider" alt="">
+                  <img  class="rounded-md" [src]="this.media()!.contenido.provider" alt="">
                 }
                 @case ('video') {
-                  <video class="rounded-md" [src]="this.media!.contenido.provider"></video>
+                  <video class="rounded-md" [src]="this.media()!.contenido.provider"></video>
                 }
                 @case ('youtube') {
-                  <img  class="rounded-md" [src]='this.media!.contenido.provider! | youtubeThumbnail' alt="">
+                  <img  class="rounded-md" [src]='this.media()!.contenido.provider! | youtubeThumbnail' alt="">
                 }
               }
 
-
-              @if (this.media.ocultar) {
+              @if (this.media()!.ocultar) {
                 <div class="absolute w-full h-full  top-0 right-0 bg-black-100 bg-opacity-20 backdrop-blur-lg rounded-md"></div>
               }
-
             </div>
 
             <div class="flex flex-row absolute top-[-10px] right-1 bg-white shadow-lg rounded-md">
