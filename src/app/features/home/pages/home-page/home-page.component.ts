@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component,  } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal,  } from '@angular/core';
 
 
 import { HeaderComponent } from "../../../core/components/header/header.component";
@@ -54,7 +54,7 @@ export class HomePageComponent {
     },
   },];
 
-  public loading = true;
+  public loading = signal(false);
 
   public get portadas() : Portada[] {
     return this._portadas;
