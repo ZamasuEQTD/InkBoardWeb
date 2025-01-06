@@ -1,0 +1,15 @@
+@if (this.isDimensionable) {
+  <div class="rounded-2xl overflow-hidden">
+    @switch (this.media.provider) {
+      @case ('youtube') {
+        <iframe [src]="this.media.url" title="YouTube video player" allowfullscreen></iframe>
+      }
+      @case ('video') {
+        <video [src]="this.media.url" controls="controls"></video>
+      }
+      @case ('image') {
+        <img [src]="this.media.url" alt="">
+      }
+    }
+  </div>
+}

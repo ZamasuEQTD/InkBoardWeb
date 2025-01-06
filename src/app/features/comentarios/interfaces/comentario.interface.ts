@@ -1,3 +1,5 @@
+import { Media } from "../../shared/interfaces/media.interface";
+
 export interface Comentario {
   id:                     string;
   texto:                  string;
@@ -12,7 +14,7 @@ export interface Comentario {
   color:                  string;
   autor:                  Autor;
   detalles:               Detalles;
-  media:                  Media;
+  media?:                  Media;
 }
 
 export interface Autor {
@@ -26,9 +28,4 @@ export interface Detalles {
   dados?:    string;
 }
 
-export interface Media {
-  provider:          string;
-  es_spoiler:        boolean;
-  url:               string;
-  previsualizacion?: string;
-}
+

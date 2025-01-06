@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ContenidoCensurable } from '../../../shared/interfaces/contenido-censurable.interface';
-import { YoutubeThumbnailPipe } from "../../../shared/components/youtubeThumbnail.pipe";
+import { YoutubeThumbnailPipe } from "../../../shared/pipes/youtubeThumbnail.pipe";
 
 @Component({
   selector: 'app-comentar-hilo-form',
@@ -31,7 +31,6 @@ export class ComentarHiloFormComponent {
           provider :  reader.result! as string,
           type : file.type.split('/')[0]
         }
-
       }
     }
 

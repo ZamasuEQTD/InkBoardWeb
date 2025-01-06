@@ -24,9 +24,9 @@ export class HiloComentariosComponent {
     recibir_notificaciones :false,
     es_op: false,
     media : {
+      provider : "youtube",
       es_spoiler : false,
-      provider : "video",
-      url : "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+      url : "https://www.youtube.com/watch?v=St32aLCNMmQ"
     },
     detalles: {
       tag : "FASFASFS"

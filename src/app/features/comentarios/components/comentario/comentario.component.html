@@ -48,7 +48,9 @@
     }
   </div>
 
-  <video src="{{this.comentario.media.url}}" controls="controls"></video>
+  @if (this.comentario.media) {
+    <app-media-box [media]="this.comentario.media"></app-media-box>
+  }
 
   <span> {{this.comentario.texto}} </span>
 </div>
