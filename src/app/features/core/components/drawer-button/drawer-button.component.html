@@ -2,7 +2,7 @@
   <i class="fa-solid fa-bars"></i>
 </button>
 
-<p-drawer  #drawer [(visible)]="show" #headless position="right" (onHide)="toggle()">
+<p-drawer  #drawer [(visible)]="show" #headless position="right" (onHide)="toggle()" baseZIndex="25">
   <ng-template #headless>
     @if (false) {
 
@@ -41,7 +41,8 @@
           </li>
         </ul>
       </div>
-    } @else   {
+    }
+    @else   {
 
       <div class="flex justify-center items-center h-full">
 
@@ -55,7 +56,7 @@
             </span>
           </button>
 
-          <button class="bg-gray-200 text-black px-2 py-3 rounded-lg mb-1 font-semibold ">
+          <button class="bg-gray-200 text-black px-2 py-3 rounded-lg mb-1 font-semibold " (click)="this.test()">
             <span>
               Registrarse
             </span>

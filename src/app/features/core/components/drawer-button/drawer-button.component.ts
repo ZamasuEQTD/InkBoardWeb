@@ -3,7 +3,9 @@ import { MenuItem } from 'primeng/api';
 import { DrawerModule } from 'primeng/drawer';
 import { MenuModule } from 'primeng/menu';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
+import { RegistrarseDialogComponent } from '../../../auth/registrarse-dialog/registrarse-dialog.component';
 @Component({
   selector: 'app-drawer-button',
   imports: [
@@ -22,11 +24,13 @@ export class DrawerButtonComponent {
     label: 'Seguidos  '
   }]
 
-  ref?: DynamicDialogRef;
 
-  private dialogService: DialogService = inject(DialogService);
+  private overlayRef?: OverlayRef;
 
-  toggle(){
+  private overlay : Overlay = inject(Overlay);
+
+
+  toggle():void {
     this.show = !this.show;
 
     if(this.show){
@@ -34,5 +38,27 @@ export class DrawerButtonComponent {
     } else {
       document.body.classList.remove("overflow-y-hidden")
     }
+  }
+
+
+  test(): void {
+    this.overlayRef = this.overlay.create({
+      hasBackdrop: true, // Fondo oscuro
+      panelClass : 'z-[10000000]',
+      positionStrategy: this.overlay
+        .position()
+        .global()
+        .centerHorizontally()
+        .centerVertically(), // Centrar el overlay
+    });
+
+    const portal = new ComponentPortal(RegistrarseDialogComponent);
+
+    var a = this.overlayRef.attach(portal);
+
+    // Cerrar el overlay al hacer clic fuera
+    this.overlayRef.backdropClick().subscribe(() => {
+      this.overlayRef!.dispose();
+    });
   }
 }

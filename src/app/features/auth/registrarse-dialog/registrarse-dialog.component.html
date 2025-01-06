@@ -1,0 +1,29 @@
+<div class="bg-white p-2  rounded-none sm:rounded-md max-[480px]:fullscreen-on-mobile sm:medium" >
+  <div class="py-2">
+    <shared-dialog-header title="Registrarse" (onClose)="this.onClose()"/>
+  </div>
+
+ <div class="px-3">
+  <form action="" (submit)="$event.preventDefault()">
+
+    <shared-input-labeled label="Usuario" class="">
+      <input type="text"  class="py-3" placeholder="Usuario">
+    </shared-input-labeled>
+
+    <shared-input-labeled label="Contraseña">
+      <input type="password" placeholder="Contraseña">
+    </shared-input-labeled>
+
+    <shared-input-labeled label="Repite contraseña">
+      <input type="password" placeholder="Repitir Contraseña">
+    </shared-input-labeled>
+
+    <div class="px-3 mt-2">
+      <button class="px-3 py-3 bg-indigo-600 w-full">
+        <span class="text-white font-semibold text-xl">Registrarse</span>
+      </button>
+    </div>
+
+  </form>
+ </div>
+</div>

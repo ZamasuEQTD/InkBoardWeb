@@ -17,18 +17,26 @@
 
 @layer utilities {
   .fullscreen-on-mobile {
-    @apply min-h-screen w-full sm:min-h-0;
+    @apply min-h-screen w-screen ;
+  }
+
+  .medium {
+    @apply w-[600px] max-h-[800] min-h-[400px];
   }
 }
 
 
 @layer base {
   input, textarea {
-    @apply bg-gray-200 px-3 py-2 outline-none rounded-lg;
+    @apply bg-gray-200 px-3  outline-none rounded-lg;
+  }
+
+  input {
+    @apply py-3
   }
 
   textarea {
-    @apply resize-none;
+    @apply resize-none py-2;
   }
 
   button {
