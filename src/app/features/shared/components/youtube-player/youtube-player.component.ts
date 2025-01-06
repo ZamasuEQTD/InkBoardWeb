@@ -16,7 +16,5 @@ export class YoutubePlayerComponent implements OnInit{
 
   ngOnInit(): void {
     this.embedUrl = "https://www.youtube.com/embed/"+  YoutubeUtil.getId(this.url) +"?autoplay=1";
-
-    console.log(this.embedUrl)
   }
 }
