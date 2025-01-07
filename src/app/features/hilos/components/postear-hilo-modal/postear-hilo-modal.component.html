@@ -1,0 +1,71 @@
+<div class="bg-white  rounded-none sm:rounded-md h-screen w-screen  sm:medium flex flex-col overflow-hidden">
+  <div class="py-2 p-4">
+    <shared-dialog-header title="Postear hilo"/>
+  </div>
+
+ <div class="px-2 flex flex-col py-2  flex-1 overflow-y-auto">
+  <form action="" [formGroup]="this.form" (submit)="$event.preventDefault()" class="overflow-y-auto">
+    <shared-input-labeled label="Titulo">
+      <input type="text" placeholder="titulo" formControlName="titulo">
+    </shared-input-labeled>
+
+    <shared-input-labeled label="Descripcion" >
+      <textarea name="" id=""  placeholder="Descripcion" rows="4" formControlName="descripcion"></textarea>
+    </shared-input-labeled>
+
+    <shared-input-labeled label="Portada">
+
+    <input type="file" name="" id="" hidden #portadaFile (change)="select($event)">
+
+    <div class="flex flex-row gap-x-1">
+      <button class="flex-1 py-3 flex flex-row gap-x-1 items-center justify-center bg-black text-white" (click)="portadaFile.click()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
+        <span>
+          Agregar archivo
+        </span>
+      </button>
+      <button class="flex-1 py-3 flex flex-row gap-x-1 items-center justify-center bg-black text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
+        <span>
+          Agregar Enlace
+        </span>
+      </button>
+    </div>
+
+    <textarea class="mt-2" name="" id="" rows="3" placeholder="Enlace (youtube de momento)" formControlName="portada"></textarea>
+
+    </shared-input-labeled>
+
+    <shared-input-labeled label="Categoria">
+      <button class="py-3 px-4 bg-gray-200 rounded-xl flex flex-row items-center justify-between">
+        <span #sinSubcategoria>Seleccionar subcategoria</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
+    </shared-input-labeled>
+
+    <shared-input-labeled label="Encuesta">
+      @if (this.encuesta.length === 0) {
+        <button class=" secondary-button flex flex-row justify-center gap-x-1 items-center h-12   mt-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-column-increasing"><path d="M13 17V9"/><path d="M18 17V5"/><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M8 17v-3"/></svg>
+          <span class="text-xl">Agregar encuesta</span>
+        </button>
+      } @else {
+        <div formArrayName="encuesta" class="flex flex-col">
+          @for (respuesta of this.encuesta.controls;let i = $index; track $index) {
+            <input type="text" [formControlName]="i">
+          }
+        </div>
+      }
+    </shared-input-labeled>
+
+    <p> {{ this.form.value | json }} </p>
+
+
+
+    <button class="flex justify-center items-center h-12 mt-2">
+      <span class="text-xl font-semibold">Postear hilo</span>
+    </button>
+
+  </form>
+ </div>
+</div>
