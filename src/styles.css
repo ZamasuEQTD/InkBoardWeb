@@ -32,11 +32,11 @@
   }
 
   input {
-    @apply py-3
+    @apply py-1
   }
 
   textarea {
-    @apply resize-none py-2;
+    @apply resize-none py-1;
   }
 
   button {

@@ -1,4 +1,4 @@
 export interface PickedMedia {
-  provider: string;
+  source: string;
   type? : string
 }

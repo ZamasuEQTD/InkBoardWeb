@@ -5,6 +5,7 @@ import { DialogHeaderComponent } from "../../../shared/components/dialog-header/
 import { InputLabeledComponent } from "../../../shared/components/input-labeled/input-labeled.component";
 import { PickedMedia } from '../../../shared/interfaces/picked-media.interface';
 import { CommonModule } from '@angular/common';
+import { ContenidoCensurable } from '../../../shared/interfaces/contenido-censurable.interface';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class PostearHiloModalComponent {
     titulo: [''],
     descripcion: [''],
     encuesta: this.fb.array<string>(['pedrooo']),
-    portada: this.fb.control<File  |string | undefined>(undefined, {
+    portada: this.fb.control<ContenidoCensurable<PickedMedia> | undefined>(undefined, {
       validators: [
         Validators.required
       ]
@@ -38,17 +39,13 @@ export class PostearHiloModalComponent {
   }
 
   get portada(){
-    return this.form.get('portada') as FormControl<File  |string | undefined>
+    return this.form.get('portada') as FormControl<ContenidoCensurable<PickedMedia> | undefined>
   }
 
   select(event:any){
     const  files :FileList = event.target.files;
 
     const  file : File= files[0];
-
-    this.form.get('portada')?.setValue(file);
-
-    console.log(this.form.get('portada'))
-  }
+}
 
 }
