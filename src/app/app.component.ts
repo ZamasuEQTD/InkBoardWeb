@@ -16,36 +16,8 @@ import { RegistrarseDialogComponent } from './features/auth/registrarse-dialog/r
     templateUrl: './app.component.html',
     styleUrl: './app.component.css'
 })
-export class AppComponent  implements OnInit{
+export class AppComponent {
   title = 'InkBoard';
-
-  private overlayRef?: OverlayRef;
-
-  private overlay : Overlay = inject(Overlay);
-
-  a () : void {
-
-this.overlayRef = this.overlay.create({
-  hasBackdrop: true, // Fondo oscuro
-  panelClass : 'z-[10000000]',
-  positionStrategy: this.overlay
-    .position()
-    .global()
-    .centerHorizontally()
-    .centerVertically(), // Centrar el overlay
-});
-
-const portal = new ComponentPortal(RegistrarseDialogComponent);
- var a =   this.overlayRef.attach(portal);
-  a.instance.closeOverlay.subscribe(() => this.overlayRef!.dispose());
-
-
-
-// Cerrar el overlay al hacer clic fuera
-  this.overlayRef.backdropClick().subscribe(() => {
-    this.overlayRef!.dispose();
-  });
-}
 
   constructor(private primeng: PrimeNG) {
     this.primeng.theme.set({
@@ -58,8 +30,5 @@ const portal = new ComponentPortal(RegistrarseDialogComponent);
               }
           }
       })
-  }
-  ngOnInit(): void {
-    this.a()
   }
 }
