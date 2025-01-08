@@ -3,9 +3,9 @@
 
     <div class="flex flex-row items-center gap-x-1">
 
-      <div class="size-12 rounded-md bg-red-600 flex justify-center items-center " >
+      <app-color-comentario [color]="this.comentario.color">
         <span class="text-white text-sm font-bold"> {{this.comentario.detalles.dados ?? (this.comentario.es_op? "OP" : this.comentario.autor.rango)}} </span>
-      </div>
+      </app-color-comentario>
 
       <div class="flex flex-wrap gap-x-1 gap-y-[2px] items-center mb">
         <span class="text-sm font-semibold">{{this.comentario.autor.nombre}}</span>

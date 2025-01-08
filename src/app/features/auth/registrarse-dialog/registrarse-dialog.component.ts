@@ -15,9 +15,8 @@ import { OverlayRef } from '@angular/cdk/overlay';
 export class RegistrarseDialogComponent {
 
   @Output() closeOverlay = new EventEmitter<void>();
-  constructor() {
 
-  }
+  constructor() {}
 
   onClose() :void {
     this.closeOverlay.emit()
