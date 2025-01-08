@@ -1,10 +1,13 @@
-<div role="button" class="portada-container relative overflow-hidden " (click)="this.visitar()">
-
+<div class="portada-container relative overflow-hidden ">
   <div [ngClass]="{ 'blur-md': this.portada.miniatura.es_spoiler}" class="w-full h-full" style="background-image: url('https://i1.sndcdn.com/artworks-000245638163-7dx5p1-t500x500.jpg');"></div>
+
 
   <div  class=" w-full h-full absolute top-0" >
 
     <div class="fade-gradient absolute w-full h-full flex flex-col p-1 justify-between">
+
+      <a [routerLink]="'hilo/'+ this.portada.id" class="w-full h-full block absolute"></a>
+
       <div class="flex flex-row text-xs text-white">
 
         <div class=" flex flex-wrap flex-1 gap-[0.125rem] ">
@@ -23,7 +26,7 @@
 
         </div>
 
-        <button (click)="$event.stopPropagation();menu.toggle($event)" class="size-5 flex justify-center items-center">
+        <button (click)="$event.stopPropagation();menu.toggle($event)" class="size-5 flex justify-center items-center z-[2]">
           <i class="fa-solid fa-ellipsis-vertical"></i>
         </button>
 
@@ -35,9 +38,12 @@
 
     </div>
 
-  </div>
 
+  </div>
 </div>
+
+
+
 
 
 <p-menu #menu [popup]="true" [model]="this.opciones">
