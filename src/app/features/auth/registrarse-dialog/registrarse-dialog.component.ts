@@ -1,7 +1,7 @@
 import { Component, EventEmitter, inject, Inject, Output } from '@angular/core';
 import { InputLabeledComponent } from '../../shared/components/input-labeled/input-labeled.component';
 import { DialogHeaderComponent } from "../../shared/components/dialog-header/dialog-header.component";
-import { OverlayRef } from '@angular/cdk/overlay';
+import { DialogRef } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-registrarse-dialog',
@@ -14,11 +14,11 @@ import { OverlayRef } from '@angular/cdk/overlay';
 })
 export class RegistrarseDialogComponent {
 
-  @Output() closeOverlay = new EventEmitter<void>();
+  dialogRef = inject(DialogRef);
 
   constructor() {}
 
-  onClose() :void {
-    this.closeOverlay.emit()
+  close() :void {
+    this.dialogRef.close();
   }
 }

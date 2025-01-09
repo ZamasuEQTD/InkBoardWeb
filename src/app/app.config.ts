@@ -7,7 +7,6 @@ import Aura from '@primeng/themes/aura';
 
 
 import { routes } from './app.routes';
-
 export const appConfig: ApplicationConfig = {
   providers: [
     provideAnimationsAsync(),

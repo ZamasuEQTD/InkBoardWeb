@@ -6,6 +6,8 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { RegistrarseDialogComponent } from '../../../auth/registrarse-dialog/registrarse-dialog.component';
+import { Dialog } from '@angular/cdk/dialog';
+import { LoginDialogComponent } from '../../../auth/login-dialog/login-dialog.component';
 @Component({
   selector: 'app-drawer-button',
   imports: [
@@ -25,10 +27,7 @@ export class DrawerButtonComponent {
   }]
 
 
-  private overlayRef?: OverlayRef;
-
-  private overlay : Overlay = inject(Overlay);
-
+  private dialog  = inject(Dialog);
 
   toggle():void {
     this.show = !this.show;
@@ -41,24 +40,11 @@ export class DrawerButtonComponent {
   }
 
 
-  test(): void {
-    this.overlayRef = this.overlay.create({
-      hasBackdrop: true, // Fondo oscuro
-      panelClass : 'z-[10000000]',
-      positionStrategy: this.overlay
-        .position()
-        .global()
-        .centerHorizontally()
-        .centerVertically(), // Centrar el overlay
-    });
+  openRegistroDialog(): void {
+    this.dialog.open(RegistrarseDialogComponent)
+  }
 
-    const portal = new ComponentPortal(RegistrarseDialogComponent);
-
-    var a = this.overlayRef.attach(portal);
-
-    // Cerrar el overlay al hacer clic fuera
-    this.overlayRef.backdropClick().subscribe(() => {
-      this.overlayRef!.dispose();
-    });
+  openLoginDialog(): void {
+    this.dialog.open(LoginDialogComponent)
   }
 }

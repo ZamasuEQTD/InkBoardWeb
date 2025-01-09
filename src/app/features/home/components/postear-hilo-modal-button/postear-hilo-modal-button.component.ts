@@ -6,4 +6,7 @@ import { Component } from '@angular/core';
   templateUrl: './postear-hilo-modal-button.component.html',
   styleUrl: './postear-hilo-modal-button.component.css',
 })
-export class PostearHiloModalButtonComponent { }
+
+export class PostearHiloModalButtonComponent {
+
+}
