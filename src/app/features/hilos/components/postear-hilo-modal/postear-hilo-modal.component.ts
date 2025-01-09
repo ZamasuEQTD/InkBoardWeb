@@ -6,6 +6,7 @@ import { InputLabeledComponent } from "../../../shared/components/input-labeled/
 import { PickedMedia } from '../../../shared/interfaces/picked-media.interface';
 import { CommonModule } from '@angular/common';
 import { ContenidoCensurable } from '../../../shared/interfaces/contenido-censurable.interface';
+import { DialogRef } from '@angular/cdk/dialog';
 
 
 @Component({
@@ -20,6 +21,12 @@ import { ContenidoCensurable } from '../../../shared/interfaces/contenido-censur
   styleUrl: './postear-hilo-modal.component.css',
 })
 export class PostearHiloModalComponent {
+
+  dialogRef = inject(DialogRef);
+
+  close ():void {
+     this.dialogRef.close();
+   }
 
   private fb : FormBuilder  = inject(FormBuilder);
 

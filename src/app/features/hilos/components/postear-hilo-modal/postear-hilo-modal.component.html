@@ -1,10 +1,10 @@
 <div class="bg-white  rounded-none sm:rounded-md h-screen w-screen  sm:medium flex flex-col overflow-hidden">
   <div class="py-2 p-4">
-    <shared-dialog-header title="Postear hilo"/>
+    <shared-dialog-header title="Postear hilo" (onClose)="this.close()"/>
   </div>
 
  <div class="px-2 flex flex-col py-2  flex-1 overflow-y-auto">
-  <form action="" [formGroup]="this.form" (submit)="$event.preventDefault()" class="overflow-y-auto">
+  <form action="" [formGroup]="this.form" (submit)="$event.preventDefault()" class="overflow-y-auto px-2">
     <shared-input-labeled label="Titulo">
       <input type="text" placeholder="titulo" formControlName="titulo">
     </shared-input-labeled>
@@ -26,9 +26,11 @@
       </button>
       <button class="flex-1 py-3 flex flex-row gap-x-1 items-center justify-center bg-black text-white">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
+
         <span>
           Agregar Enlace
         </span>
+
       </button>
     </div>
 
