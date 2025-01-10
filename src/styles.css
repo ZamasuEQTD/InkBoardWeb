@@ -51,7 +51,7 @@
   }
 
   .icon-button {
-    @apply p-0
+    @apply p-0 flex justify-center items-center
   }
 }
 
