@@ -46,7 +46,7 @@ export class PostearHiloModalComponent {
     })
   });
 
-  get encuesta() {
+  get encuesta() : FormArray<FormControl<string | null>> {
     return (this.form.get('encuesta') as FormArray);
   }
 
@@ -78,21 +78,16 @@ export class PostearHiloModalComponent {
     })
   }
 
-  agregarEncuesta():void {
-    const encuestaArray = this.form.get('encuesta') as FormArray;
-
-    encuestaArray.push(this.fb.control(''));
-  }
-
   agregarOpcionEncuesta() : void {
     const encuestaArray = this.form.get('encuesta') as FormArray;
 
     encuestaArray.push(this.fb.control(''));
   }
 
-  eliminarOpcion(index : number):void {
-    const encuestaArray = this.form.get('encuesta') as FormArray;
+  eliminarOpcion(index : number) : void {
+    this.encuesta.removeAt(index);
 
-    encuestaArray.removeAt(index);
+    console.log(this.encuesta);
+
   }
 }
