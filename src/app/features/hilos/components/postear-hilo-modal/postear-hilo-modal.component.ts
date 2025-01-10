@@ -7,7 +7,9 @@ import { PickedMedia } from '../../../shared/interfaces/picked-media.interface';
 import { CommonModule } from '@angular/common';
 import { ContenidoCensurable } from '../../../shared/interfaces/contenido-censurable.interface';
 import { DialogRef } from '@angular/cdk/dialog';
-
+import { PickFileInputComponent } from "../../../shared/components/pick-file-input/pick-file-input.component";
+import { MediaBoxComponent } from "../../../shared/components/media-box/media-box.component";
+import { MediaPipe } from '../../../shared/pipes/media.pipe';
 
 @Component({
   selector: 'postear-hilo-modal',
@@ -15,8 +17,11 @@ import { DialogRef } from '@angular/cdk/dialog';
     CommonModule,
     DialogHeaderComponent,
     InputLabeledComponent,
-    ReactiveFormsModule
-  ],
+    ReactiveFormsModule,
+    PickFileInputComponent,
+    MediaBoxComponent,
+    MediaPipe
+],
   templateUrl: './postear-hilo-modal.component.html',
   styleUrl: './postear-hilo-modal.component.css',
 })
@@ -33,7 +38,7 @@ export class PostearHiloModalComponent {
   form = this.fb.group({
     titulo: [''],
     descripcion: [''],
-    encuesta: this.fb.array<string>(['pedrooo']),
+    encuesta: this.fb.array<string>([]),
     portada: this.fb.control<ContenidoCensurable<PickedMedia> | undefined>(undefined, {
       validators: [
         Validators.required
@@ -42,17 +47,52 @@ export class PostearHiloModalComponent {
   });
 
   get encuesta() {
-    return this.form.get('encuesta') as FormArray;
+    return (this.form.get('encuesta') as FormArray);
   }
 
   get portada(){
-    return this.form.get('portada') as FormControl<ContenidoCensurable<PickedMedia> | undefined>
+    return (this.form.get('portada') as FormControl<ContenidoCensurable<PickedMedia> | undefined>).value;
   }
 
-  select(event:any){
-    const  files :FileList = event.target.files;
+  agregarPortada(pick: PickedMedia) :void {
+    this.form.patchValue({
+      portada : {
+        ocultar : false,
+        contenido : pick
+      }
+    })
+  }
 
-    const  file : File= files[0];
-}
+  eliminarPortada() :void {
+    this.form.patchValue({
+      portada: undefined
+    })
+  }
 
+  togglesSpoiler() :void {
+    this.form.patchValue({
+      portada : {
+        ocultar :!this.portada!.ocultar,
+        contenido : this.portada!.contenido
+      }
+    })
+  }
+
+  agregarEncuesta():void {
+    const encuestaArray = this.form.get('encuesta') as FormArray;
+
+    encuestaArray.push(this.fb.control(''));
+  }
+
+  agregarOpcionEncuesta() : void {
+    const encuestaArray = this.form.get('encuesta') as FormArray;
+
+    encuestaArray.push(this.fb.control(''));
+  }
+
+  eliminarOpcion(index : number):void {
+    const encuestaArray = this.form.get('encuesta') as FormArray;
+
+    encuestaArray.removeAt(index);
+  }
 }

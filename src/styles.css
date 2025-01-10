@@ -36,11 +36,24 @@
   }
 
   button {
-    @apply rounded-xl outline-none;
+    @apply rounded-xl outline-none py-2 px-4 ;
   }
 }
 
 
+@layer components {
+  .outlined-button  {
+    @apply w-full bg-white text-primary font-semibold  border border-primary
+  }
+
+  .primary-button {
+   @apply w-full bg-gray-900 text-white font-semibold
+  }
+
+  .icon-button {
+    @apply p-0
+  }
+}
 
 body { margin: 0; font-family: 'Poppins', Roboto, "Helvetica Neue", sans-serif; word-break: break-word; overflow-wrap: break-word; }
 

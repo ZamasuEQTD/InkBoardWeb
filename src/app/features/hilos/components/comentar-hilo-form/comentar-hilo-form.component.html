@@ -20,7 +20,7 @@
                   <img  class="rounded-md" [src]="this.media!.source" alt="">
                 }
                 @case ('video') {
-                  <video class="rounded-md" [src]="this.media!.source"></video>
+                  <video class="rounded-md" [src]="this.media!.source" preload="none"></video>
                 }
                 @case ('youtube') {
                   <img  class="rounded-md" [src]='this.media!.source | youtubeThumbnail' alt="">
