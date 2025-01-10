@@ -8,6 +8,11 @@
   }
 }
 
+app-media-box video {
+  border-radius: 50px;
+}
+
+
 
 :host {
   display: block;
