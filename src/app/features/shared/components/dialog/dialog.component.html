@@ -1,0 +1,40 @@
+<div class="h-full w-full absolute top-0 left-0" (click)="this.close()">
+  <div
+    class="absolute top-0 bottom-0 left-0 right-0 flex justify-center items-center sm:py-10"
+  >
+    <div
+      class="flex flex-col sm:justify-center sm:items-center h-full w-full"
+      [class] = "{
+        'justify-end' : !this.fullscreenOnMobile
+      }"
+    >
+    <div
+      class=" sm:w-[600px] sm:max-h-[800px] sm:min-h-[400px] bg-white sm:rounded-xl flex flex-col p-2"
+
+      [class] = "{
+        'semiscreen-on-mobile' : !this.fullscreenOnMobile,
+        'fullscreen-on-mobile' : this.fullscreenOnMobile
+      }"
+
+      (click)="$event.stopPropagation()"
+
+
+    >
+
+    @if(!this.fullscreenOnMobile){
+      <div class="flex justify-center py-2 px-4 sm:hidden">
+        <div class="h-1 rounded-2xl w-full bg-neutral-100"></div>
+      </div>
+    }
+
+    @if (this.title) {
+      <shared-dialog-header [title]="this.title" />
+    }
+
+    <ng-content></ng-content>
+
+
+    </div>
+    </div>
+  </div>
+</div>

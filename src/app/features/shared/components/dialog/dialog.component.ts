@@ -1,15 +1,20 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Dialog, DialogRef } from '@angular/cdk/dialog';
+import { Component, EventEmitter, inject, Input, Output, TemplateRef, ViewChild } from '@angular/core';
+import { DialogHeaderComponent } from "../dialog-header/dialog-header.component";
 
 @Component({
   selector: 'app-dialog',
-  imports: [],
+  imports: [DialogHeaderComponent],
   templateUrl: './dialog.component.html',
   styleUrl: './dialog.component.css',
 })
 export class DialogComponent {
-  @Output() onClose = new EventEmitter<void>();
+  @Input() fullscreenOnMobile : boolean  = true;
+  @Input() title?:string;
 
-  close(){
-    this.onClose.emit();
+  private _dialog  = inject(DialogRef);
+
+  close() : void {
+    this._dialog.close();
   }
 }
