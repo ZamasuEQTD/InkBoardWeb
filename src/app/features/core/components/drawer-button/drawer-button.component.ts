@@ -2,12 +2,10 @@ import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { DrawerModule } from 'primeng/drawer';
 import { MenuModule } from 'primeng/menu';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { Overlay, OverlayRef } from '@angular/cdk/overlay';
-import { ComponentPortal } from '@angular/cdk/portal';
 import { RegistrarseDialogComponent } from '../../../auth/registrarse-dialog/registrarse-dialog.component';
 import { Dialog } from '@angular/cdk/dialog';
 import { LoginDialogComponent } from '../../../auth/login-dialog/login-dialog.component';
+import { RegistroUsuarioDialogComponent } from '../../../registros/components/registro-usuario-dialog/registro-usuario-dialog.component';
 @Component({
   selector: 'app-drawer-button',
   imports: [
@@ -41,7 +39,7 @@ export class DrawerButtonComponent {
 
 
   openRegistroDialog(): void {
-    this.dialog.open(RegistrarseDialogComponent)
+    this.dialog.open(RegistroUsuarioDialogComponent)
   }
 
   openLoginDialog(): void {
