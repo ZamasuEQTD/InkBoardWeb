@@ -1,5 +1,5 @@
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { DialogHeaderComponent } from "../../../shared/components/dialog-header/dialog-header.component";
 import { DialogRef } from '@angular/cdk/dialog';
 
@@ -12,9 +12,15 @@ import { DialogRef } from '@angular/cdk/dialog';
 export class RegistroUsuarioDialogComponent {
   dialogRef = inject(DialogRef);
 
+  registroSeleccionado: WritableSignal<'hilos' | 'comentarios'> = signal('hilos')
 
   close() :void {
     this.dialogRef.close()
+  }
+
+  seleccionarRegistro(registro:'hilos' | 'comentarios'):void{
+
+    this.registroSeleccionado.set(registro) ;
   }
 }
 
