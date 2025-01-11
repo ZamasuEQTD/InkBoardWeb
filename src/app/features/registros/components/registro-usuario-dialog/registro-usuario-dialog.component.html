@@ -7,13 +7,13 @@
       <div class="w-full h-[80vh] sm:w-[600px] sm:max-h-[800px] sm:min-h-[400px] bg-white rounded-t-2xl sm:rounded-xl flex flex-col p-2" (click)="$event.stopPropagation()">
 
         <div class="flex justify-center py-2 px-4 sm:hidden">
-          <div class="h-1 rounded-2xl w-full bg-gray-200">
+          <div class="h-1 rounded-2xl w-full bg-neutral-100">
           </div>
         </div>
 
-        <div class="overflow-y-auto">
+        <div class="overflow-y-auto flex-1">
 
-          <div class="flex justify-center bg-gray-100 rounded-lg mb-1 p-2">
+          <div class="flex justify-center bg-slate-100 rounded-lg mb-1 p-2">
             <div class="p-2  flex flex-row gap-x-2">
 
               <div class="size-12 bg-white rounded-full flex justify-center items-center">
@@ -50,23 +50,7 @@
           </div>
 
           @for (registro of [1,2,3,4,5,6,7]; track $index) {
-            <div class="flex flex-col p-2 bg-gray-100 rounded-lg mt-1">
-
-              <div class="flex flex-row gap-x-3">
-                <div class="size-16 rounded-xl bg-red-300"></div>
-
-                <div class="flex-1">
-                  <span class="line-clamp-2 font-semibold text-sm">Ha comentado en : Los viernes de la jungla</span>
-                </div>
-
-              </div>
-
-              <span class="text-xs text-gray-400"> hace 2ms</span>
-
-              <span class="text-sm"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima ipsa quam nemo distinctio eos, debitis soluta asperiores quaerat numquam eligendi!</span>
-
-            </div>
-
+            <app-registro />
           }
 
       </div>
