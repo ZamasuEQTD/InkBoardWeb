@@ -30,8 +30,6 @@ export class NotificacionesButtonComponent {
         originY: 'bottom',
         overlayX: 'start',
         overlayY: 'top',
-        offsetX: -40,
-        offsetY: 8,
       }
     ])
 

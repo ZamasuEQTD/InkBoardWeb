@@ -17,7 +17,7 @@
 
 @layer utilities {
   .fullscreen-on-mobile {
-    @apply min-h-screen w-screen ;
+    @apply min-h-screen w-screen sm:min-h-0;
   }
 
   .medium {
