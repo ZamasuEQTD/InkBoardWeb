@@ -2,12 +2,13 @@ import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { DialogRef, Dialog } from '@angular/cdk/dialog';
 import { RegistroComponent } from "../registro/registro.component";
 import { BanearUsuarioDialogComponent } from '../../../moderacion/banear-usuario-dialog/banear-usuario-dialog.component';
+import { DialogComponent } from "../../../shared/components/dialog/dialog.component";
 
 @Component({
   selector: 'app-registro-usuario-dialog',
   templateUrl: './registro-usuario-dialog.component.html',
   styleUrl: './registro-usuario-dialog.component.css',
-  imports: [RegistroComponent],
+  imports: [RegistroComponent, DialogComponent],
 })
 export class RegistroUsuarioDialogComponent {
   dialogRef = inject(DialogRef);
