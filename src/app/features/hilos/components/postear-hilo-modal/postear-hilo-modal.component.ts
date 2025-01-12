@@ -10,28 +10,23 @@ import { DialogRef } from '@angular/cdk/dialog';
 import { PickFileInputComponent } from "../../../shared/components/pick-file-input/pick-file-input.component";
 import { MediaBoxComponent } from "../../../shared/components/media-box/media-box.component";
 import { MediaPipe } from '../../../shared/pipes/media.pipe';
+import { DialogComponent } from "../../../shared/components/dialog/dialog.component";
 
 @Component({
   selector: 'postear-hilo-modal',
   imports: [
     CommonModule,
-    DialogHeaderComponent,
     InputLabeledComponent,
     ReactiveFormsModule,
     PickFileInputComponent,
     MediaBoxComponent,
-    MediaPipe
+    MediaPipe,
+    DialogComponent
 ],
   templateUrl: './postear-hilo-modal.component.html',
   styleUrl: './postear-hilo-modal.component.css',
 })
 export class PostearHiloModalComponent {
-
-  dialogRef = inject(DialogRef);
-
-  close ():void {
-     this.dialogRef.close();
-   }
 
   private fb : FormBuilder  = inject(FormBuilder);
 

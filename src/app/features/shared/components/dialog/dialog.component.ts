@@ -10,6 +10,7 @@ import { DialogHeaderComponent } from "../dialog-header/dialog-header.component"
 })
 export class DialogComponent {
   @Input() fullscreenOnMobile : boolean  = true;
+
   @Input() title?:string;
 
   private _dialog  = inject(DialogRef);

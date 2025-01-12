@@ -1,10 +1,5 @@
-<div class="bg-white  rounded-none sm:rounded-md h-screen w-screen  sm:medium flex flex-col overflow-hidden">
-  <div class="py-2 p-4">
-    <shared-dialog-header title="Postear hilo" (onClose)="this.close()"/>
-  </div>
-
- <div class="px-2 flex flex-col py-2  flex-1 overflow-y-auto">
-  <form action="" [formGroup]="this.form" (submit)="$event.preventDefault()" class="overflow-y-auto px-2">
+<app-dialog title="Postear hilo">
+  <form action="" [formGroup]="this.form" (submit)="$event.preventDefault()">
     <shared-input-labeled label="Titulo">
       <input type="text" placeholder="titulo" formControlName="titulo">
     </shared-input-labeled>
@@ -88,6 +83,8 @@
 
     </shared-input-labeled>
 
+
+
     <shared-input-labeled label="Encuesta">
 
       @if (this.encuesta.length === 0) {
@@ -128,14 +125,17 @@
           </button>
         }
       }
+
+
+
     </shared-input-labeled>
 
     <!-- <p> {{ this.form.value | json }} </p> -->
 
-    <button class="primary-button mt-2 ">
+    <button class="primary-button">
       <span>Postear</span>
     </button>
 
   </form>
- </div>
-</div>
+
+</app-dialog>

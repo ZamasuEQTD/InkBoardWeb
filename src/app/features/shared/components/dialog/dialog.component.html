@@ -28,11 +28,12 @@
     }
 
     @if (this.title) {
-      <shared-dialog-header [title]="this.title" />
+      <shared-dialog-header [title]="this.title" (onClose)="this.close()" />
     }
 
-    <ng-content></ng-content>
-
+    <div class="overflow-y-auto flex-1">
+      <ng-content></ng-content>
+    </div>
 
     </div>
     </div>
