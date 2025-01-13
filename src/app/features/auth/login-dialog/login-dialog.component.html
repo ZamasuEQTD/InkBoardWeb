@@ -1,7 +1,4 @@
-
-<div class="bg-white p-2  rounded-none sm:rounded-md fullscreen-on-mobile sm:medium">
-  <shared-dialog-header title="Iniciar sesión" (onClose)="this.close()" />
-
+<app-dialog title="Iniciar sesión">
   <form action="" (submit)="$event.preventDefault()">
 
     <shared-input-labeled label="Usuario">
@@ -19,5 +16,4 @@
     </div>
 
   </form>
-
-</div>
+</app-dialog>

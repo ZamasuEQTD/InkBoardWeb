@@ -5,12 +5,11 @@ import { RouterOutlet } from '@angular/router';
 
 import { PrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
-import { DialogService } from 'primeng/dynamicdialog';
 
 @Component({
     selector: 'app-root',
     imports: [RouterOutlet],
-    providers:[DialogService],
+    providers:[],
     templateUrl: './app.component.html',
     styleUrl: './app.component.css'
 })

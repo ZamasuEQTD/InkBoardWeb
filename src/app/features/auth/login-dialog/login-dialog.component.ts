@@ -6,7 +6,7 @@ import { InputLabeledComponent } from "../../shared/components/input-labeled/inp
 
 @Component({
   selector: 'app-login-dialog',
-  imports: [DialogHeaderComponent, InputLabeledComponent],
+  imports: [ InputLabeledComponent, DialogComponent],
   templateUrl: './login-dialog.component.html',
   styleUrl: './login-dialog.component.css',
 })

@@ -8,8 +8,9 @@
         'justify-end' : !this.fullscreenOnMobile
       }"
     >
+
     <div
-      class=" sm:w-[600px] sm:max-h-[800px] sm:min-h-[400px] bg-white sm:rounded-xl flex flex-col p-2"
+      class=" sm:w-[600px] sm:max-h-[800px] sm:min-h-[400px] sm:relative sm:overflow-y-auto bg-white sm:rounded-xl p-2"
 
       [class] = "{
         'semiscreen-on-mobile' : !this.fullscreenOnMobile,
@@ -17,8 +18,6 @@
       }"
 
       (click)="$event.stopPropagation()"
-
-
     >
 
     @if(!this.fullscreenOnMobile){
@@ -31,7 +30,7 @@
       <shared-dialog-header [title]="this.title" (onClose)="this.close()" />
     }
 
-    <div class="overflow-y-auto flex-1">
+    <div class="overflow-y-auto flex-1 max-h-none">
       <ng-content></ng-content>
     </div>
 

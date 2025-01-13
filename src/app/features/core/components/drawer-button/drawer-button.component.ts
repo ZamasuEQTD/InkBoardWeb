@@ -40,14 +40,10 @@ export class DrawerButtonComponent {
 
 
   openRegistroDialog(): void {
-    this.dialog.open(RegistroUsuarioDialogComponent, {
-      scrollStrategy: new NoopScrollStrategy()
-    })
+    this.dialog.open(RegistroUsuarioDialogComponent)
   }
 
   openLoginDialog(): void {
-    this.dialog.open(LoginDialogComponent,{
-      scrollStrategy: new NoopScrollStrategy()
-    })
+    this.dialog.open(LoginDialogComponent)
   }
 }

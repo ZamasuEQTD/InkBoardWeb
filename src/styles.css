@@ -17,16 +17,16 @@
 
 @layer utilities {
   .fullscreen-on-mobile {
-    @apply min-h-screen w-screen sm:min-h-0 max-h-none;
+    @apply absolute top-0 left-0  overflow-y-auto right-0 bottom-0 flex flex-col;
   }
 
 
   .semiscreen-on-mobile {
-    @apply w-full h-[80vh] rounded-t-2xl
+    @apply w-full h-[80vh] rounded-t-2xl;
   }
 
   .medium {
-    @apply w-[600px] max-h-[800] min-h-[400px];
+    @apply w-[600px] max-h-[800px] min-h-[400px] relative overflow-y-auto;
   }
 }
 
@@ -94,8 +94,6 @@ body { margin: 0; font-family: 'Poppins', Roboto, "Helvetica Neue", sans-serif; 
 }
 
 
-
-
 .cdk-global-scrollblock{
-  overflow: hidden;
+  overflow: hidden hidden !important;
 }
