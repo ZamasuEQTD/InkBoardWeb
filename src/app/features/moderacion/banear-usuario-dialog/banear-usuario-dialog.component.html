@@ -1,31 +1,33 @@
-<app-dialog [fullscreenOnMobile]="true" title="Banear usuario">
-  <shared-input-labeled label="Duracion">
-    <button class="outlined-button flex flex-row justify-between">
-      <span>
-        Selecciona la duracion
-      </span>
+<app-dialog [fullscreenOnMobile]="true" title="Banear usuario" >
+  <form action="" class="px-1">
 
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>
+    <shared-input-labeled label="Duracion">
+      <button class="outlined-button flex flex-row justify-between">
+        <span>
+          Selecciona la duracion
+        </span>
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
+    </shared-input-labeled>
+
+
+    <shared-input-labeled label="Razón">
+      <button class="outlined-button flex flex-row justify-between">
+        <span>
+          Selecciona la razón
+        </span>
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
+    </shared-input-labeled>
+
+    <shared-input-labeled label="Mensaje (opcional)">
+      <textarea name="" id="" placeholder="Mensaje" rows="4"></textarea>
+    </shared-input-labeled>
+
+    <button class="primary-button">
+      <span>Banear</span>
     </button>
-  </shared-input-labeled>
-
-
-  <shared-input-labeled label="Razón">
-    <button class="outlined-button flex flex-row justify-between">
-      <span>
-        Selecciona la razón
-      </span>
-
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>
-    </button>
-  </shared-input-labeled>
-
-  <shared-input-labeled label="Mensaje (opcional)">
-    <textarea name="" id="" placeholder="Mensaje" rows="4"></textarea>
-  </shared-input-labeled>
-
-  <button class="primary-button">
-    <span>Banear</span>
-  </button>
-
+  </form>
 </app-dialog>

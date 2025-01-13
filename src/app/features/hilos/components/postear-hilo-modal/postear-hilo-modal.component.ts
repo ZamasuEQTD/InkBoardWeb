@@ -6,11 +6,13 @@ import { InputLabeledComponent } from "../../../shared/components/input-labeled/
 import { PickedMedia } from '../../../shared/interfaces/picked-media.interface';
 import { CommonModule } from '@angular/common';
 import { ContenidoCensurable } from '../../../shared/interfaces/contenido-censurable.interface';
-import { DialogRef } from '@angular/cdk/dialog';
+import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { PickFileInputComponent } from "../../../shared/components/pick-file-input/pick-file-input.component";
 import { MediaBoxComponent } from "../../../shared/components/media-box/media-box.component";
 import { MediaPipe } from '../../../shared/pipes/media.pipe';
 import { DialogComponent } from "../../../shared/components/dialog/dialog.component";
+import { SeleccionarSubcategoriaDialogComponent } from '../../../categorias/components/seleccionar-subcategoria-dialog/seleccionar-subcategoria-dialog.component';
+import { Subcategoria } from '../../../categorias/interfaces/subcategoria.interface';
 
 @Component({
   selector: 'postear-hilo-modal',
@@ -30,15 +32,20 @@ export class PostearHiloModalComponent {
 
   private fb : FormBuilder  = inject(FormBuilder);
 
+  private dialog = inject(Dialog);
+
   form = this.fb.group({
     titulo: [''],
     descripcion: [''],
+    subcategoria: this.fb.control<Subcategoria | null>(null),
     encuesta: this.fb.array<string>([]),
     portada: this.fb.control<ContenidoCensurable<PickedMedia> | undefined>(undefined, {
       validators: [
         Validators.required
       ]
-    })
+    }),
+    dados : [false],
+    idUnico: [false]
   });
 
   get encuesta() : FormArray<FormControl<string | null>> {
@@ -84,5 +91,18 @@ export class PostearHiloModalComponent {
 
     console.log(this.encuesta);
 
+  }
+
+  seleccionarSubcategoria(){
+   var seleccionarSubcategoriaDialog =  this.dialog.open(SeleccionarSubcategoriaDialogComponent, {
+    data:{
+      onSubcategoriaSeleccionada: (subcategoria: Subcategoria) => {
+        this.form.patchValue({
+          subcategoria
+        })
+        seleccionarSubcategoriaDialog.close()
+      }
+    }
+   })
   }
 }

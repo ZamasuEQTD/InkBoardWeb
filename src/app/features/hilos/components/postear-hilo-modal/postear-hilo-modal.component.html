@@ -1,5 +1,5 @@
 <app-dialog title="Postear hilo">
-  <form action="" [formGroup]="this.form" (submit)="$event.preventDefault()">
+  <form action="" [formGroup]="this.form" (submit)="$event.preventDefault()" class="px-1">
     <shared-input-labeled label="Titulo">
       <input type="text" placeholder="titulo" formControlName="titulo">
     </shared-input-labeled>
@@ -13,7 +13,7 @@
       @if(this.portada){
         <div class="flex justify-center ">
 
-          <div class="relative rounded-lg overflow-hidden bg-clip-border min-h-48 max-h-[40rem] object-contain bg-gray-200">
+          <div class="relative rounded-lg overflow-hidden bg-clip-border min-h-48 max-h-[20rem] object-contain bg-gray-200">
 
             <app-media-box [media]="portada.contenido | media" />
 
@@ -66,12 +66,15 @@
 
     <shared-input-labeled label="Categoria">
 
-      <button class="py-3 px-4  outlined-button rounded-xl flex flex-row items-center justify-between">
+      <button class="py-3 px-4  outlined-button rounded-xl flex flex-row items-center justify-between" (click)="this.seleccionarSubcategoria()">
 
-        @if(false){
-          <div class="flex flex-row gap-x-1 items-center ">
-            <div class="size-8 rounded-md bg-slate-800"></div>
-            <span>NSFW</span>
+        @let subcategoria = this.form.get("subcategoria")!;
+
+        @if(subcategoria.value){
+          <div class="flex flex-row gap-x-2 items-center ">
+            <div class="size-8 rounded-md bg-slate-800" [ngStyle]="{'background-image': 'url(' + subcategoria.value.image + ')'}" ></div>
+
+            <span>{{subcategoria!.value.nombre}}</span>
           </div>
         }
         @else {
@@ -82,8 +85,6 @@
       </button>
 
     </shared-input-labeled>
-
-
 
     <shared-input-labeled label="Encuesta">
 
@@ -118,7 +119,7 @@
         </div>
 
         @if(this.encuesta.length < 4){
-          <button (click)="this.agregarOpcionEncuesta()">
+          <button (click)="this.agregarOpcionEncuesta()" class="primary-button">
             <span>
               Agregar opcion
             </span>
@@ -130,7 +131,21 @@
 
     </shared-input-labeled>
 
-    <!-- <p> {{ this.form.value | json }} </p> -->
+    <shared-input-labeled label="Banderas">
+      <div class="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-900">
+        <div class="flex flex-row justify-between items-center py-2 px-1">
+          <span class="font-semibold">Dados activados</span>
+
+          <input type="checkbox" name="" id="" >
+        </div>
+
+        <div class="flex flex-row justify-between items-center py-2 px-1">
+          <span class="font-semibold">Id unico activado</span>
+
+          <input type="checkbox" name="" id="" >
+        </div>
+      </div>
+    </shared-input-labeled>
 
     <button class="primary-button">
       <span>Postear</span>

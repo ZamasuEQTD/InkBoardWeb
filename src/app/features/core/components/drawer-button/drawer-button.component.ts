@@ -46,6 +46,8 @@ export class DrawerButtonComponent {
   }
 
   openLoginDialog(): void {
-    this.dialog.open(LoginDialogComponent)
+    this.dialog.open(LoginDialogComponent,{
+      scrollStrategy: new NoopScrollStrategy()
+    })
   }
 }

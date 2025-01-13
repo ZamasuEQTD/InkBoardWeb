@@ -17,7 +17,7 @@
 
 @layer utilities {
   .fullscreen-on-mobile {
-    @apply min-h-screen w-screen sm:min-h-0;
+    @apply min-h-screen w-screen sm:min-h-0 max-h-none;
   }
 
 
@@ -67,7 +67,7 @@
 body { margin: 0; font-family: 'Poppins', Roboto, "Helvetica Neue", sans-serif; word-break: break-word; overflow-wrap: break-word; }
 
 ::-webkit-scrollbar {
-  width: 11px;
+  width: 10px;
   height: 16px;
 }
 
@@ -94,3 +94,8 @@ body { margin: 0; font-family: 'Poppins', Roboto, "Helvetica Neue", sans-serif; 
 }
 
 
+
+
+.cdk-global-scrollblock{
+  overflow: hidden;
+}
