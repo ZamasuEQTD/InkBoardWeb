@@ -58,6 +58,10 @@
   .icon-button {
     @apply p-0 flex justify-center items-center
   }
+
+  .colored-icon-button {
+    @apply bg-gray-900 text-white
+  }
 }
 
 body { margin: 0; font-family: 'Poppins', Roboto, "Helvetica Neue", sans-serif; word-break: break-word; overflow-wrap: break-word; }

@@ -6,6 +6,7 @@ import { RegistrarseDialogComponent } from '../../../auth/registrarse-dialog/reg
 import { Dialog } from '@angular/cdk/dialog';
 import { LoginDialogComponent } from '../../../auth/login-dialog/login-dialog.component';
 import { RegistroUsuarioDialogComponent } from '../../../registros/components/registro-usuario-dialog/registro-usuario-dialog.component';
+import { NoopScrollStrategy } from '@angular/cdk/overlay';
 @Component({
   selector: 'app-drawer-button',
   imports: [
@@ -39,7 +40,9 @@ export class DrawerButtonComponent {
 
 
   openRegistroDialog(): void {
-    this.dialog.open(RegistroUsuarioDialogComponent)
+    this.dialog.open(RegistroUsuarioDialogComponent, {
+      scrollStrategy: new NoopScrollStrategy()
+    })
   }
 
   openLoginDialog(): void {
