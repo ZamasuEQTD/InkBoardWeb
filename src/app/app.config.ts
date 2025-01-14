@@ -7,18 +7,20 @@ import Aura from '@primeng/themes/aura';
 
 
 import { routes } from './app.routes';
+import { provideStore } from '@ngrx/store';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideAnimationsAsync(),
     providePrimeNG({
-      theme: {
-          preset: Aura,
-          options : {
-            darkModeSelector: '.my-app-dark'
-          }
-      }
+        theme: {
+            preset: Aura,
+            options: {
+                darkModeSelector: '.my-app-dark'
+            }
+        }
     }),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-  ]
+    provideStore()
+]
 };
