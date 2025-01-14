@@ -5,21 +5,21 @@
   </div>
 
  <div class="px-3">
-  <form action="" (submit)="$event.preventDefault()">
+  <form action="" (submit)="$event.preventDefault()" [formGroup]="this.form">
 
     <shared-input-labeled label="Usuario" class="">
-      <input type="text"   placeholder="Usuario">
+      <input type="text"   placeholder="Usuario" formControlName="username">
     </shared-input-labeled>
 
     <shared-input-labeled label="Contraseña">
-      <input type="password" placeholder="Contraseña">
+      <input type="password" placeholder="Contraseña" formControlName="password">
     </shared-input-labeled>
 
     <shared-input-labeled label="Repite contraseña">
-      <input type="password" placeholder="Repitir Contraseña">
+      <input type="password" placeholder="Repitir Contraseña" formControlName="passwordRepetida">
     </shared-input-labeled>
 
-    <div class="px-3 mt-2">
+    <div class="px-3 mt-2" (click)="this.registrarse()">
       <button class=" primary-button">
         <span >Registrarse</span>
       </button>

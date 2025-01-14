@@ -4,11 +4,12 @@ import { jwtDecode } from "jwt-decode";
 import { HttpClient } from '@angular/common/http';
 import { catchError, EMPTY, finalize, map, throwError } from 'rxjs';
 import { ApiResponse } from '../../core/interfaces/api-response.interface';
+import { DecodedToken } from '../interfaces/decoded-tokent.interface';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthServiceService {
-  currentUser = signal<DecodedToken | null>(null);
+export class AuthService {
+  currentUser = signal<CurrentUser | null>(null);
   accessToken = signal<string | null>(null);
   authenticando = signal<boolean>(false);
 
@@ -17,7 +18,7 @@ export class AuthServiceService {
   restaurarSesion() {
     const token = localStorage.getItem("token");
 
-    if (!token || this.tokenHaExpirado(token)) return;
+    if (!token) return;
 
     this.crearSesion(token);
   }
@@ -31,13 +32,13 @@ export class AuthServiceService {
   }
 
   login(form: AuthFormData) {
-    this.authenticarse("", form).subscribe((token) => {
+    this.authenticarse("http://192.168.2.105:5000/api/auth/login", form).subscribe((token) => {
       this.crearSesion(token);
     });
   }
 
   registrarse(form: AuthFormData) {
-    this.authenticarse("", form).subscribe((token) => {
+    this.authenticarse("http://192.168.2.105:5000/api/auth/registro", form).subscribe((token) => {
       this.crearSesion(token);
     });
   }
@@ -57,27 +58,23 @@ export class AuthServiceService {
   }
 
   private crearSesion(token: string): void {
-    const user: DecodedToken = jwtDecode(token);
-    this.currentUser.set(user);
+    const {name,sub, roles} : DecodedToken = jwtDecode(token);
+
+    this.currentUser.set({
+      id: sub,
+      username: name,
+      roles: roles
+    });
+
+    console.log(this.currentUser());
+
     this.accessToken.set(token);
+
     localStorage.setItem("token", token);
-  }
-
-  private tokenHaExpirado(token: string): boolean {
-    const decodedToken: DecodedToken = jwtDecode(token);
-
-    return decodedToken.exp * 1000 < Date.now();
   }
 }
 
 interface AuthFormData {
   username: string;
   password: string;
-}
-
-
-interface DecodedToken {
-  sub: string;
-  exp: number;
-  // Otras propiedades del token
 }

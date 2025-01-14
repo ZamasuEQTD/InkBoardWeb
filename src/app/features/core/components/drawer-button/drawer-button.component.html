@@ -4,18 +4,20 @@
 
 <p-drawer  #drawer [(visible)]="show" #headless position="right" (onHide)="toggle()" baseZIndex="25">
   <ng-template #headless>
-    @if (false) {
+    @if (this.currentUser) {
+
+      @let user = this.currentUser!;
 
       <div class="flex flex-col p-2 text-gray-800">
 
         <div class="flex flex-row items-center gap-x-2 p-2">
 
-          <div class="size-14 rounded-full flex justify-center items-center bg-gray-300">
+          <div class="size-14 rounded-full flex justify-center items-center bg-gray-200">
             <i class="fa-regular fa-user"></i>
           </div>
 
           <span>
-            Bienvenido <span class="font-semibold">Franco</span>
+            Bienvenido <span class="font-semibold"> {{ user.username }} </span>
           </span>
 
         </div>
