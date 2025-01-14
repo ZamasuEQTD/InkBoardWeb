@@ -8,6 +8,10 @@
   }
 }
 
+@layer components {
+}
+
+
 :host {
   display: block;
 }

@@ -3,6 +3,7 @@ import { CurrentUser } from '../interfaces/current-user.interface';
 import { jwtDecode } from "jwt-decode";
 import { HttpClient } from '@angular/common/http';
 import { catchError, EMPTY, finalize, map, throwError } from 'rxjs';
+import { ApiResponse } from '../../core/interfaces/api-response.interface';
 @Injectable({
   providedIn: 'root'
 })
@@ -21,6 +22,14 @@ export class AuthServiceService {
     this.crearSesion(token);
   }
 
+  logout() {
+    this.currentUser.set(null);
+
+    this.accessToken.set(null);
+
+    localStorage.removeItem("token");
+  }
+
   login(form: AuthFormData) {
     this.authenticarse("", form).subscribe((token) => {
       this.crearSesion(token);
@@ -33,13 +42,6 @@ export class AuthServiceService {
     });
   }
 
-  logout() {
-    this.currentUser.set(null);
-
-    this.accessToken.set(null);
-
-    localStorage.removeItem("token");
-  }
 
   private authenticarse(url: string, form: AuthFormData) {
     this.authenticando.set(true);
@@ -73,11 +75,6 @@ interface AuthFormData {
   password: string;
 }
 
-interface ApiResponse<T> {
-  value: T;
-  message?: string;
-  status?: number;
-}
 
 interface DecodedToken {
   sub: string;

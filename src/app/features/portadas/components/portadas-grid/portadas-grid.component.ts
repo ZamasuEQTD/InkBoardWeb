@@ -14,6 +14,6 @@ export class PortadasGridComponent {
 
   @Input() cargando!: boolean;
 
-  l : number[] = Array(29).fill(1);
+  loading : number[] = Array(29).fill(1);
 
 }

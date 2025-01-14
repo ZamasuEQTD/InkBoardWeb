@@ -1,10 +1,12 @@
-import { ChangeDetectionStrategy, Component, signal,  } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal,  } from '@angular/core';
 
 
 import { HeaderComponent } from "../../../core/components/header/header.component";
 import { Portada } from '../../../portadas/interfaces/portada.interface';
 import { PortadasGridComponent } from "../../../portadas/components/portadas-grid/portadas-grid.component";
 import { PostearHiloModalButtonComponent } from "../../components/postear-hilo-modal-button/postear-hilo-modal-button.component";
+import { HomeService } from '../../services/home.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-home-page',
@@ -17,48 +19,31 @@ import { PostearHiloModalButtonComponent } from "../../components/postear-hilo-m
   styleUrl: './home-page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomePageComponent {
+export class HomePageComponent implements OnInit{
 
-  private _portadas: Portada[] = [{
-    id: "1",
-    titulo: "Primera Portada",
-    es_op: true,
-    es_sticky: false,
-    es_nuevo: true,
-    subcategoria: "SPDA",
-    recibir_notificaciones: true,
-    banderas: {
-      dados_activados: false,
-      id_unico_activado: true,
-      tiene_encuesta: false,
-    },
-    miniatura: {
-      es_spoiler: false,
-      url: "https://wallpapers.com/images/featured/fondos-de-goku-vhm3f71ddueli0kl.jpg",
-    },
-  },
-  {
-    id: "2",
-    titulo: "Segunda Portada",
-    es_op: false,
-    es_sticky: true,
-    es_nuevo: false,
-    subcategoria: "FTAS",
-    recibir_notificaciones: false,
-    banderas: {
-      dados_activados: true,
-      id_unico_activado: false,
-      tiene_encuesta: true,
-    },
-    miniatura: {
-      es_spoiler: true,
-      url: "https://wallpapers.com/images/featured/fondos-de-goku-vhm3f71ddueli0kl.jpg",
-    },
-  },];
 
-  public loading = signal(false);
+  portadas = signal<Portada[]>([]);
 
-  public get portadas() : Portada[] {
-    return this._portadas;
+  isLoading = signal(false);
+
+  private service = inject(HomeService);
+
+  ngOnInit(): void {
+    this.cargarPortadas();
+  }
+
+  cargarPortadas() {
+    if(this.isLoading()) return;
+
+    this.isLoading.set(true);
+
+    var obs =  this.service.cargarPortadas();
+
+    obs.pipe(
+      finalize(() => this.isLoading.set(false))
+    )
+    .subscribe((portadas) => {
+      this.portadas.update((p)=> [...p, ...portadas])
+    })
   }
 }
