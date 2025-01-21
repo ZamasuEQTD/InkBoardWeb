@@ -2,11 +2,12 @@ import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 
-
 import { PrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
-import { AuthService } from './features/auth/services/auth-service';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
+import { environment } from '../environments/environment.development';
+import { AuthService } from './features/auth/services/auth-service';
 @Component({
     selector: 'app-root',
     imports: [RouterOutlet],
@@ -31,7 +32,6 @@ export class AppComponent implements OnInit {
           }
       })
   }
-
 
   ngOnInit(): void {
     this.auth.restaurarSesion();

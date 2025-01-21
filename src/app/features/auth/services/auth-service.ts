@@ -32,13 +32,13 @@ export class AuthService {
   }
 
   login(form: AuthFormData) {
-    this.authenticarse("http://192.168.2.105:5000/api/auth/login", form).subscribe((token) => {
+    this.authenticarse("/api/auth/login", form).subscribe((token) => {
       this.crearSesion(token);
     });
   }
 
   registrarse(form: AuthFormData) {
-    this.authenticarse("http://192.168.2.105:5000/api/auth/registro", form).subscribe((token) => {
+    this.authenticarse("/api/auth/registro", form).subscribe((token) => {
       this.crearSesion(token);
     });
   }
@@ -53,7 +53,7 @@ export class AuthService {
         console.error('Error en la solicitud:', error);
         return throwError(() => new Error('Error en la autenticación'));
       }),
-      map((response) => response.value)
+      map((response) => response.data)
     );
   }
 

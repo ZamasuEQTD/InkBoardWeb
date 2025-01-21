@@ -7,8 +7,9 @@ import Aura from '@primeng/themes/aura';
 
 
 import { routes } from './app.routes';
-import { provideHttpClient } from '@angular/common/http';
-
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
+import { environment } from '../environments/environment.development';
+import { ApiUrlInterceptor } from './features/shared/interceptors/api-url-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,6 +24,10 @@ export const appConfig: ApplicationConfig = {
     }),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideHttpClient(),
+    provideHttpClient(withInterceptorsFromDi()),
+    {
+      provide: "BASE_API_URL", useValue: environment.api
+    },
+    {provide: HTTP_INTERCEPTORS, useClass: ApiUrlInterceptor, multi: true},
 ]
 };

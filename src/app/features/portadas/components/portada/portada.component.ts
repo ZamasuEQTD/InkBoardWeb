@@ -18,8 +18,6 @@ import { MenuModule } from 'primeng/menu';
   styleUrl: './portada.component.css',
 })
 export class PortadaComponent implements OnInit{
-
-
   @Input() portada!:Portada;
 
   public icons: IconTag[] = []
@@ -29,7 +27,7 @@ export class PortadaComponent implements OnInit{
       {
         color: 'bg-yellow-500',
         icon: 'fa-solid fa-thumbtack',
-        active: this.portada.es_sticky
+        active: this.portada.banderas.es_sticky
       },
       {
         color: 'bg-blue-500',
@@ -39,7 +37,7 @@ export class PortadaComponent implements OnInit{
       {
         color: 'bg-blue-500',
         icon: 'fa-solid fa-dice-two',
-        active: this.portada.banderas.dados_activados
+        active: this.portada.banderas.dados_activado
       },
     ];
   }

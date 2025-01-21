@@ -1,23 +1,23 @@
 export interface Portada {
   id:                     string;
-  titulo:                 string;
   autor_id?:              string;
-  es_op:                  boolean;
-  es_sticky:              boolean;
-  es_nuevo:               boolean;
-  subcategoria:           string;
   recibir_notificaciones?:boolean;
-  banderas:               Banderas;
+  es_op:                  boolean;
+  es_nuevo:               boolean;
+  titulo:                 string;
+  subcategoria:           string;
   miniatura:              Miniatura;
+  banderas:               Banderas;
 }
 
 export interface Banderas {
-  dados_activados:   boolean;
-  id_unico_activado: boolean;
+  es_sticky:         boolean;
   tiene_encuesta:    boolean;
+  dados_activado:    boolean;
+  id_unico_activado: boolean;
 }
 
 export interface Miniatura {
-  es_spoiler: boolean;
-  url:        string;
+  spoiler: boolean;
+  url:     string;
 }

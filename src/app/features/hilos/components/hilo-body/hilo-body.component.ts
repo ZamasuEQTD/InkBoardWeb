@@ -9,4 +9,4 @@ import { YoutubePlayerComponent } from "../../../shared/components/youtube-playe
   templateUrl: './hilo-body.component.html',
   styleUrl: './hilo-body.component.css',
 })
-export class HiloBodyComponent { }
+export class HiloBodyComponent {}

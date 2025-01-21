@@ -27,5 +27,3 @@ export interface Detalles {
   tag_unico?:string;
   dados?:    string;
 }
-
-
