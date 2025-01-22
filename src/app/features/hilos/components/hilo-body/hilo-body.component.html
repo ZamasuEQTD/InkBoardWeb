@@ -1,52 +1,113 @@
-<div class=" flex flex-col md:overflow-y-auto md:w-full md:h-full px-2 py-3 rounded-lg md:rounded-none bg-slate-100">
+@let hilo = service.hilo();
 
-  <div class="hilo-section flex items-center gap-x-2  ">
-    <img class="size-[30px] rounded"  src="https://pbs.twimg.com/profile_images/1366466342354751491/JyhZpbtu_400x400.jpg"alt="">
-    <a routerLink="/"  class="font-semibold text-blue-700" href=""><span>General</span></a>
-  </div>
 
-  <div class="hilo-section flex flex-row justify-between">
+  <div class=" flex flex-col md:overflow-y-auto md:w-full md:h-full px-2 py-3 rounded-lg md:rounded-none bg-slate-100">
 
-    <div class="flex flex-row gap-x-1">
+    @if (hilo != null && false) {
 
-      <button id="denunciar-button" class="hilo-button-action ">
-        <i class="fa-regular fa-flag"></i>
-      </button>
-
-      <button id="favorito-button" class="hilo-button-action ">
-        <i class="fa-regular fa-star"></i>
-      </button>
-
-      <button id="ocultar-button" class="hilo-button-action ">
-        <i class="fa-regular fa-eye"></i>
-      </button>
-
-      <button id="seguir-button" class="hilo-button-action ">
-        <i class="fa-solid fa-user-plus"></i>
-      </button>
-
-    </div>
-
-    <div class="flex flex-row gap-x-1 items-center">
-      <span class="font-bold text-sm">Anonimo</span>
-
-      <div class="px-1 py-[0.125rem] bg-gray-400 flex items-center justify-center rounded-md  ">
-        <span class="text-xs font-semibold text-white">anon</span>
+      <div class="hilo-section flex items-center gap-x-2  ">
+        <img class="size-[30px] rounded"  src="https://pbs.twimg.com/profile_images/1366466342354751491/JyhZpbtu_400x400.jpg"alt="">
+        <a routerLink="/"  class="font-semibold text-blue-700" href=""><span>General</span></a>
       </div>
 
-      <span class="text-xs font-semibold text-gray-400">2m</span>
-    </div>
+      <div class="hilo-section flex flex-row justify-between">
+
+        <div class="flex flex-row gap-x-1">
+
+          <button id="denunciar-button" class="hilo-button-action ">
+            <i class="fa-regular fa-flag"></i>
+          </button>
+
+          <button id="favorito-button" class="hilo-button-action ">
+            <i class="fa-regular fa-star"></i>
+          </button>
+
+          <button id="ocultar-button" class="hilo-button-action ">
+            <i class="fa-regular fa-eye"></i>
+          </button>
+
+          <button id="seguir-button" class="hilo-button-action ">
+            <i class="fa-solid fa-user-plus"></i>
+          </button>
+
+        </div>
+
+        <div class="flex flex-row gap-x-1 items-center">
+          <span class="font-bold text-sm">Anonimo</span>
+
+          <div class="px-1 py-[0.125rem] bg-gray-400 flex items-center justify-center rounded-md  ">
+            <span class="text-xs font-semibold text-white">anon</span>
+          </div>
+
+          <span class="text-xs font-semibold text-gray-400">2m</span>
+        </div>
+
+      </div>
+
+      <div class="flex justify-center mb-1">
+          <app-media-box [media]="hilo.media" />
+      </div>
+
+      <span class="titulo-hilo text-2xl font-bold break-words "> {{hilo.titulo}} </span>
+
+      <span class="break-words"> {{hilo.descripcion}} </span>
+    }
+    @else {
+      <div class="hilo-section flex items-center gap-x-2  ">
+        <div class="size-[30px] rounded bg-gray-300" ></div>
+        <div class="font-semibold h-4 bg-gray-300 w-[160px] rounded" href=""> </div>
+      </div>
+
+      <div class="hilo-section flex flex-row justify-between">
+
+        <div class="flex flex-row gap-x-1">
+
+          <div id="denunciar-button" class="hilo-button-action bg-gray-300 rounded"></div>
+
+          <div id="favorito-button" class="hilo-button-action bg-gray-300 rounded"></div>
+
+          <div id="ocultar-button" class="hilo-button-action  bg-gray-300 rounded "></div>
+
+          <div id="seguir-button" class="hilo-button-action bg-gray-300 rounded"></div>
+
+        </div>
+
+        <div class="flex flex-row gap-x-1 items-center">
+          <span class="w-24 h-3 bg-gray-300 rounded-md"></span>
+
+          <span class="w-5 h-3 bg-gray-300 rounded-md"></span>
+        </div>
+
+      </div>
+
+      <div class="flex justify-center mb-1">
+        <div class="w-[60%] h-[200px] bg-gray-300 rounded-lg"></div>
+      </div>
+
+
+      <div class="flex flex-wrap gap-1 mb-3">
+        <span class="rounded-md w-[300px] h-7 bg-gray-300"></span>
+        <span class="rounded-md w-[150px] h-7 bg-gray-300"></span>
+        <span class="rounded-md w-[20px] h-7 bg-gray-300"></span>
+        <span class="rounded-md w-[80px] h-7 bg-gray-300"></span>
+      </div>
+
+
+      <div class="flex flex-wrap gap-1">
+        <span class="rounded-md w-[300px] h-4 bg-gray-300"></span>
+        <span class="rounded-md w-[250px] h-4 bg-gray-300"></span>
+        <span class="rounded-md w-[80px] h-4 bg-gray-300"></span>
+        <span class="rounded-md w-[10000px] h-4 bg-gray-300"></span>
+        <span class="rounded-md w-[300px] h-4 bg-gray-300"></span>
+        <span class="rounded-md w-[150px] h-4 bg-gray-300"></span>
+        <span class="rounded-md w-[20px] h-4 bg-gray-300"></span>
+        <span class="rounded-md w-[80px] h-4 bg-gray-300"></span>
+        <span class="rounded-md w-[300px] h-4 bg-gray-300"></span>
+        <span class="rounded-md w-[80px] h-4 bg-gray-300"></span>
+        <span class="rounded-md w-[20px] h-4 bg-gray-300"></span>
+
+      </div>
+    }
 
   </div>
 
-  <div class="flex justify-center">
-    <div class="max-w-[90%] max-h-[60%]">
-      <app-youtube-player url="https://www.youtube.com/watch?v=pehYsaOL0dI"></app-youtube-player>
-    </div>
-  </div>
-
-  <span class="titulo-hilo text-2xl font-bold break-words ">Me siento tan pequeñoooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo</span>
-
-  <span class="break-words"> ds. dsaaaaaaafasfasfasfassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsadadadsaaaaaaaaaajidsaaaaaaafasfasfasfassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsadadadsaaaaaaaaaajidsaaaaaaafasfasfasfassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsadadadsaaaaaaaaaajidsaaaaaaafasfasfasfassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsadadadsaaaaaaaaaajidsaaaaaaafasfasfasfassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsadadadsaaaaaaaaaajidsaaaaaaafasfasfasfassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsadadadsaaaaaaaaaajidsaaaaaaafasfasfasfassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsadadadsaaaaaaaaaajidsaaaaaaafasfasfasfassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsadadadsaaaaaaaaaajidsaaaaaaafasfasfasfassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsadadadsaaaaaaaaaajidsaaaaaaafasfasfasfassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsadadadsaaaaaaaaaajidsaaaaaaafasfasfasfassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsadadadsaaaaaaaaaajidsaaaaaaafasfasfasfassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsadadadsaaaaaaaaaajidsaaaaaaafasfasfasfassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsadadadsaaaaaaaaaajidsaaaaaaafasfasfasfassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsadadadsaaaaaaaaaajidsaaaaaaafasfasfasfassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsadadadsaaaaaaaaaajidsaaaaaaafasfasfasfassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsadadadsaaaaaaaaaajidsaaaaaaafasfasfasfassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsadadadsaaaaaaaaaajidsaaaaaaafasfasfasfassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsadadadsaaaaaaaaaajidsaaaaaaafasfasfasfassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsadadadsaaaaaaaaaajidsaaaaaaafasfasfasfassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsadadadsaaaaaaaaaajidsaaaaaaafasfasfasfassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsadadadsaaaaaaaaaajidsaaaaaaafasfasfasfassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsadadadsaaaaaaaaaajidsaaaaaaafasfasfasfassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsadadadsaaaaaaaaaajidsaaaaaaafasfasfasfassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsadadadsaaaaaaaaaajidsaaaaaaafasfasfasfassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsadadadsaaaaaaaaaajidsaaaaaaafasfasfasfassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsadadadsaaaaaaaaaajidsaaaaaaafasfasfasfassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsadadadsaaaaaaaaaajidsaaaaaaafasfasfasfassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsadadadsaaaaaaaaaajidsaaaaaaafasfasfasfassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsadadadsaaaaaaaaaajidsaaaaaaafasfasfasfassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsadadadsaaaaaaaaaajidsaaaaaaafasfasfasfassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsadadadsaaaaaaaaaajidsaaaaaaafasfasfasfassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsadadadsaaaaaaaaaajidsaaaaaaafasfasfasfassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsadadadsaaaaaaaaaajidsaaaaaaafasfasfasfassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsadadadsaaaaaaaaaajidsaaaaaaafasfasfasfassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsadadadsaaaaaaaaaajidsaaaaaaafasfasfasfassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsadadadsaaaaaaaaaaji</span>
-
-</div>

@@ -21,7 +21,7 @@ export class HiloService {
     this.hiloIsLoading.set(true);
 
     var obs = this.http
-    .get<ApiResponse<Hilo>>(`api/hilos/${id}`)
+    .get<ApiResponse<Hilo>>(`/api/hilos/${id}`)
     .pipe(
       map(
         (response) => response.data
@@ -38,31 +38,6 @@ export class HiloService {
     )
     .subscribe((hilo) => {
       this.hilo.set(hilo)
-
-      this.cargarComentarios();
-    })
-  }
-
-
-  public cargarComentarios(){
-    this.isComentariosLoading.set(true);
-
-    var obs = this.http
-    .get<ApiResponse<Comentario[]>>(`api/hilos/${this.hilo()!.id}`)
-    .pipe(
-      map(
-        (response) => response.data
-      )
-    )
-
-    obs
-    .pipe(
-      finalize(()=> {
-        this.isComentariosLoading.set(false)
-      })
-    )
-    .subscribe((comentarios) => {
-      this.comentarios.update((c) => [...c, ...comentarios]);
     })
   }
 }

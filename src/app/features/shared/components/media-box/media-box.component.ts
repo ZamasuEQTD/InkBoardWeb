@@ -14,6 +14,6 @@ export class MediaBoxComponent implements OnInit {
   isDimensionable !:boolean;
 
   ngOnInit(): void {
-    this.isDimensionable = this.media.provider === 'youtube' || this.media.provider === 'image' || this.media.provider === 'video';
+    this.isDimensionable = this.media.provider === 'Youtube' || this.media.provider === 'Image' || this.media.provider === 'Video';
   }
 }

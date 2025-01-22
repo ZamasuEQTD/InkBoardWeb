@@ -1,6 +1,6 @@
 export interface Media {
   provider:          string;
-  es_spoiler:        boolean;
+  spoiler:        boolean;
   url:               string;
   previsualizacion?: string;
 }

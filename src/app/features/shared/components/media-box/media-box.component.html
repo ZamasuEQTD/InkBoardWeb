@@ -1,12 +1,12 @@
 @if (this.isDimensionable) {
     @switch (this.media.provider) {
-      @case ('youtube') {
+      @case ('Youtube') {
         <app-youtube-player [url]="this.media.url"></app-youtube-player>
       }
-      @case ('video') {
+      @case ('Video') {
         <video [src]="this.media.url" class="h-full w-full object-contain"  [poster]="this.media.previsualizacion" controls="controls"></video>
       }
-      @case ('image') {
+      @case ('Image') {
         <img [src]="this.media.url" class="h-full w-full object-contain" alt="imagen no visible">
       }
     }

@@ -11,7 +11,7 @@ export class MediaPipe implements PipeTransform {
   transform(value:  PickedMedia): Media {
     return {
       url:value.source,
-      es_spoiler:false,
+      spoiler:false,
       provider : value.type!
     };
   }
