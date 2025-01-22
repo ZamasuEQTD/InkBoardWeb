@@ -28,6 +28,14 @@
   .medium {
     @apply w-[600px] max-h-[800px] min-h-[400px] relative overflow-y-auto;
   }
+
+  .skeleton {
+    @apply animate-pulse bg-slate-200   rounded;
+  }
+
+  .text-skeleton {
+    @apply skeleton rounded-md
+  }
 }
 
 

@@ -1,3 +1,4 @@
+import { Media } from "../../shared/interfaces/media.interface";
 
 export interface Hilo {
   id:                     string;
@@ -24,12 +25,12 @@ export interface Respuesta {
   votos:     number;
 }
 
-export interface  Media {
-  provider:         string;
-  spoiler:          boolean;
-  url:              string;
-  previsualizacion: string;
-}
+// export interface  Media {
+//   provider:         string;
+//   spoiler:          boolean;
+//   url:              string;
+//   previsualizacion: string;
+// }
 
 export interface Subcategoria {
   id:     string;

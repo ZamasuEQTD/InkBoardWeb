@@ -7,9 +7,10 @@ import { MediaBoxComponent } from "../../../shared/components/media-box/media-bo
 
 @Component({
   selector: 'app-hilo-body',
-  imports: [MediaBoxComponent],
+  // imports: [MediaBoxComponent],
   templateUrl: './hilo-body.component.html',
   styleUrl: './hilo-body.component.css',
+  imports: [MediaBoxComponent],
 })
 export class HiloBodyComponent {
   public service = inject(HiloService);

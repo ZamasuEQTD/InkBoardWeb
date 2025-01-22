@@ -4,15 +4,9 @@
 
 @layer components  {
   .comentario-container {
-    @apply  w-full bg-gray-200 rounded-xl p-2 flex flex-col;
+    @apply  w-full bg-gray-100 rounded-xl p-2 flex flex-col;
   }
 }
-
-app-media-box video {
-  border-radius: 50px;
-}
-
-
 
 :host {
   display: block;

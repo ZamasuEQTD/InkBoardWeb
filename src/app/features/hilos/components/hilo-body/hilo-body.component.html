@@ -1,9 +1,8 @@
 @let hilo = service.hilo();
 
+  <div class=" flex flex-col md:overflow-y-auto md:w-full md:h-full px-2 py-3 rounded-lg md:rounded-none bg-gray-100">
 
-  <div class=" flex flex-col md:overflow-y-auto md:w-full md:h-full px-2 py-3 rounded-lg md:rounded-none bg-slate-100">
-
-    @if (hilo != null && false) {
+    @if (hilo != null) {
 
       <div class="hilo-section flex items-center gap-x-2  ">
         <img class="size-[30px] rounded"  src="https://pbs.twimg.com/profile_images/1366466342354751491/JyhZpbtu_400x400.jpg"alt="">
@@ -44,8 +43,11 @@
 
       </div>
 
+
       <div class="flex justify-center mb-1">
-          <app-media-box [media]="hilo.media" />
+
+          <app-media-box class="max-w-[80%] max-h-[400px] overflow-hidden" [media]="hilo.media" />
+
       </div>
 
       <span class="titulo-hilo text-2xl font-bold break-words "> {{hilo.titulo}} </span>
@@ -54,57 +56,57 @@
     }
     @else {
       <div class="hilo-section flex items-center gap-x-2  ">
-        <div class="size-[30px] rounded bg-gray-300" ></div>
-        <div class="font-semibold h-4 bg-gray-300 w-[160px] rounded" href=""> </div>
+        <div class="size-[30px] skeleton" ></div>
+        <div class="h-4 text-skeleton w-[160px] " href=""> </div>
       </div>
 
       <div class="hilo-section flex flex-row justify-between">
 
         <div class="flex flex-row gap-x-1">
 
-          <div id="denunciar-button" class="hilo-button-action bg-gray-300 rounded"></div>
+          <div id="denunciar-button" class="hilo-button-action skeleton"></div>
 
-          <div id="favorito-button" class="hilo-button-action bg-gray-300 rounded"></div>
+          <div id="favorito-button" class="hilo-button-action skeleton"></div>
 
-          <div id="ocultar-button" class="hilo-button-action  bg-gray-300 rounded "></div>
+          <div id="ocultar-button" class="hilo-button-action  skeleton "></div>
 
-          <div id="seguir-button" class="hilo-button-action bg-gray-300 rounded"></div>
+          <div id="seguir-button" class="hilo-button-action skeleton"></div>
 
         </div>
 
         <div class="flex flex-row gap-x-1 items-center">
-          <span class="w-24 h-3 bg-gray-300 rounded-md"></span>
+          <span class="w-24 h-3 text-skeleton"></span>
 
-          <span class="w-5 h-3 bg-gray-300 rounded-md"></span>
+          <span class="w-5 h-3 text-skeleton"></span>
         </div>
 
       </div>
 
       <div class="flex justify-center mb-1">
-        <div class="w-[60%] h-[200px] bg-gray-300 rounded-lg"></div>
+        <div class="w-[60%] h-[200px] skeleton"></div>
       </div>
 
 
       <div class="flex flex-wrap gap-1 mb-3">
-        <span class="rounded-md w-[300px] h-7 bg-gray-300"></span>
-        <span class="rounded-md w-[150px] h-7 bg-gray-300"></span>
-        <span class="rounded-md w-[20px] h-7 bg-gray-300"></span>
-        <span class="rounded-md w-[80px] h-7 bg-gray-300"></span>
+        <span class="w-[300px] h-7 text-skeleton"></span>
+        <span class="w-[150px] h-7 text-skeleton"></span>
+        <span class="w-[20px]  h-7 text-skeleton"></span>
+        <span class="w-[80px]  h-7 text-skeleton"></span>
       </div>
 
 
       <div class="flex flex-wrap gap-1">
-        <span class="rounded-md w-[300px] h-4 bg-gray-300"></span>
-        <span class="rounded-md w-[250px] h-4 bg-gray-300"></span>
-        <span class="rounded-md w-[80px] h-4 bg-gray-300"></span>
-        <span class="rounded-md w-[10000px] h-4 bg-gray-300"></span>
-        <span class="rounded-md w-[300px] h-4 bg-gray-300"></span>
-        <span class="rounded-md w-[150px] h-4 bg-gray-300"></span>
-        <span class="rounded-md w-[20px] h-4 bg-gray-300"></span>
-        <span class="rounded-md w-[80px] h-4 bg-gray-300"></span>
-        <span class="rounded-md w-[300px] h-4 bg-gray-300"></span>
-        <span class="rounded-md w-[80px] h-4 bg-gray-300"></span>
-        <span class="rounded-md w-[20px] h-4 bg-gray-300"></span>
+        <span class= "w-[300px] h-4 text-skeleton"></span>
+        <span class= "w-[250px] h-4 text-skeleton"></span>
+        <span class= "w-[80px] h-4 text-skeleton"></span>
+        <span class= "w-[10000px] h-4 text-skeleton"></span>
+        <span class= "w-[300px] h-4 text-skeleton"></span>
+        <span class= "w-[150px] h-4 text-skeleton"></span>
+        <span class= "w-[20px] h-4 text-skeleton"></span>
+        <span class= "w-[80px] h-4 text-skeleton"></span>
+        <span class= "w-[300px] h-4 text-skeleton"></span>
+        <span class= "w-[80px] h-4 text-skeleton"></span>
+        <span class= "w-[20px] h-4 text-skeleton"></span>
 
       </div>
     }
