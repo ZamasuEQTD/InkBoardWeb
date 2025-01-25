@@ -5,13 +5,15 @@ import { Media } from '../../../shared/interfaces/media.interface';
 import { PickFileInputComponent } from "../../../shared/components/pick-file-input/pick-file-input.component";
 import { PickedMedia } from '../../../shared/interfaces/picked-media.interface';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-comentar-hilo-form',
   imports: [
     YoutubeThumbnailPipe,
     PickFileInputComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommonModule
   ],
   templateUrl: './comentar-hilo-form.component.html',
   styleUrl: './comentar-hilo-form.component.css',
@@ -43,6 +45,12 @@ export class ComentarHiloFormComponent {
     this.form.patchValue({
       file:  undefined
     })
+  }
+
+  comentar() : void {
+    this.form.patchValue({
+      texto: ""
+    });
   }
 
 

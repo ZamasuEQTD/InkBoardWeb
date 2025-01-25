@@ -14,12 +14,12 @@
     </div>
 
     <div class="px-2 flex flex-col gap-y-1">
-      @for (comentario of comentarios; track $index) {
+      @for (comentario of service.comentarios(); track $index) {
         <app-comentario [comentario]="comentario"></app-comentario>
       }
 
       @if(hilo == null || this.service.isComentariosLoading()){
-        @for (_ of comentarios; track $index) {
+        @for (_ of [1,2,3,4,5]; track $index) {
           <app-comentario-skeleton></app-comentario-skeleton>
         }
       }

@@ -10,16 +10,11 @@ export interface Comentario {
   respuestas:             string[];
   responde:               string[];
   es_op:                  boolean;
+  tag:                   string;
+  tag_unico?:            string;
   recibir_notificaciones?:boolean;
   color:                  string;
-  autor:                  Autor;
-  detalles:               Detalles;
   media?:                  Media;
-}
-
-export interface Autor {
-  nombre: string;
-  rango:  string;
 }
 
 export interface Detalles {

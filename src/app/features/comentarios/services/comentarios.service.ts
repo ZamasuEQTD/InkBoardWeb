@@ -12,8 +12,8 @@ export class ComentariosService {
 
   getComentariosDeHilo(hilo : string): Observable<Comentario[]> {
     return this.
-      http.get<ApiResponse<Comentario[]>>('')
-      .pipe(
+      http.get<ApiResponse<Comentario[]>>(`/api/comentarios/hilo/${hilo}`).
+      pipe(
         map((response)=> response.data)
       );
   }

@@ -4,6 +4,7 @@ import { finalize, map, Observable } from 'rxjs';
 import { Hilo } from '../interfaces/hilo.interface';
 import { ApiResponse } from '../../core/interfaces/api-response.interface';
 import { Comentario } from '../../comentarios/interfaces/comentario.interface';
+import { ComentariosService } from '../../comentarios/services/comentarios.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,10 @@ export class HiloService {
   hiloIsLoading = signal<boolean>(false);
 
   comentarios = signal<Comentario[]>([])
+
   isComentariosLoading = signal<boolean>(false);
+
+  comentariosService = inject(ComentariosService);
 
   private http = inject(HttpClient)
 
@@ -38,6 +42,14 @@ export class HiloService {
     )
     .subscribe((hilo) => {
       this.hilo.set(hilo)
+
+      var comentarios =  this.comentariosService.getComentariosDeHilo(hilo.id)
+
+      comentarios.subscribe((comentarios) => {
+        this.comentarios.update((old) => {
+          return [...old, ...comentarios]
+        })
+      })
     })
   }
 }

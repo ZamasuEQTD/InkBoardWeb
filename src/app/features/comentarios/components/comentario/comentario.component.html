@@ -3,12 +3,12 @@
 
     <div class="flex flex-row items-center gap-x-1">
 
-      <app-color-comentario [color]="this.comentario.color">
-        <span class="text-white text-sm font-bold"> {{this.comentario.detalles.dados ?? (this.comentario.es_op? "OP" : this.comentario.autor.rango)}} </span>
+      <app-color-comentario [color]="this.comentario.color | lowercase">
+        <span class="text-white text-sm font-bold"> OP  </span>
       </app-color-comentario>
 
       <div class="flex flex-wrap gap-x-1 gap-y-[2px] items-center mb">
-        <span class="text-sm font-semibold">{{this.comentario.autor.nombre}}</span>
+        <span class="text-sm font-semibold"> ANONIMO </span>
 
         @if (this.comentario.es_op) {
           <div class="bg-white text-xs px-2 py-1 rounded-lg"> OP </div>
@@ -18,10 +18,10 @@
           <div class="bg-yellow-200 text-xs px-2 py-1 rounded-lg">Destacado</div>
         }
 
-        <div  class="bg-white text-xs px-2 py-1 rounded-lg"> {{this.comentario.detalles.tag}} </div>
+        <div  class="bg-white text-xs px-2 py-1 rounded-lg cursor-pointer"> {{this.comentario.tag}} </div>
 
-        @if (this.comentario.detalles.tag_unico) {
-          <div class="bg-red-500 text-white text-xs px-2 py-1 rounded-lg"> {{this.comentario.detalles.tag_unico}} </div>
+        @if (this.comentario.tag_unico) {
+          <div class="bg-red-500 text-white text-xs px-2 py-1 rounded-lg"> {{this.comentario.tag_unico}} </div>
         }
 
       </div>
