@@ -6,6 +6,7 @@ import { PickFileInputComponent } from "../../../shared/components/pick-file-inp
 import { PickedMedia } from '../../../shared/interfaces/picked-media.interface';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ComentarHiloService } from '../../services/comentar-hilo.service';
 
 @Component({
   selector: 'app-comentar-hilo-form',
@@ -22,37 +23,14 @@ export class ComentarHiloFormComponent {
 
   @ViewChild('fileRef') fileInput!: PickFileInputComponent;
 
-  private fb : FormBuilder  = inject(FormBuilder);
+  comentarHiloService = inject(ComentarHiloService);
 
-  form = this.fb.group({
-    texto: [''],
-    spoiler: [false],
-    file: this.fb.control<PickedMedia | undefined>(undefined, {
-      validators: []
-    }),
-  });
 
-  agregarMedia(picked:PickedMedia){
-    this.form.patchValue({
-      spoiler : false,
-      file:picked
-    })
+  comentar() : void {}
+
+  get form(){
+    return this.comentarHiloService.form;
   }
-
-  eliminarMedia() :void {
-    this.fileInput.clear();
-
-    this.form.patchValue({
-      file:  undefined
-    })
-  }
-
-  comentar() : void {
-    this.form.patchValue({
-      texto: ""
-    });
-  }
-
 
   get media(): PickedMedia | null | undefined {
     return this.form.get('file')!.value;

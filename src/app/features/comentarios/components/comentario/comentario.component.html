@@ -18,7 +18,7 @@
           <div class="bg-yellow-200 text-xs px-2 py-1 rounded-lg">Destacado</div>
         }
 
-        <div  class="bg-white text-xs px-2 py-1 rounded-lg cursor-pointer"> {{this.comentario.tag}} </div>
+        <div  class="bg-white text-xs px-2 py-1 rounded-lg cursor-pointer" (click)="this.tagguear()"> {{this.comentario.tag}} </div>
 
         @if (this.comentario.tag_unico) {
           <div class="bg-red-500 text-white text-xs px-2 py-1 rounded-lg"> {{this.comentario.tag_unico}} </div>
