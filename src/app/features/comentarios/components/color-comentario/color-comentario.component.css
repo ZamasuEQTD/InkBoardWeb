@@ -1,32 +1,3 @@
-
-@tailwind components;
-
-@layer components {
-  .rojo {
-    @apply bg-red-500 ;
-  }
-
-  .verde{
-    @apply bg-green-500
-  }
-
-  .azul{
-    @apply bg-blue-500
-  }
-
-  .amarillo{
-    @apply bg-yellow-500
-  }
-
-  .white{
-    @apply bg-white
-  }
-
-  .black{
-    @apply bg-black
-  }
-}
-
 .multi {
   animation: multi-linear-animaton .3s infinite;
 }
@@ -43,3 +14,28 @@
   display: block;
 }
 
+
+.amarillo {
+  background-color: #eab308;
+}
+
+.white {
+  background-color: #fff;
+}
+
+.black {
+  background-color: #fff
+  ;
+}
+
+.rojo {
+  background-color: #ef4444;
+}
+
+.verde {
+  background-color:#22c55e;
+}
+
+.azul {
+  background-color: #3b82f6;
+}

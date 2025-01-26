@@ -5,35 +5,32 @@ import { Pipe, type PipeTransform } from '@angular/core';
 })
 export class TiempoTranscurridoPipe implements PipeTransform {
 
-  transform(value: Date, ...args: any[]): string {
-    // Verificamos si la fecha es válida
-    if (!(value instanceof Date && !isNaN(value.getTime()))) {
-      return "Fecha inválida";
+  transform(value: string, ...args: any[]): string {
+    console.log('Input value:', value);
+    const date = new Date(value);
+    console.log('Parsed date:', date);
+
+    if (isNaN(date.getTime())) {
+      return 'Fecha inválida';
     }
 
-    // Obtenemos la diferencia en milisegundos
-    const ahora = Date.now();
-    const fecha = value.getTime();
-    const diferenciaMilisegundos = Math.abs(ahora - fecha);
+    const now = new Date();
+    const diff = now.getTime() - date.getTime();
 
-    // Convertimos la diferencia a segundos, minutos, horas, días y meses
-    const diferenciaSegundos = Math.floor(diferenciaMilisegundos / 1000);
-    const diferenciaMinutos = Math.floor(diferenciaSegundos / 60);
-    const diferenciaHoras = Math.floor(diferenciaMinutos / 60);
-    const diferenciaDias = Math.floor(diferenciaHoras / 24);
-    const diferenciaMeses = Math.floor(diferenciaDias / 30); // Aproximación para meses
+    // Calculate the time difference in various units
+    const seconds = Math.floor(diff / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
 
-    // Definimos los mensajes según la diferencia
-    if (diferenciaMinutos < 1) {
-      return "ahora";
-    } else if (diferenciaMinutos < 60) {
-      return `${diferenciaMinutos}m`;
-    } else if (diferenciaHoras < 24) {
-      return `${diferenciaHoras}h`;
-    } else if (diferenciaDias < 30) {
-      return `${diferenciaDias}d`;
+    if (days > 0) {
+      return `${days} días`;
+    } else if (hours > 0) {
+      return `${hours} horas`;
+    } else if (minutes > 0) {
+      return `${minutes} minutos`;
     } else {
-      return `${diferenciaMeses}ms`;
+      return `${seconds} segundos`;
     }
   }
 }

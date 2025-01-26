@@ -2,8 +2,7 @@
   <div class="flex flex-row justify-between items-center mb-1">
 
     <div class="flex flex-row items-center gap-x-1">
-
-      <app-color-comentario [color]="this.comentario.color | lowercase">
+      <app-color-comentario [color]="this.comentario.color">
         <span class="text-white text-sm font-bold"> OP  </span>
       </app-color-comentario>
 
@@ -30,7 +29,7 @@
 
     <div class="items-center flex flex-row gap-x-1">
 
-      <span class="text-sm text-gray-400"> {{this.comentario.created_at | tiempoTranscurrido}} </span>
+      <span class="text-sm text-gray-400">{{this.comentario.created_at | tiempoTranscurrido}} </span>
 
       <button>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"

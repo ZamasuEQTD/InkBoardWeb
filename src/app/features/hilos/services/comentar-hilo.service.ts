@@ -1,11 +1,15 @@
 import { inject, Injectable } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { PickedMedia } from '../../shared/interfaces/picked-media.interface';
+import { TagUtils } from '../../comentarios/utils/tags-utils';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ComentarHiloService {
+
+  static cantidadMaximaDeTaggueos = 5;
+
  private fb : FormBuilder  = inject(FormBuilder);
 
   form = this.fb.group({
@@ -30,21 +34,20 @@ export class ComentarHiloService {
     })
   }
 
-  static tag_regex = />>[A-Z0-9]{8}/g
 
   tagguear(tag:string){
-    if((this.form.get('texto')!.value! as string ).includes('>>' + tag)){
-      return;
-    }
+    var texto = this.form.get('texto')!.value! as string;
 
-    const matches = Array.from((this.form.get('texto')!.value! as string).matchAll(ComentarHiloService.tag_regex)).length;
+    if(TagUtils.incluyeTag(texto, tag)) return;
 
-    if (matches >= 5) {
-      return;
-    }
+    if (this.alcanzoLimiteDeTaggueos(texto)) return;
 
     this.form.patchValue({
       texto: this.form.get('texto')!.value + '>>' + tag
     })
+  }
+
+  private alcanzoLimiteDeTaggueos(texto:string): boolean {
+    return TagUtils.cantidadTags(texto) >= ComentarHiloService.cantidadMaximaDeTaggueos;
   }
 }
