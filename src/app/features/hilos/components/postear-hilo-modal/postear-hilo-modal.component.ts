@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import {FormGroup, FormControl, FormBuilder, FormArray, ReactiveFormsModule, RequiredValidator, Validators} from '@angular/forms';
 
 import { DialogHeaderComponent } from "../../../shared/components/dialog-header/dialog-header.component";
@@ -13,6 +13,9 @@ import { MediaPipe } from '../../../shared/pipes/media.pipe';
 import { DialogComponent } from "../../../shared/components/dialog/dialog.component";
 import { SeleccionarSubcategoriaDialogComponent } from '../../../categorias/components/seleccionar-subcategoria-dialog/seleccionar-subcategoria-dialog.component';
 import { Subcategoria } from '../../../categorias/interfaces/subcategoria.interface';
+import { HttpClient } from '@angular/common/http';
+import { ApiResponse } from '../../../core/interfaces/api-response.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'postear-hilo-modal',
@@ -23,13 +26,18 @@ import { Subcategoria } from '../../../categorias/interfaces/subcategoria.interf
     PickFileInputComponent,
     MediaBoxComponent,
     MediaPipe,
-    DialogComponent
+    DialogComponent,
 ],
   templateUrl: './postear-hilo-modal.component.html',
   styleUrl: './postear-hilo-modal.component.css',
 })
 export class PostearHiloModalComponent {
 
+
+  posteando = signal(false);
+
+  private http = inject(HttpClient);
+  private router = inject(Router);
   private fb : FormBuilder  = inject(FormBuilder);
 
   private dialog = inject(Dialog);
@@ -104,5 +112,37 @@ export class PostearHiloModalComponent {
       }
     }
    })
+  }
+
+  postear() : void {
+    if(this.posteando()) return;
+
+    var data  = new FormData();
+
+    data.append("titulo", this.form.get("titulo")?.value || "");
+
+    data.append("descripcion", this.form.get("descripcion")?.value || "");
+
+    data.append("Subcategoria",  "0abc0946-1eba-479c-8875-cef61a10f851");
+
+    data.append("DadosActivados", this.form.get("dados")?.value?.toString() || "false");
+
+    data.append("IdUnicoActivado", this.form.get("idUnico")?.value?.toString() || "false");
+
+
+    const portada = this.form.get("portada")?.value;
+
+    if (portada) {
+      data.append("File", portada.contenido.file!);
+      data.append("Spoiler", portada.ocultar.toString());
+    }
+
+    this.http.post<ApiResponse<string>>("/api/hilos/postear", data).subscribe((result)=> {
+      console.log(result);
+
+
+      const hiloId = result.data;
+      this.router.navigate([`/hilos/${hiloId}`]);
+    });
   }
 }

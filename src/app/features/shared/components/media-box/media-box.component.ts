@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Media } from '../../interfaces/media.interface';
 import { YoutubePlayerComponent } from "../youtube-player/youtube-player.component";
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-media-box',
-  imports: [YoutubePlayerComponent],
+  imports: [YoutubePlayerComponent,CommonModule],
   templateUrl: './media-box.component.html',
   styleUrl: './media-box.component.css',
 })

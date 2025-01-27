@@ -1,4 +1,6 @@
 export interface PickedMedia {
-  source: string;
+  source: string
   type? : string
+  filename?:string
+  file?: File
 }

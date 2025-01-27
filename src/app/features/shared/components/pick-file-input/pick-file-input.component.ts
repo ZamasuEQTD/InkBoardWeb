@@ -24,17 +24,22 @@ export class PickFileInputComponent {
   onChange(event: any) :void{
     const  files :FileList = event.target.files;
 
-    const  file : File= files[0];
+    const  file : File = files[0];
 
     const reader = new FileReader();
 
     reader.onload = (e: ProgressEvent<FileReader>) => {
       this.onPickedFile.emit({
-        type :  file.type.split('/')[0],
-        source :  reader.result! as string
+        type :  this.capitalize(file.type.split('/')[0]),
+        source :  reader.result! as string,
+        file: file
       });
     }
 
     reader.readAsDataURL(file);
+  }
+
+  capitalize(type:string) : string {
+    return type.charAt(0).toUpperCase() + type.slice(1);
   }
 }

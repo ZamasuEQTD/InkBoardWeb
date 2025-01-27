@@ -13,7 +13,7 @@
       @if(this.portada){
         <div class="flex justify-center ">
 
-          <div class="relative rounded-lg overflow-hidden bg-clip-border min-h-48 max-h-[20rem] object-contain bg-gray-200">
+          <div class=" relative rounded-lg overflow-hidden bg-clip-border min-h-48 max-h-[20rem] object-contain bg-gray-200">
 
             <app-media-box [media]="portada.contenido | media" />
 
@@ -147,7 +147,7 @@
       </div>
     </shared-input-labeled>
 
-    <button class="primary-button">
+    <button class="primary-button" (click)="this.postear()">
       <span>Postear</span>
     </button>
 

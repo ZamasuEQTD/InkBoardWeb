@@ -1,4 +1,5 @@
 @if (this.isDimensionable) {
+   <div class="w-full h-full">
     @switch (this.media.provider) {
       @case ('Youtube') {
         <app-youtube-player [url]="this.media.url"></app-youtube-player>
@@ -10,4 +11,5 @@
         <img [src]="this.media.url" class="h-full w-full object-contain" alt="imagen no visible">
       }
     }
+   </div>
 }
