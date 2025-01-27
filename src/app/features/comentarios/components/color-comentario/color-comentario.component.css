@@ -2,13 +2,6 @@
   animation: multi-linear-animaton .3s infinite;
 }
 
-@keyframes multi-linear-animaton {
-  0%  { background: linear-gradient(theme(colors.red.500) 25%, theme(colors.yellow.500) 25%, theme(colors.yellow.500) 50%, theme(colors.blue.500) 50%, theme(colors.blue.500) 75%, theme(colors.green.500) 75%, theme(colors.green.500) 100%);}
-  20%  { background: linear-gradient(theme(colors.red.500) 25%, theme(colors.yellow.500) 25%, theme(colors.yellow.500) 50%, theme(colors.blue.500) 50%, theme(colors.blue.500) 75%, theme(colors.green.500) 75%, theme(colors.green.500) 100%);}
-  60%  { background: linear-gradient(theme(colors.green.500) 25%, theme(colors.red.500) 25%, theme(colors.red.500) 50%, theme(colors.yellow.500) 50%, theme(colors.yellow.500) 75%, theme(colors.blue.500) 75%, theme(colors.blue.500) 100%);}
-  80%  { background: linear-gradient(theme(colors.blue.500) 25%, theme(colors.green.500) 25%, theme(colors.green.500) 50%, theme(colors.red.500) 50%, theme(colors.red.500) 75%, theme(colors.yellow.500) 75%, theme(colors.yellow.500) 100%);}
-  100% { background: linear-gradient(theme(colors.yellow.500) 25%, theme(colors.blue.500) 25%, theme(colors.blue.500) 50%, theme(colors.green.500) 50%, theme(colors.green.500) 75%, theme(colors.red.500) 75%, theme(colors.red.500) 100%);}
-}
 
 :host {
   display: block;
@@ -38,4 +31,12 @@
 
 .azul {
   background-color: #3b82f6;
+}
+
+@keyframes multi-linear-animaton {
+  0%  { background: linear-gradient(theme(colors.red.500) 25%, theme(colors.yellow.500) 25%, theme(colors.yellow.500) 50%, theme(colors.blue.500) 50%, theme(colors.blue.500) 75%, theme(colors.green.500) 75%, theme(colors.green.500) 100%);}
+  20%  { background: linear-gradient(theme(colors.red.500) 25%, theme(colors.yellow.500) 25%, theme(colors.yellow.500) 50%, theme(colors.blue.500) 50%, theme(colors.blue.500) 75%, theme(colors.green.500) 75%, theme(colors.green.500) 100%);}
+  60%  { background: linear-gradient(theme(colors.green.500) 25%, theme(colors.red.500) 25%, theme(colors.red.500) 50%, theme(colors.yellow.500) 50%, theme(colors.yellow.500) 75%, theme(colors.blue.500) 75%, theme(colors.blue.500) 100%);}
+  80%  { background: linear-gradient(theme(colors.blue.500) 25%, theme(colors.green.500) 25%, theme(colors.green.500) 50%, theme(colors.red.500) 50%, theme(colors.red.500) 75%, theme(colors.yellow.500) 75%, theme(colors.yellow.500) 100%);}
+  100% { background: linear-gradient(theme(colors.yellow.500) 25%, theme(colors.blue.500) 25%, theme(colors.blue.500) 50%, theme(colors.green.500) 50%, theme(colors.green.500) 75%, theme(colors.red.500) 75%, theme(colors.red.500) 100%);}
 }

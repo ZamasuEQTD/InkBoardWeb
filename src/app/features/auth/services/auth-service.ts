@@ -38,7 +38,7 @@ export class AuthService {
   }
 
   registrarse(form: AuthFormData) {
-    this.authenticarse("/api/auth/registro", form).subscribe((token) => {
+    this.authenticarse("/api/auth/registrarse", form).subscribe((token) => {
       this.crearSesion(token);
     });
   }
@@ -58,6 +58,9 @@ export class AuthService {
   }
 
   private crearSesion(token: string): void {
+
+    console.log(token);
+
     const {name,sub, roles} : DecodedToken = jwtDecode(token);
 
     this.currentUser.set({

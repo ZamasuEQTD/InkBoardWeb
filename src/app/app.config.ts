@@ -10,6 +10,7 @@ import { routes } from './app.routes';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
 import { environment } from '../environments/environment.development';
 import { ApiUrlInterceptor } from './features/shared/interceptors/api-url-interceptor';
+import { TokenInterceptor } from './features/shared/interceptors/token-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -29,5 +30,7 @@ export const appConfig: ApplicationConfig = {
       provide: "BASE_API_URL", useValue: environment.api
     },
     {provide: HTTP_INTERCEPTORS, useClass: ApiUrlInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
+
 ]
 };
