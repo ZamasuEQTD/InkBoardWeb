@@ -23,14 +23,19 @@ export class TiempoTranscurridoPipe implements PipeTransform {
     const hours = Math.floor(minutes / 60);
     const days = Math.floor(hours / 24);
 
+    const months = Math.floor(days / 30);
+
+    if (months > 0) {
+      return `${months} ms`;
+    }
     if (days > 0) {
-      return `${days} días`;
+      return `${days} ds`;
     } else if (hours > 0) {
-      return `${hours} horas`;
+      return `${hours} hs`;
     } else if (minutes > 0) {
-      return `${minutes} minutos`;
+      return `${minutes} min`;
     } else {
-      return `${seconds} segundos`;
+      return `${seconds} segs`;
     }
   }
 }

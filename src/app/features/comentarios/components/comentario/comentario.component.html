@@ -41,9 +41,9 @@
 
   </div>
 
-  <div id="respuestas-comentario-wrap" class="flex flex-wrap gap-x-1 gap-y-1">
-    @for (tag of this.comentario.respuestas; track $index) {
-      <span class=" text-blue-600">{{tag}}</span>
+  <div id="respuestas-comentario-wrap" class="flex flex-wrap gap-x-2 gap-y-2 cursor-pointer">
+    @for (tag of this.comentario.respondido_por; track $index) {
+      <span class=" text-blue-600 text-sm">>>{{tag}}</span>
     }
   </div>
 
@@ -51,5 +51,5 @@
       <app-media-box class="" [media]="this.comentario.media"/>
   }
 
-  <span> {{this.comentario.texto}} </span>
+  <app-texto [comentario]="this.comentario"></app-texto>
 </div>

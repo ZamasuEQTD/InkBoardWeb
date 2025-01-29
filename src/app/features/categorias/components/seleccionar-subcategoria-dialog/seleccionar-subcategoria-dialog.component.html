@@ -1,22 +1,20 @@
-<div class="w-[400px] min-h-[200px]  max-h-[500px] bg-white rounded-lg p-2 overflow-y-auto">
+<app-dialog [fullscreenOnMobile]="false">
 
+  <div class="overflow-y-auto">
+    @for (categoria of this.categorias(); track $index) {
+      <div class="mb-1">
+        <span class="font-semibold text-lg"> {{categoria.nombre}} </span>
 
-    <div class="overflow-y-auto">
-      @for (categoria of this.categorias; track $index) {
-        <div class="mb-1">
-          <span class="font-semibold text-lg"> {{categoria.nombre}} </span>
+        @for (subcategoria of categoria.subcategorias; track $index) {
+          <button class="flex flex-row items-center gap-x-1 px-2 py-1 w-full my-1" (click)="this.data.onSubcategoriaSeleccionada(subcategoria)">
+            <div class="size-9 bg-slate-800 rounded-md" [style.backgroundImage]="'url(' + subcategoria.image + ')'"></div>
 
-          @for (subcategoria of categoria.subcategorias; track $index) {
-            <button class="flex flex-row items-center gap-x-1 px-2 py-1" (click)="this.data.onSubcategoriaSeleccionada(subcategoria)">
-              <div class="size-7 bg-slate-800 rounded-md" [style.backgroundImage]="'url(' + subcategoria.image + ')'"></div>
+            <span class="ml-1"> {{subcategoria.nombre}} </span>
+          </button>
+        }
 
-              <span class="text-sm"> {{subcategoria.nombre}} </span>
-            </button>
-          }
+      </div>
+    }
 
-        </div>
-      }
-
-    </div>
-
-</div>
+  </div>
+</app-dialog>

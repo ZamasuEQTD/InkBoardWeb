@@ -42,6 +42,9 @@ export class PostearHiloModalComponent {
 
   private dialog = inject(Dialog);
 
+  private dialogRef = inject(DialogRef);
+
+
   form = this.fb.group({
     titulo: [''],
     descripcion: [''],
@@ -123,7 +126,7 @@ export class PostearHiloModalComponent {
 
     data.append("descripcion", this.form.get("descripcion")?.value || "");
 
-    data.append("Subcategoria",  "0abc0946-1eba-479c-8875-cef61a10f851");
+    data.append("Subcategoria",  this.form.get("subcategoria")?.value?.id || "");
 
     data.append("DadosActivados", this.form.get("dados")?.value?.toString() || "false");
 
@@ -142,7 +145,10 @@ export class PostearHiloModalComponent {
 
 
       const hiloId = result.data;
-      this.router.navigate([`/hilos/${hiloId}`]);
+
+      this.dialogRef.close();
+
+      this.router.navigateByUrl("/hilo/" + hiloId);
     });
   }
 }

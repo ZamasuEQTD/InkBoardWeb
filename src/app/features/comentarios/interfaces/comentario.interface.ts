@@ -7,8 +7,8 @@ export interface Comentario {
   autor_id?:              string;
   es_autor:               boolean;
   destacado:              boolean;
-  respuestas:             string[];
-  responde:               string[];
+  respondido_por:             string[];
+  responde_a:               string[];
   es_op:                  boolean;
   tag:                   string;
   tag_unico?:            string;
