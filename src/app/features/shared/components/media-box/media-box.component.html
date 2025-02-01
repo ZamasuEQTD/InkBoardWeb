@@ -1,4 +1,3 @@
-
 @if (this.isDimensionable) {
 
    <div class="w-full h-full">
@@ -10,6 +9,10 @@
         <video [src]="this.media.url" class="h-full w-full object-contain"  [poster]="this.media.previsualizacion" controls="controls"></video>
       }
       @case ('Image') {
+        <img [src]="this.media.url" class="h-full w-full object-contain" alt="imagen no visible">
+      }
+
+      @case ('Gif') {
         <img [src]="this.media.url" class="h-full w-full object-contain" alt="imagen no visible">
       }
     }

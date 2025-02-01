@@ -10,11 +10,14 @@ import { CommonModule } from '@angular/common';
   styleUrl: './media-box.component.css',
 })
 export class MediaBoxComponent implements OnInit {
+  
+  static dimensionables :string [] = ['Youtube', 'Image', 'Gif' ,'Video']
+
   @Input() media!:Media;
 
   isDimensionable !:boolean;
 
   ngOnInit(): void {
-    this.isDimensionable = this.media.provider === 'Youtube' || this.media.provider === 'Image' || this.media.provider === 'Video';
+    this.isDimensionable = MediaBoxComponent.dimensionables.includes(this.media.provider);
   }
 }

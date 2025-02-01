@@ -30,7 +30,7 @@ export class PickFileInputComponent {
 
     reader.onload = (e: ProgressEvent<FileReader>) => {
       this.onPickedFile.emit({
-        type :  this.capitalize(file.type.split('/')[0]),
+        type :  this.capitalize(file.type.split('/')[0]).toLowerCase(),
         source :  reader.result! as string,
         file: file
       });
