@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components  {
+    img, video {
+        @apply  rounded-lg object-cover h-full
+    }
+}
+
+
+:host {
+    display: block;
+}

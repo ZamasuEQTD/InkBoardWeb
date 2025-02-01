@@ -3,4 +3,5 @@ export interface PickedMedia {
   type? : string
   filename?:string
   file?: File
+
 }

@@ -8,50 +8,9 @@
     @if (this.media) {
 
       @if (this.media!.type === 'video' || this.media!.type === 'image' || this.media!.type === 'youtube') {
-
-        <div class="inline-flex mb-2 relative">
-
-          <div class="sm:size-28  size-24 inline-flex rounded-s bg-gray-200 p-2 rounded-xl overflow-hidden">
-
-            <div class="rounded-lg overflow-hidden flex justify-center h-full w-full relative object-cover">
-
-              @switch (this.media!.type) {
-                @case ('image') {
-                  <img  class="rounded-md" [src]="this.media!.source" alt="">
-                }
-                @case ('video') {
-                  <video class="rounded-md" [src]="this.media!.source"></video>
-                }
-                @case ('youtube') {
-                  <img  class="rounded-md" [src]='this.media!.source | youtubeThumbnail' alt="">
-                }
-              }
-
-              @if (this.spoiler) {
-                <div class="absolute w-full h-full  top-0 right-0 bg-black-100 bg-opacity-20 backdrop-blur-lg rounded-md"></div>
-              }
-
-            </div>
-
-            <div class="flex flex-row absolute top-[-10px] right-1 bg-white shadow-lg rounded-md">
-              <button class="size-8 icon-button"  (click)="spoilerRef.click()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>
-              </button>
-
-              <button class="size-8 icon-button" (click)="this.comentarHiloService.eliminarMedia()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
-              </button>
-
-            </div>
-          </div>
-
-        </div>
-
-      } @else {
-
-      }
+        <app-spoileable-picked-media [spoiler]="spoiler" [media]="this.media" (onDelete)="this.comentarHiloService.eliminarMedia()" (onSpoiler)="spoilerRef.click()"></app-spoileable-picked-media>
+      } 
     }
-
 
     <div class="flex flex-row gap-x-2 items-center ">
 
