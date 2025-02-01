@@ -53,4 +53,13 @@ export class HiloService {
       })
     })
   }
+
+
+  getHilo(id: string): Observable<Hilo> {
+    return this.http
+      .get<ApiResponse<Hilo>>(`/api/hilos/${id}`)
+      .pipe(
+        map((response) => response.data)
+      );
+  }
 }

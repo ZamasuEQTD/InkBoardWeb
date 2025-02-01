@@ -1,7 +1,71 @@
+
+@let hilo = this.hilo();
 <app-header class="sticky z-10 top-0"></app-header>
+
 <div class="md:h-[calc(100vh-56px)] w-full flex flex-col md:flex-row md:overflow-hidden">
 
-  <app-hilo-body class="md:w-[55%] md:h-full"/>
+  <div class="md:w-[55%] md:h-full">
+    <div class=" flex flex-col md:overflow-y-auto md:w-full md:h-full px-2 py-3 rounded-lg md:rounded-none bg-gray-100">
+
+      @if (hilo) {
+  
+        <div class="hilo-section flex items-center gap-x-2  ">
+          <img class="size-[30px] rounded"  src="https://pbs.twimg.com/profile_images/1366466342354751491/JyhZpbtu_400x400.jpg"alt="">
+          <a routerLink="/"  class="font-semibold text-blue-700" href=""><span>General</span></a>
+        </div>
+  
+        <div class="hilo-section flex flex-row justify-between">
+  
+          <div class="flex flex-row gap-x-1">
+  
+            <button id="denunciar-button" class="hilo-button-action ">
+              <i class="fa-regular fa-flag"></i>
+            </button>
+  
+            <button id="favorito-button" class="hilo-button-action ">
+              <i class="fa-regular fa-star"></i>
+            </button>
+  
+            <button id="ocultar-button" class="hilo-button-action ">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+  
+            <button id="seguir-button" class="hilo-button-action ">
+              <i class="fa-solid fa-user-plus"></i>
+            </button>
+  
+          </div>
+  
+          <div class="flex flex-row gap-x-1 items-center">
+            <span class="font-bold text-sm">Anonimo</span>
+  
+            <div class="px-1 py-[0.125rem] bg-gray-400 flex items-center justify-center rounded-md  ">
+              <span class="text-xs font-semibold text-white">anon</span>
+            </div>
+  
+            <span class="text-xs font-semibold text-gray-400">2m</span>
+          </div>
+  
+        </div>
+  
+  
+        <div class="flex justify-center mb-1">
+  
+            <app-media-box class="max-h-[400px] overflow-hidden" [media]="hilo.media"></app-media-box>
+  
+        </div>
+  
+        <span class="titulo-hilo text-2xl font-bold break-words "> {{hilo.titulo}} </span>
+  
+        <span class="break-words"> {{hilo.descripcion}} </span>
+      }
+      @else {
+        <app-hilo-body-skeleton></app-hilo-body-skeleton>
+      }
+  
+    </div>
+  </div>
+
 
   <app-hilo-comentarios class="md:flex-1"/>
 

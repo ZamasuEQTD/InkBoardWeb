@@ -15,8 +15,3 @@
     @apply size-8 flex justify-center items-center
   }
 }
-
-
-:host {
-  display: block;
-}

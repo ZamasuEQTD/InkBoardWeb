@@ -1,3 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components  {
+  .portada-feauture-icon {
+    @apply rounded-md size-[20px] flex items-center justify-center;
+  }
+
+  .hilo-section {
+    @apply  bg-white rounded-lg py-1 px-4 mb-2 h-10;
+  }
+
+  .hilo-button-action {
+    @apply size-8 flex justify-center items-center
+  }
+}
+
 :host {
   display: block;
 }
