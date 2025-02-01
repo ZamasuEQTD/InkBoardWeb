@@ -17,4 +17,8 @@ export class ComentariosService {
         map((response)=> response.data)
       );
   }
+
+  comentarHilo(hilo : string,  data: FormData): Observable<void> {
+    return this.http.post<void>(`/api/comentarios/comentar-hilo/${hilo}`,data);
+  }
 }

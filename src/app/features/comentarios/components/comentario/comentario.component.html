@@ -7,20 +7,20 @@
       </app-color-comentario>
 
       <div class="flex flex-wrap gap-x-1 gap-y-[2px] items-center mb">
-        <span class="text-sm font-semibold"> ANONIMO </span>
+        <span class="text-sm font-bold">ANONIMO</span>
 
         @if (this.comentario.es_op) {
-          <div class="bg-white text-xs px-2 py-1 rounded-lg"> OP </div>
+          <div class="bg-white text-xs px-2 py-1 rounded-lg">OP</div>
         }
 
         @if (this.comentario.destacado) {
           <div class="bg-yellow-200 text-xs px-2 py-1 rounded-lg">Destacado</div>
         }
 
-        <div  class="bg-white text-xs px-2 py-1 rounded-lg cursor-pointer" (click)="this.tagguear()"> {{this.comentario.tag}} </div>
+        <div  class="bg-white text-xs px-2 py-1 rounded-lg cursor-pointer font-semibold" (click)="this.tagguear()">{{this.comentario.tag}}</div>
 
         @if (this.comentario.tag_unico) {
-          <div class="bg-red-500 text-white text-xs px-2 py-1 rounded-lg"> {{this.comentario.tag_unico}} </div>
+          <div class="bg-red-500 text-white text-xs px-2 py-1 rounded-lg font-semibold">{{this.comentario.tag_unico}}</div>
         }
 
       </div>
@@ -29,7 +29,7 @@
 
     <div class="items-center flex flex-row gap-x-1">
 
-      <span class="text-sm text-gray-400">{{this.comentario.created_at | tiempoTranscurrido}} </span>
+      <span class="text-sm text-gray-400">{{this.comentario.created_at | tiempoTranscurrido}}</span>
 
       <button>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"

@@ -5,10 +5,10 @@
       <span>{{section.content}}</span>
     }
     @case ("link") {
-      <a class="text-blue-600 cursor-pointer" [href]="section.content">{{section.content}}</a>
+      <a class="text-blue-600 cursor-pointer" target="_blank" [href]="section.content">{{section.content}}</a>
     }
     @case ("tag") {
-      <span  class="text-blue-600">{{section.content}}</span>
+      <span class="text-blue-600">{{section.content}}</span>
     }
   }
 }
