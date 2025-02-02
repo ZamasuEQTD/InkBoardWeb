@@ -5,6 +5,7 @@ import { MediaBoxComponent } from "../../../shared/components/media-box/media-bo
 import { ColorComentarioComponent } from "../color-comentario/color-comentario.component";
 import { CommonModule } from '@angular/common';
 import { TextoComponent } from "../texto/texto.component";
+import { ColorPicker } from '../../../shared/util/color-picker-util';
 
 @Component({
   selector: 'app-comentario',
@@ -17,6 +18,10 @@ export class ComentarioComponent  {
 
   @Output() onTagguear = new EventEmitter<string>()
 
+
+  colorTagUnico():string {
+    return ColorPicker.generar(this.comentario.tag_unico!);
+  }
 
   tagguear(){
     this.onTagguear.emit(this.comentario.tag)
