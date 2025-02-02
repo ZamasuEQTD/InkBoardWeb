@@ -3,24 +3,24 @@
 
     <div class="flex flex-row items-center gap-x-1">
       <app-color-comentario [color]="this.comentario.color">
-        <span class="text-white text-sm font-bold">OP</span>
+        <span class="font-bold text-white">{{this.comentario.es_op?'OP':'ANON'}}</span>
       </app-color-comentario>
 
       <div class="flex flex-wrap gap-x-1 gap-y-[2px] items-center mb">
         <span class="text-sm font-bold">ANONIMO</span>
 
         @if (this.comentario.es_op) {
-          <div class="bg-white text-xs px-2 py-1 rounded-lg font-semibold">OP</div>
+          <div class="bg-white text-sm px-2 py-1 rounded-lg font-semibold">OP</div>
         }
 
         @if (this.comentario.destacado) {
-          <div class="bg-yellow-200 text-xs px-2 py-1 rounded-lg">Destacado</div>
+          <div class="bg-yellow-200 text-sm px-2 py-1 rounded-lg">Destacado</div>
         }
 
-        <div  class="bg-white text-xs px-2 py-1 rounded-lg cursor-pointer font-semibold" (click)="this.tagguear()">{{this.comentario.tag}}</div>
+        <div  class="bg-white text-sm px-2 py-1 rounded-lg cursor-pointer font-semibold" (click)="this.tagguear()">{{this.comentario.tag}}</div>
 
         @if (this.comentario.tag_unico) {
-          <div class="text-white text-xs px-2 py-1 rounded-lg font-semibold" [ngClass]="this.colorTagUnico()">{{this.comentario.tag_unico}}</div>
+          <div class="text-white text-sm px-2 py-1 rounded-lg font-semibold" [ngClass]="this.colorTagUnico()">{{this.comentario.tag_unico}}</div>
         }
 
       </div>
