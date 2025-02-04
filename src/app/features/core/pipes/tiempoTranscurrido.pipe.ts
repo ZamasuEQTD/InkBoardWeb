@@ -6,9 +6,7 @@ import { Pipe, type PipeTransform } from '@angular/core';
 export class TiempoTranscurridoPipe implements PipeTransform {
 
   transform(value: string, ...args: any[]): string {
-    console.log('Input value:', value);
     const date = new Date(value);
-    console.log('Parsed date:', date);
 
     if (isNaN(date.getTime())) {
       return 'Fecha inválida';
