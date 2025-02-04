@@ -2,7 +2,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { CurrentUser } from '../interfaces/current-user.interface';
 import { jwtDecode } from "jwt-decode";
 import { HttpClient } from '@angular/common/http';
-import { catchError, EMPTY, finalize, map, throwError } from 'rxjs';
+import { catchError, EMPTY, finalize, map, Observable, throwError } from 'rxjs';
 import { ApiResponse } from '../../core/interfaces/api-response.interface';
 import { DecodedToken } from '../interfaces/decoded-tokent.interface';
 @Injectable({
@@ -31,35 +31,9 @@ export class AuthService {
     localStorage.removeItem("token");
   }
 
-  login(form: AuthFormData) {
-    this.authenticarse("/api/auth/login", form).subscribe((token) => {
-      this.crearSesion(token);
-    });
-  }
 
-  registrarse(form: AuthFormData) {
-    this.authenticarse("/api/auth/registrarse", form).subscribe((token) => {
-      this.crearSesion(token);
-    });
-  }
+  crearSesion(token: string): void {
 
-
-  private authenticarse(url: string, form: AuthFormData) {
-    this.authenticando.set(true);
-
-    return this.http.post<ApiResponse<string>>(url, form).pipe(
-      finalize(() => this.authenticando.set(false)),
-      catchError((error) => {
-        console.error('Error en la solicitud:', error);
-        return throwError(() => new Error('Error en la autenticación'));
-      }),
-      map((response) => response.data)
-    );
-  }
-
-  private crearSesion(token: string): void {
-
-    console.log(token);
 
     const {name,sub, roles} : DecodedToken = jwtDecode(token);
 
@@ -69,12 +43,31 @@ export class AuthService {
       roles: roles
     });
 
-    console.log(this.currentUser());
 
     this.accessToken.set(token);
 
     localStorage.setItem("token", token);
   }
+
+  registrarse (form : AuthFormData): Observable<string>{
+    return this.http.post<ApiResponse<string>>('/api/auth/registrarse', form).pipe(
+      map(response => response.data),
+      catchError(error => {
+        return throwError(() => new Error('Registration failed'));
+      })
+    );
+  }
+
+  login (form : AuthFormData): Observable<string>{
+    return this.http.post<ApiResponse<string>>('/api/auth/login', form).pipe(
+      map(response => response.data),
+      catchError(error => {
+        return throwError(() => new Error('Registration failed'));
+      })
+    );
+  }
+
+  
 }
 
 interface AuthFormData {

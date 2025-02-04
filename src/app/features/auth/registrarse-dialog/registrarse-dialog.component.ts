@@ -37,6 +37,10 @@ export class RegistrarseDialogComponent {
     this.service.registrarse({
       username: this.form.value.username!,
       password: this.form.value.password!
-    })
+    }).subscribe(token =>{ 
+      this.service.crearSesion(token)
+
+      this.close()
+    });
   }
 }
