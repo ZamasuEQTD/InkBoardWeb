@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Media } from '../../interfaces/media.interface';
 import { YoutubePlayerComponent } from "../youtube-player/youtube-player.component";
 import { CommonModule } from '@angular/common';
+import { Media } from '../../../core/models/media.interface';
 
 @Component({
   selector: 'app-media-box',
@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 })
 export class MediaBoxComponent implements OnInit {
   
-  static dimensionables :string [] = ['Youtube', 'Image', 'Gif' ,'Video']
+  static dimensionables :string [] = ['youtube', 'image', 'gif' ,'video']
 
   @Input() media!:Media;
 

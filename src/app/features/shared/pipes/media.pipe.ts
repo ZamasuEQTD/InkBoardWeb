@@ -1,7 +1,6 @@
 import { Pipe, type PipeTransform } from '@angular/core';
 import { PickedMedia } from '../interfaces/picked-media.interface';
-import { Media } from '../interfaces/media.interface';
-import { ContenidoCensurable } from '../interfaces/contenido-censurable.interface';
+import { Media } from '../../core/models/media.interface';
 
 @Pipe({
   name: 'media',

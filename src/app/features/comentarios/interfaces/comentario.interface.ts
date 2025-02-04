@@ -1,4 +1,4 @@
-import { Media } from "../../shared/interfaces/media.interface";
+import { Media } from "../../core/models/media.interface";
 
 export interface Comentario {
   id:                     string;

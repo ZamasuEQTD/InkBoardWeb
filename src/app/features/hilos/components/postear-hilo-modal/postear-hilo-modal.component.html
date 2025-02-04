@@ -134,15 +134,15 @@
     <shared-input-labeled label="Banderas">
       <div class="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-900">
         <div class="flex flex-row justify-between items-center py-2 px-1">
-          <span class="font-semibold">Dados activados</span>
+            <label for="dados" class="font-semibold">Dados activados</label>
+            <input type="checkbox" formControlName="dados" name="dados" id="dados">
 
-          <input type="checkbox" name="" id="" >
         </div>
 
         <div class="flex flex-row justify-between items-center py-2 px-1">
-          <span class="font-semibold">Id unico activado</span>
+          <label class="font-semibold" for="id-unico">Id unico activado</label>
 
-          <input type="checkbox" name="" id="" >
+          <input type="checkbox" formControlName="idUnico" name="id-unico" id="id-unico" >
         </div>
       </div>
     </shared-input-labeled>

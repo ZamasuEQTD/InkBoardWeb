@@ -1,4 +1,4 @@
-import { Media } from "../../shared/interfaces/media.interface";
+import { Media } from "../../core/models/media.interface";
 
 export interface Hilo {
   id:                     string;
@@ -25,12 +25,7 @@ export interface Respuesta {
   votos:     number;
 }
 
-// export interface  Media {
-//   provider:         string;
-//   spoiler:          boolean;
-//   url:              string;
-//   previsualizacion: string;
-// }
+ 
 
 export interface Subcategoria {
   id:     string;

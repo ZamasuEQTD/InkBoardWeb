@@ -2,17 +2,17 @@
 
    <div class="w-full h-full">
     @switch (this.media.provider) {
-      @case ('Youtube') {
+      @case ('youtube') {
         <app-youtube-player [url]="this.media.url"></app-youtube-player>
       }
-      @case ('Video') {
+      @case ('video') {
         <video [src]="this.media.url" class="h-full w-full object-contain"  [poster]="this.media.previsualizacion" controls="controls"></video>
       }
-      @case ('Image') {
+      @case ('image') {
         <img [src]="this.media.url" class="h-full w-full object-contain" alt="imagen no visible">
       }
 
-      @case ('Gif') {
+      @case ('gif') {
         <img [src]="this.media.url" class="h-full w-full object-contain" alt="imagen no visible">
       }
     }
