@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import {FormGroup, FormControl, FormBuilder, FormArray, ReactiveFormsModule, RequiredValidator, Validators} from '@angular/forms';
+import {FormGroup, FormControl, FormBuilder, FormArray, ReactiveFormsModule, RequiredValidator, Validators, ValidatorFn, ValidationErrors, AbstractControl} from '@angular/forms';
 
 import { DialogHeaderComponent } from "../../../shared/components/dialog-header/dialog-header.component";
 import { InputLabeledComponent } from "../../../shared/components/input-labeled/input-labeled.component";
@@ -16,6 +16,8 @@ import { Subcategoria } from '../../../categorias/interfaces/subcategoria.interf
 import { HttpClient } from '@angular/common/http';
 import { ApiResponse } from '../../../core/interfaces/api-response.interface';
 import { Router } from '@angular/router';
+import { YoutubeUtil } from '../../../shared/util/youtube-util';
+import { YoutubeIdPipe } from '../../../shared/pipes/youtubeId.pipe';
 
 @Component({
   selector: 'postear-hilo-modal',
@@ -47,9 +49,10 @@ export class PostearHiloModalComponent {
 
   form = this.fb.group({
     titulo: [''],
-    descripcion: [''],
+    descripcion: ['',],
     subcategoria: this.fb.control<Subcategoria | null>(null),
     encuesta: this.fb.array<string>([]),
+    embed:['',[esYoutubeUrl()]],
     portada: this.fb.control<ContenidoCensurable<PickedMedia> | undefined>(undefined, {
       validators: [
         Validators.required
@@ -76,6 +79,17 @@ export class PostearHiloModalComponent {
     })
   }
 
+  agregarEmbed(){
+    if(this.form.get('embed')?.valid){
+      const url: string = this.form.get('embed')!.value  as string||'';
+      
+      this.agregarPortada({
+        source: url,
+        type: 'youtube'
+      })      
+    }
+  }
+
   eliminarPortada() :void {
     this.form.patchValue({
       portada: undefined
@@ -99,9 +113,6 @@ export class PostearHiloModalComponent {
 
   eliminarOpcion(index : number) : void {
     this.encuesta.removeAt(index);
-
-    console.log(this.encuesta);
-
   }
 
   seleccionarSubcategoria(){
@@ -136,14 +147,18 @@ export class PostearHiloModalComponent {
     const portada = this.form.get("portada")?.value;
 
     if (portada) {
-      data.append("File", portada.contenido.file!);
+      if(this.form.get("embed")?.valid){
+        data.append("Embed", this.form.get("embed")?.value || "");      
+      } else {
+        data.append("File", portada.contenido.file!);
+      }
+      
+
+
       data.append("Spoiler", portada.ocultar.toString());
     }
 
     this.http.post<ApiResponse<string>>("/api/hilos/postear", data).subscribe((result)=> {
-      console.log(result);
-
-
       const hiloId = result.data;
 
       this.dialogRef.close();
@@ -152,3 +167,14 @@ export class PostearHiloModalComponent {
     });
   }
 }
+
+
+
+export function esYoutubeUrl( ): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const esYoutube = YoutubeUtil.esYoutubeEnlace(control.value || '');
+
+    return !esYoutube ? {enlaceInvalido: {value: control.value}} : null;
+  };
+}
+ 
