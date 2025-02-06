@@ -1,9 +1,22 @@
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
-import { Component, ElementRef, inject, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
-import { DialogHeaderComponent } from "../../../shared/components/dialog-header/dialog-header.component";
-import { DialogRef } from '@angular/cdk/dialog';
-import { NotificacionComponent } from "../../../notificaciones/components/notificacion/notificacion.component";
+import {
+  Component,
+  ElementRef,
+  inject,
+  signal,
+  TemplateRef,
+  ViewChild,
+  ViewContainerRef,
+  OnInit,
+} from '@angular/core';
+import { DialogHeaderComponent } from '../../../shared/components/dialog-header/dialog-header.component';
+import { NotificacionComponent } from '../../../notificaciones/components/notificacion/notificacion.component';
+import { Dialog } from '@angular/cdk/dialog';
+import { HttpClient } from '@angular/common/http';
+import { ApiResponse } from '../../interfaces/api-response.interface';
+import { Notificacion } from '../../../notificaciones/interfaces/notificacion.interface';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-notificaciones-button',
@@ -11,45 +24,47 @@ import { NotificacionComponent } from "../../../notificaciones/components/notifi
   templateUrl: './notificaciones-button.component.html',
   styleUrl: './notificaciones-button.component.css',
 })
-export class NotificacionesButtonComponent {
-  overlay = inject(Overlay)
+export class NotificacionesButtonComponent implements OnInit {
+  dialog = inject(Dialog);
+
+  ngOnInit(): void {
+    this.cargarNotificaciones();
+  }
 
   viewRef = inject(ViewContainerRef);
 
-  @ViewChild('notificacionesRef') notificacionsRef! : TemplateRef<any>;
+  @ViewChild('notificacionesRef') notificacionsRef!: TemplateRef<any>;
 
-  @ViewChild('buttonRef') button !: ElementRef<HTMLButtonElement>
-
+  @ViewChild('buttonRef') button!: ElementRef<HTMLButtonElement>;
 
   private ref!: OverlayRef;
 
-  show() : void {
-    const position =  this.overlay.position().flexibleConnectedTo(this.button).withPositions([
-      {
-        originX: 'start',
-        originY: 'bottom',
-        overlayX: 'start',
-        overlayY: 'top',
-      }
-    ])
+  http = inject(HttpClient);
 
+  notificaciones = signal<Notificacion[]>([]);
 
-    this.ref = this.overlay.create({
-      positionStrategy : position,
-      hasBackdrop: true,
-    })
-
-    this.ref.backdropClick().subscribe(() => {
-      this.ref.dispose()
-    });
-
-    const portal = new TemplatePortal(this.notificacionsRef, this.viewRef);
-
-
-    this.ref.attach(portal);
+  cargarNotificaciones() {
+    this.http
+      .get<ApiResponse<Notificacion[]>>('/api/notificaciones')
+      .pipe(
+        map((response) => response.data),
+        map((data) => {
+          console.log(data);
+          return data;
+        })
+      )
+      .subscribe((notificaciones) =>
+        this.notificaciones.update((n) => [...n, ...notificaciones])
+      );
   }
 
-  close() :void {
-    this.ref.dispose()
+  show(): void {
+    this.dialog.open(this.notificacionsRef, {
+      closeOnNavigation:true,
+    });
+  }
+
+  close(): void {
+    this.ref.dispose();
   }
 }
