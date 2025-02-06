@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { HeaderComponent } from '../../../core/components/header/header.component';
 import { Hilo } from '../../interfaces/hilo.interface';
 import { HiloService } from '../../services/hilo.service';
@@ -15,7 +15,7 @@ import { PickFileInputComponent } from '../../../shared/components/pick-file-inp
 import { SpoileablePickedMediaComponent } from '../../../core/components/spoileable-picked-media/spoileable-picked-media.component';
 import { TagUtils } from '../../../comentarios/utils/tags-utils';
 import { CommonModule } from '@angular/common';
-
+import { CdkMenuModule } from '@angular/cdk/menu';
 @Component({
   selector: 'hilo-page',
   imports: [
@@ -27,6 +27,7 @@ import { CommonModule } from '@angular/common';
     ComentarioSkeletonComponent,
     ComentarioComponent,
     PickFileInputComponent,
+    CdkMenuModule,
     SpoileablePickedMediaComponent,
   ],
   templateUrl: './hilo-page.component.html',
@@ -35,6 +36,7 @@ import { CommonModule } from '@angular/common';
 export class HiloPageComponent implements OnInit {
   static cantidadMaximaDeTaggueos = 5;
   
+
   hiloService = inject(HiloService);
 
   comentariosService = inject(ComentariosService);

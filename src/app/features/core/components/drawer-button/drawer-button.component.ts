@@ -5,9 +5,6 @@ import { MenuModule } from 'primeng/menu';
 import { RegistrarseDialogComponent } from '../../../auth/registrarse-dialog/registrarse-dialog.component';
 import { Dialog } from '@angular/cdk/dialog';
 import { LoginDialogComponent } from '../../../auth/login-dialog/login-dialog.component';
-import { RegistroUsuarioDialogComponent } from '../../../registros/components/registro-usuario-dialog/registro-usuario-dialog.component';
-import { NoopScrollStrategy } from '@angular/cdk/overlay';
-import { DialogServiceService } from '../../../shared/services/dialog-service.service';
 import { AuthService } from '../../../auth/services/auth-service';
 import { CurrentUser } from '../../../auth/interfaces/current-user.interface';
 @Component({
