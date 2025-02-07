@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from "@angular/core";
 })
 export class AutorRolePipe implements PipeTransform  {
     static labels: { [key: string]: string } = {
-        "Owner": "owner",
+        "Owner": "God",
         "Anonimo": "anon",
         "Moderador": "mod"
     }

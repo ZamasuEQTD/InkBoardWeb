@@ -15,6 +15,9 @@ export interface Comentario {
   recibir_notificaciones?:boolean;
   color:                  string;
   media?:                  Media;
+  autor_role:             string;
+  autor:                  string
+
 }
 
 export interface Detalles {

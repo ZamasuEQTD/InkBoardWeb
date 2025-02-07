@@ -6,10 +6,11 @@ import { ColorComentarioComponent } from "../color-comentario/color-comentario.c
 import { CommonModule } from '@angular/common';
 import { TextoComponent } from "../texto/texto.component";
 import { ColorPicker } from '../../../shared/util/color-picker-util';
+import { AutorRolePipe } from "../../../core/pipes/autor_role.pipe";
 
 @Component({
   selector: 'app-comentario',
-  imports: [TiempoTranscurridoPipe, MediaBoxComponent, ColorComentarioComponent, CommonModule, TextoComponent],
+  imports: [TiempoTranscurridoPipe, MediaBoxComponent, ColorComentarioComponent, CommonModule, TextoComponent, AutorRolePipe],
   templateUrl: './comentario.component.html',
   styleUrl: './comentario.component.css',
 })
