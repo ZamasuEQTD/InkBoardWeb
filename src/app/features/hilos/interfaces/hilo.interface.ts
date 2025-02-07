@@ -12,6 +12,8 @@ export interface Hilo {
   created_at:             Date;
   media:                  Media;
   encuesta:               Encuesta;
+  autor_role:             string;
+  autor:         string
 }
 
 export interface Encuesta {

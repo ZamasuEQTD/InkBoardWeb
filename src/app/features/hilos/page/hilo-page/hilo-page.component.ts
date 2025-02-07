@@ -17,6 +17,7 @@ import { TagUtils } from '../../../comentarios/utils/tags-utils';
 import { CommonModule } from '@angular/common';
 import { CdkMenuModule } from '@angular/cdk/menu';
 import { TiempoTranscurridoPipe } from "../../../core/pipes/tiempoTranscurrido.pipe";
+import { AutorRolePipe } from "../../../core/pipes/autor_role.pipe";
 @Component({
   selector: 'hilo-page',
   imports: [
@@ -30,7 +31,8 @@ import { TiempoTranscurridoPipe } from "../../../core/pipes/tiempoTranscurrido.p
     PickFileInputComponent,
     CdkMenuModule,
     SpoileablePickedMediaComponent,
-    TiempoTranscurridoPipe
+    TiempoTranscurridoPipe,
+    AutorRolePipe
 ],
   templateUrl: './hilo-page.component.html',
   styleUrl: './hilo-page.component.css',
