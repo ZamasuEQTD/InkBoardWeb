@@ -1,4 +1,12 @@
-import { Component, inject, OnInit, signal, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import {
+  Component,
+  inject,
+  OnInit,
+  signal,
+  TemplateRef,
+  ViewChild,
+  ViewContainerRef,
+} from '@angular/core';
 import { HeaderComponent } from '../../../core/components/header/header.component';
 import { Hilo } from '../../interfaces/hilo.interface';
 import { HiloService } from '../../services/hilo.service';
@@ -16,8 +24,8 @@ import { SpoileablePickedMediaComponent } from '../../../core/components/spoilea
 import { TagUtils } from '../../../comentarios/utils/tags-utils';
 import { CommonModule } from '@angular/common';
 import { CdkMenuModule } from '@angular/cdk/menu';
-import { TiempoTranscurridoPipe } from "../../../core/pipes/tiempoTranscurrido.pipe";
-import { AutorRolePipe } from "../../../core/pipes/autor_role.pipe";
+import { TiempoTranscurridoPipe } from '../../../core/pipes/tiempoTranscurrido.pipe';
+import { AutorRolePipe } from '../../../core/pipes/autor_role.pipe';
 @Component({
   selector: 'hilo-page',
   imports: [
@@ -32,14 +40,13 @@ import { AutorRolePipe } from "../../../core/pipes/autor_role.pipe";
     CdkMenuModule,
     SpoileablePickedMediaComponent,
     TiempoTranscurridoPipe,
-    AutorRolePipe
-],
+    AutorRolePipe,
+  ],
   templateUrl: './hilo-page.component.html',
   styleUrl: './hilo-page.component.css',
 })
 export class HiloPageComponent implements OnInit {
   static cantidadMaximaDeTaggueos = 5;
-  
 
   hiloService = inject(HiloService);
 
@@ -54,7 +61,7 @@ export class HiloPageComponent implements OnInit {
   private fb: FormBuilder = inject(FormBuilder);
 
   comentarHiloForm = this.fb.group({
-    texto: "",
+    texto: '',
     spoiler: false,
     file: this.fb.control<PickedMedia | undefined>(undefined, {
       validators: [],
@@ -92,30 +99,38 @@ export class HiloPageComponent implements OnInit {
     });
   }
 
-   tagguear(tag:string){
-      var texto = this.comentarHiloForm.get('texto')!.value! as string;
-  
-      if(TagUtils.incluyeTag(texto, tag)) return;
-  
-      if (this.alcanzoLimiteDeTaggueos(texto)) return;
-  
-      this.comentarHiloForm.patchValue({
-        texto: this.comentarHiloForm.get('texto')!.value + '>>' + tag + " "
-      })
-    }
+  tagguear(tag: string) {
+    var texto = this.comentarHiloForm.get('texto')!.value! as string;
+
+    if (TagUtils.incluyeTag(texto, tag)) return;
+
+    if (this.alcanzoLimiteDeTaggueos(texto)) return;
+
+    this.comentarHiloForm.patchValue({
+      texto: this.comentarHiloForm.get('texto')!.value + '>>' + tag + ' ',
+    });
+  }
 
   comentar() {
     var data = new FormData();
 
-    data.append("texto", this.comentarHiloForm.get('texto')!.value || '');
+    data.append('texto', this.comentarHiloForm.get('texto')!.value || '');
 
-    this.comentariosService.comentarHilo(this.hilo()!.id, data).subscribe(()=> {
-      this.comentarHiloForm.reset({
-        texto: '',
-        spoiler: false,
-        file : undefined
-      });
-    })
+    const file = this.comentarHiloForm.get('file')?.value;
+
+    if (file) {
+      data.append('file', file.file!);
+    }
+
+    this.comentariosService
+        .comentarHilo(this.hilo()!.id, data)
+        .subscribe(() => {
+          this.comentarHiloForm.reset({
+            texto: '',
+            spoiler: false,
+            file: undefined,
+          });
+        });
   }
 
   get media(): PickedMedia | null | undefined {
@@ -126,8 +141,9 @@ export class HiloPageComponent implements OnInit {
     return this.comentarHiloForm.get('spoiler')!.value as boolean;
   }
 
-
-  private alcanzoLimiteDeTaggueos(texto:string): boolean {
-    return TagUtils.cantidadTags(texto) >= HiloPageComponent.cantidadMaximaDeTaggueos;
+  private alcanzoLimiteDeTaggueos(texto: string): boolean {
+    return (
+      TagUtils.cantidadTags(texto) >= HiloPageComponent.cantidadMaximaDeTaggueos
+    );
   }
 }
