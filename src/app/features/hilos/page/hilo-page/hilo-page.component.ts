@@ -16,6 +16,7 @@ import { SpoileablePickedMediaComponent } from '../../../core/components/spoilea
 import { TagUtils } from '../../../comentarios/utils/tags-utils';
 import { CommonModule } from '@angular/common';
 import { CdkMenuModule } from '@angular/cdk/menu';
+import { TiempoTranscurridoPipe } from "../../../core/pipes/tiempoTranscurrido.pipe";
 @Component({
   selector: 'hilo-page',
   imports: [
@@ -29,7 +30,8 @@ import { CdkMenuModule } from '@angular/cdk/menu';
     PickFileInputComponent,
     CdkMenuModule,
     SpoileablePickedMediaComponent,
-  ],
+    TiempoTranscurridoPipe
+],
   templateUrl: './hilo-page.component.html',
   styleUrl: './hilo-page.component.css',
 })

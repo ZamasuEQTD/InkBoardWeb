@@ -3,7 +3,7 @@ import { Media } from "../../core/models/media.interface";
 export interface Comentario {
   id:                     string;
   texto:                  string;
-  created_at:             string;
+  created_at:             Date;
   autor_id?:              string;
   es_autor:               boolean;
   destacado:              boolean;

@@ -5,10 +5,11 @@ import { DialogComponent } from '../../shared/components/dialog/dialog.component
 import { InputLabeledComponent } from '../../shared/components/input-labeled/input-labeled.component';
 import { AuthService } from '../services/auth-service';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login-dialog',
-  imports: [InputLabeledComponent, DialogComponent, ReactiveFormsModule],
+  imports: [InputLabeledComponent, DialogComponent, ReactiveFormsModule, CommonModule],
   templateUrl: './login-dialog.component.html',
   styleUrl: './login-dialog.component.css',
 })

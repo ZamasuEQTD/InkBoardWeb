@@ -5,7 +5,7 @@ import { Pipe, type PipeTransform } from '@angular/core';
 })
 export class TiempoTranscurridoPipe implements PipeTransform {
 
-  transform(value: string, ...args: any[]): string {
+  transform(value: Date, ...args: any[]): string {
     const date = new Date(value);
 
     if (isNaN(date.getTime())) {

@@ -1,7 +1,7 @@
 export interface Notificacion {
     tipo:                      string;
     id:                        string;
-    fecha:                     string;
+    fecha:                     Date;
     contenido:                 string;
     hilo:                      Hilo;
     comentario_respuesta_tag:  string;

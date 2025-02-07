@@ -1,19 +1,18 @@
 <app-dialog title="Iniciar sesión">
-  <form action="" (submit)="$event.preventDefault()">
+  <form action=""  [formGroup]="this.form">
 
     <shared-input-labeled label="Usuario">
-      <input type="text" placeholder="Usuario">
+      <input type="text" placeholder="Usuario" formControlName="username">
     </shared-input-labeled>
 
-    <shared-input-labeled label="Contraseña">
-      <input type="text" placeholder="Contraseña">
+    <shared-input-labeled label="Contraseña" >
+      <input type="text" placeholder="Contraseña" formControlName="password">
     </shared-input-labeled>
 
     <div class="px-3 mt-2">
-      <button class="primary-button">
+      <button class="primary-button" (click)="this.login()">
         <span class="">Iniciar sesión</span>
       </button>
     </div>
-
   </form>
 </app-dialog>

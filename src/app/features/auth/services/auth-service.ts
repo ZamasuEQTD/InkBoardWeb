@@ -52,18 +52,12 @@ export class AuthService {
   registrarse (form : AuthFormData): Observable<string>{
     return this.http.post<ApiResponse<string>>('/api/auth/registrarse', form).pipe(
       map(response => response.data),
-      catchError(error => {
-        return throwError(() => new Error('Registration failed'));
-      })
     );
   }
 
   login (form : AuthFormData): Observable<string>{
     return this.http.post<ApiResponse<string>>('/api/auth/login', form).pipe(
       map(response => response.data),
-      catchError(error => {
-        return throwError(() => new Error('Registration failed'));
-      })
     );
   }
 

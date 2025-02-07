@@ -9,6 +9,7 @@ export interface Hilo {
   cantidad_comentarios:   number;
   recibir_notificaciones: null;
   subcategoria:           Subcategoria;
+  created_at:             Date;
   media:                  Media;
   encuesta:               Encuesta;
 }
