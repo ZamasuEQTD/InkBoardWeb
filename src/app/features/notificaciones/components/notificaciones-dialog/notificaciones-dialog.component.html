@@ -1,0 +1,26 @@
+<div
+  class="sm:size-[500px] bg-white p-2 fullscreen-on-mobile sm:absolute sm:shadow-2xl sm:rounded-lg sm:top-[48px] sm:left-[auto] sm:right-[48px] flex flex-col justify-between"
+>
+  <shared-dialog-header title="Mis notificaciones" class="sm:hidden" (onClose)="this.close()"></shared-dialog-header>
+
+  <div class="overflow-y-auto py-2">
+    @for (notificacion of this.notificaciones; track $index) {
+    <app-notificacion
+      class="mt-1"
+      [notificacion]="notificacion"
+    ></app-notificacion>
+    }
+
+    @if (this.cargando) { @for(_ of [].constructor(15); track $index){
+      <app-notificacion-skeleton class="mt-1"></app-notificacion-skeleton>
+      } }
+  </div>
+
+  <div>
+    <button class="outlined-button" (click)="leer()">
+      <span>Leer todas</span>
+      <i class="fa-solid fa-check ml-2"></i>
+    </button>
+  </div>
+
+</div>

@@ -33,6 +33,8 @@ export class DrawerButtonComponent {
     return this.authService.currentUser()
   }
 
+  logout = () => this.authService.logout();
+
   toggle():void {
     this.show = !this.show;
 

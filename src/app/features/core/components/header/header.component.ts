@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { DrawerButtonComponent } from "../drawer-button/drawer-button.component";
 import { NotificacionesButtonComponent } from "../notificaciones-button/notificaciones-button.component";
+import { AuthService } from '../../../auth/services/auth-service';
 
 @Component({
   selector: 'app-header',
@@ -13,4 +14,11 @@ import { NotificacionesButtonComponent } from "../notificaciones-button/notifica
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
-export class HeaderComponent { }
+export class HeaderComponent {
+  private readonly auth = inject(AuthService);
+
+
+  get autenticado() :boolean {
+    return this.auth.autenticado();
+  }
+}

@@ -1,4 +1,4 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { CurrentUser } from '../interfaces/current-user.interface';
 import { jwtDecode } from "jwt-decode";
 import { HttpClient } from '@angular/common/http';
@@ -11,6 +11,9 @@ import { DecodedToken } from '../interfaces/decoded-tokent.interface';
 export class AuthService {
   currentUser = signal<CurrentUser | null>(null);
   accessToken = signal<string | null>(null);
+
+  autenticado = computed<boolean>(()=> this.currentUser() != null);
+
   authenticando = signal<boolean>(false);
 
   private http = inject(HttpClient);

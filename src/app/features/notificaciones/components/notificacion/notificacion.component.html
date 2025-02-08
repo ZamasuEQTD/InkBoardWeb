@@ -1,4 +1,4 @@
-<a [routerLink]="['/hilo', this.notificacion.hilo.id]" [queryParams]="{comentario: this.notificacion.id}">
+<a [routerLink]="['/hilo', this.notificacion.hilo.id]" (click)="this.leer(notificacion.id)" [queryParams]="{comentario: this.notificacion.id}">
   <div class="flex-col p-2 rounded-xl bg-gray-100 shadow-sm">
     <div class="flex flex-row gap-x-2">
       <div

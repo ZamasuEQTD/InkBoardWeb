@@ -7,7 +7,9 @@
 
       <div class="flex flex-row">
 
-        <app-notificaciones-button />
+        @if (this.autenticado) {
+          <app-notificaciones-button />
+        }          
 
         <app-drawer-button />
 
