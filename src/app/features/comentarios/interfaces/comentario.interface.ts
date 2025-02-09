@@ -14,6 +14,7 @@ export interface Comentario {
   tag_unico?:            string;
   recibir_notificaciones?:boolean;
   color:                  string;
+  dados?:                  string;
   media?:                  Media;
   autor_role:             string;
   autor:                  string

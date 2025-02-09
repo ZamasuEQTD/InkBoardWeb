@@ -4,7 +4,7 @@
 
     <div class="flex flex-row items-center gap-x-1">
       <app-color-comentario [color]="this.comentario.color">
-        <span class="font-bold text-white">{{this.comentario.es_op && this.comentario.autor_role == "Anonimo" ?'OP': this.comentario.autor_role | autorRole |uppercase}}</span>
+        <span class="font-bold text-white">{{this.comentario.dados ?? (this.comentario.es_op && this.comentario.autor_role == "Anonimo" ? 'OP': this.comentario.autor_role | autorRole |uppercase)}}</span>
       </app-color-comentario>
 
       <div class="flex flex-wrap gap-x-1 gap-y-[2px] items-center mb">
