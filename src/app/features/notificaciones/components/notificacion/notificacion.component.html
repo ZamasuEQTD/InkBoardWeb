@@ -1,35 +1,35 @@
-<a [routerLink]="['/hilo', this.notificacion.hilo.id]" (click)="this.leer(notificacion.id)" [queryParams]="{comentario: this.notificacion.id}">
+<a [routerLink]="['/hilo', this.notificacion.hilo.id]" (click)="this.leer(notificacion.id)"
+  [queryParams]="{comentario: this.notificacion.id}">
   <div class="flex-col p-2 rounded-xl bg-gray-100 shadow-sm">
     <div class="flex flex-row gap-x-2">
-      <div
-        class="size-14 rounded-md flex-shrink-0 overflow-hidden "
-      >
-      <img [src]="this.notificacion.hilo.portada" alt="" class="w-full h-full object-cover" />
-    </div>
+      <div class="size-14 rounded-md flex-shrink-0 overflow-hidden ">
+        <img [src]="this.notificacion.hilo.portada" alt="" class="w-full h-full object-cover" />
+      </div>
       <div class="flex-1 flex items-center">
-        <span class="font-semibold line-clamp-2 text-sm">
+        <span class="line-clamp-2 text-sm">
           @switch (this.notificacion.tipo) { @case ("HiloComentado") {
-          <span>Han comentado tu hilo {{ this.notificacion.hilo.titulo }}</span>
-          } @case ("ComentarioRespondido") {
-          <span
-            >Han respondido tu comentario
-            {{ this.notificacion.comentario_respondido_tag }} en el hilo
-            {{ this.notificacion.hilo.titulo }}</span
-          >
-          } @case ('HiloSeguidoComentado') {
-          <span>Han comentado el hilo {{ this.notificacion.hilo.titulo }}</span>
-          } }
+            <span>Han comentado tu hilo <span class="font-semibold">{{ this.notificacion.hilo.titulo }}</span></span>
+          } 
+          @case ("ComentarioRespondido") {
+            <span>Han respondido tu comentario
+              <span class="font-semibold">{{ this.notificacion.comentario_respondido_tag }}</span> en el hilo
+              <span class="font-semibold">{{ this.notificacion.hilo.titulo }}</span>
+            </span>
+          } @default {
+            <span>Han comentado el hilo <span class="font-semibold">{{ this.notificacion.hilo.titulo }}</span></span>
+          } 
+        }
         </span>
       </div>
     </div>
-  
+
     <span class="text-sm line-clamp-3">{{ this.notificacion.contenido }}</span>
-  
+
     <div>
       <span class="text-xs text-slate-500">
         Hace {{ this.notificacion.fecha | tiempoTranscurrido }}
       </span>
     </div>
-  
+
   </div>
 </a>

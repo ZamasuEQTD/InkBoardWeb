@@ -1,7 +1,7 @@
 export interface DecodedToken {
   sub:   string;
   name:  string;
-  roles: string[];
+  role: string[];
   exp:   number;
   iss:   string;
   aud:   string;

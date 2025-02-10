@@ -21,4 +21,28 @@ export class HiloService {
         map((response) => response.data)
       );
   }
+
+  eliminar(id:string) :Observable<void> {
+    return this.http.delete<void>(`/api/hilos/eliminar/${id}`);
+  }
+
+  establecerSticky(id:string) :Observable<void> {
+    return this.http.post<void>(`/api/hilos/establecer-sticky/${id}`,null);
+  }
+
+  eliminarSticky(id:string) :Observable<void> {
+    return this.http.delete<void>(`/api/hilos/eliminar-sticky/${id}`);
+  }
+
+  ocultar(id:string) :Observable<void>{
+    return this.http.post<void>(`/api/hilos/colecciones/ocultos/ocultar/${id}`,null);
+  }
+
+  seguir(id:string) :Observable<void>{
+    return this.http.post<void>(`/api/hilos/colecciones/seguidos/seguir/${id}`,null);
+  }
+
+  ponerEnFavoritos(id:string) :Observable<void>{
+    return this.http.post<void>(`/api/hilos/colecciones/favoritos/poner-en-favoritos/${id}`,null);
+  }
 }

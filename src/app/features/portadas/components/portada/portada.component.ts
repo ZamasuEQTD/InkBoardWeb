@@ -5,6 +5,7 @@ import { Router, RouterModule } from '@angular/router';
 import { Portada, Banderas } from '../../interfaces/portada.interface';
 
 import { MenuModule } from 'primeng/menu';
+import { HiloService } from '../../../hilos/services/hilo.service';
 
 
 @Component({
@@ -21,6 +22,8 @@ export class PortadaComponent implements OnInit{
   @Input() portada!:Portada;
 
   public icons: IconTag[] = []
+
+  private service = inject(HiloService);
 
   ngOnInit(): void {
     this.icons = [
@@ -48,16 +51,40 @@ export class PortadaComponent implements OnInit{
       label: "Denunciar",
     },
     {
-      label: "Seguir"
+      label: "Seguir",
+      command:()=> {
+        this.service.seguir(this.portada.id).subscribe()
+      }
     },
     {
-      label: "Ocultar"
+      label: "Ocultar",
+      command:()=> {
+        this.service.ocultar(this.portada.id).subscribe()
+      }
     },
     {
-      label: "Poner en favoritos"
+      label: "Poner en favoritos",
+      command:()=> {
+        this.service.ponerEnFavoritos(this.portada.id).subscribe()
+      }
+    },
+    {
+      label: "Establecer sticky",
+      command: () => {
+        this.service.establecerSticky(this.portada.id).subscribe();
+      }
+    },
+    {
+      label: "Eliminar sticky",
+      command: () => {
+        this.service.eliminarSticky(this.portada.id).subscribe();
+      }
     },
     {
       label: "Eliminar",
+      command: () => {
+        this.service.eliminar(this.portada.id).subscribe();
+      }
     },
     {
       label: "Ver usuario",

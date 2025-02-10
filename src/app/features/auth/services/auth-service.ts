@@ -38,12 +38,12 @@ export class AuthService {
   crearSesion(token: string): void {
 
 
-    const {name,sub, roles} : DecodedToken = jwtDecode(token);
+    const {name,sub, role} : DecodedToken = jwtDecode(token);
 
     this.currentUser.set({
       id: sub,
       username: name,
-      roles: roles
+      role: role
     });
 
 
