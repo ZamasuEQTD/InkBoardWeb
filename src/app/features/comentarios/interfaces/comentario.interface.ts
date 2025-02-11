@@ -1,5 +1,11 @@
 import { Media } from "../../core/models/media.interface";
 
+
+export interface ComentariosHilo {
+  destacados : Comentario[]
+  comentarios : Comentario[]
+}
+
 export interface Comentario {
   id:                     string;
   texto:                  string;

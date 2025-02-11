@@ -57,6 +57,12 @@ export class PortadaComponent implements OnInit{
       }
     },
     {
+      label: "Cambiar Notificaciones",
+      command:()=> {
+        this.service.cambiarNotificaciones(this.portada.id).subscribe()
+      }
+    },
+    {
       label: "Ocultar",
       command:()=> {
         this.service.ocultar(this.portada.id).subscribe()

@@ -1,4 +1,6 @@
-<div class="comentario-container">
+<div class="comentario-container" [ngClass]="{
+  'border-t-2 border-yellow-500': this.comentario.destacado
+}">
 
   <div class="flex flex-row justify-between items-center mb-1">
 
@@ -32,7 +34,7 @@
 
       <span class="text-sm text-gray-400">{{this.comentario.created_at | tiempoTranscurrido}}</span>
 
-      <button>
+      <button (click)="menu.toggle($event)">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
           class="size-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
@@ -54,3 +56,8 @@
 
   <app-texto [comentario]="this.comentario"></app-texto>
 </div>
+
+
+<p-menu #menu [popup]="true" [model]="this.opciones">
+
+</p-menu>

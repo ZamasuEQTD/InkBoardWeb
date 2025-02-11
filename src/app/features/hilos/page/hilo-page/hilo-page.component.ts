@@ -1,5 +1,6 @@
 import {
   Component,
+  computed,
   inject,
   OnInit,
   signal,
@@ -54,7 +55,12 @@ export class HiloPageComponent implements OnInit {
 
   hilo = signal<undefined | Hilo>(undefined);
 
-  comentarios = signal<undefined | Comentario[]>(undefined);
+  private _destacados =  signal<Comentario[]>([]);
+
+  private _comentarios = signal<Comentario[]>([]);
+
+
+  comentarios = computed<Comentario[]>(() => [...this._destacados(), ...this._comentarios()]);
 
   cargandoComentarios = signal<boolean>(true);
 
@@ -71,18 +77,22 @@ export class HiloPageComponent implements OnInit {
   route = inject(ActivatedRoute);
 
   ngOnInit(): void {
-    const id: string = this.route.snapshot.paramMap.get('id') as string;
 
-    this.hiloService.getHilo(id).subscribe((hilo) => {
-      this.hilo.set(hilo);
+    this.route.paramMap.subscribe((params) => {
+      const id = params.get('id') as string;
+      
+      this.hiloService.getHilo(id).subscribe((hilo) => {
 
-      this.comentariosService
-        .getComentariosDeHilo(hilo.id)
-        .subscribe((comentarios) => {
-          this.comentarios.set(comentarios);
+        this.hilo.set(hilo);
 
-          this.cargandoComentarios.set(false);
-        });
+        this.comentariosService
+          .getComentariosDeHilo(hilo.id)
+          .subscribe((response) => {
+            this._destacados.set(response.destacados);
+            this._comentarios.set(response.comentarios);
+            this.cargandoComentarios.set(false);
+          });
+      });
     });
   }
 
@@ -123,14 +133,14 @@ export class HiloPageComponent implements OnInit {
     }
 
     this.comentariosService
-        .comentarHilo(this.hilo()!.id, data)
-        .subscribe(() => {
-          this.comentarHiloForm.reset({
-            texto: '',
-            spoiler: false,
-            file: undefined,
-          });
+      .comentarHilo(this.hilo()!.id, data)
+      .subscribe(() => {
+        this.comentarHiloForm.reset({
+          texto: '',
+          spoiler: false,
+          file: undefined,
         });
+      });
   }
 
   get media(): PickedMedia | null | undefined {

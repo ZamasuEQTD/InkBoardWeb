@@ -45,4 +45,9 @@ export class HiloService {
   ponerEnFavoritos(id:string) :Observable<void>{
     return this.http.post<void>(`/api/hilos/colecciones/favoritos/poner-en-favoritos/${id}`,null);
   }
+
+  cambiarNotificaciones(id:string): Observable<void>{
+    return this.http.post<void>(`/api/hilos/cambiar-notificaciones/${id}`,null);
+
+  }
 }
