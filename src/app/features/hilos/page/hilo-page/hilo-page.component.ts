@@ -2,6 +2,7 @@ import {
   Component,
   computed,
   inject,
+  OnDestroy,
   OnInit,
   signal,
   TemplateRef,
@@ -27,6 +28,7 @@ import { CommonModule } from '@angular/common';
 import { CdkMenuModule } from '@angular/cdk/menu';
 import { TiempoTranscurridoPipe } from '../../../core/pipes/tiempoTranscurrido.pipe';
 import { AutorRolePipe } from '../../../core/pipes/autor_role.pipe';
+import { HiloPageService } from '../../services/hilo-page.service';
 @Component({
   selector: 'hilo-page',
   imports: [
@@ -46,25 +48,20 @@ import { AutorRolePipe } from '../../../core/pipes/autor_role.pipe';
   templateUrl: './hilo-page.component.html',
   styleUrl: './hilo-page.component.css',
 })
-export class HiloPageComponent implements OnInit {
+export class HiloPageComponent implements OnInit , OnDestroy{
+  
   static cantidadMaximaDeTaggueos = 5;
 
   hiloService = inject(HiloService);
 
+  service = inject(HiloPageService);
+
   comentariosService = inject(ComentariosService);
 
-  hilo = signal<undefined | Hilo>(undefined);
-
-  private _destacados =  signal<Comentario[]>([]);
-
-  private _comentarios = signal<Comentario[]>([]);
-
-
-  comentarios = computed<Comentario[]>(() => [...this._destacados(), ...this._comentarios()]);
-
-  cargandoComentarios = signal<boolean>(true);
-
   private fb: FormBuilder = inject(FormBuilder);
+  ngOnDestroy(): void {
+    this.service.reiniciar();
+  }
 
   comentarHiloForm = this.fb.group({
     texto: '',
@@ -81,21 +78,23 @@ export class HiloPageComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id') as string;
       
-      this.hiloService.getHilo(id).subscribe((hilo) => {
-
-        this.hilo.set(hilo);
-
-        this.comentariosService
-          .getComentariosDeHilo(hilo.id)
-          .subscribe((response) => {
-            this._destacados.set(response.destacados);
-            this._comentarios.set(response.comentarios);
-            this.cargandoComentarios.set(false);
-          });
-      });
+      this.service.cargar(id);
     });
   }
 
+
+  get hilo(): Hilo | undefined {
+    return this.service.hilo();
+  }
+
+
+  get comentarios(): Comentario[] {
+    return this.service.comentarios();
+  }
+
+  get cargandoComentarios(): boolean {
+    return this.service.cargandoComentarios();
+  }
   agregarMedia(picked: PickedMedia) {
     this.comentarHiloForm.patchValue({
       spoiler: false,
@@ -133,7 +132,7 @@ export class HiloPageComponent implements OnInit {
     }
 
     this.comentariosService
-      .comentarHilo(this.hilo()!.id, data)
+      .comentarHilo(this.hilo!.id, data)
       .subscribe(() => {
         this.comentarHiloForm.reset({
           texto: '',

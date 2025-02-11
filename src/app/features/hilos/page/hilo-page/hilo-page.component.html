@@ -1,4 +1,4 @@
-@let hilo = this.hilo();
+@let hilo = this.hilo;
 <app-header class="sticky z-10 top-0"></app-header>
 
 <div
@@ -84,12 +84,12 @@
 
         <div class="px-2 flex flex-col gap-y-1">
           
-          @for (comentario of this.comentarios(); track comentario.id) {
+          @for (comentario of this.comentarios; track comentario.id) {
             <app-comentario [comentario]="comentario" (onTagguear)="this.tagguear($event)" [hilo]="hilo!.id" />
           } 
           
-          @if(!hilo || this.cargandoComentarios()){ 
-            @for (_ of [1,2,3,4,5];track $index) {
+          @if(!hilo || this.cargandoComentarios){ 
+            @for (_ of [].constructor(5);track $index) {
               <app-comentario-skeleton /> 
             } 
           }
