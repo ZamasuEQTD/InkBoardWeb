@@ -20,12 +20,12 @@ export class HiloPageService {
 
   hilo = signal<undefined | Hilo>(undefined);
 
-  private _destacados = signal<Comentario[]>([]);
-  private _comentarios = signal<Comentario[]>([]);
-
-  comentarios = computed<Comentario[]>(() => [...this._destacados(), ...this._comentarios()]);
+  destacados = signal<Comentario[]>([]);
+  comentarios = signal<Comentario[]>([]);
 
   cargandoComentarios = signal<boolean>(true);
+
+  comentariosDic: { [key: string]: Comentario } = {}
 
 
   constructor() { }
@@ -38,17 +38,19 @@ export class HiloPageService {
       this.comentariosService
         .getComentariosDeHilo(hilo.id)
         .subscribe((response) => {
-          this._destacados.set(response.destacados);
-          this._comentarios.set(response.comentarios);
+          this.destacados.set(response.destacados);
+          this.comentarios.set(response.comentarios);
           this.cargandoComentarios.set(false);
+
+          this.comentarios().forEach(c=> this.comentariosDic[c.tag] = c);
+
         });
     });
   }
 
   reiniciar() {
     this.hilo.set(undefined);
-    this._comentarios.set([]);
-    this._destacados.set([]);
-
+    this.comentarios.set([]);
+    this.destacados.set([]);
   }
 }

@@ -84,6 +84,10 @@
 
         <div class="px-2 flex flex-col gap-y-1">
           
+          @for (comentario of this.destacados; track comentario.id) {
+            <app-comentario [comentario]="comentario" (onTagguear)="this.tagguear($event)" [hilo]="hilo!.id" />
+          } 
+
           @for (comentario of this.comentarios; track comentario.id) {
             <app-comentario [comentario]="comentario" (onTagguear)="this.tagguear($event)" [hilo]="hilo!.id" />
           } 
