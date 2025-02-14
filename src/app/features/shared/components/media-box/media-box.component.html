@@ -1,24 +1,27 @@
 @if (this.isDimensionable) {
 
   <div class="flex justify-center">
-    <span class=" overflow-hidden rounded-md">
-      
-      @if(this.media.provider === "image" || this.media.provider  ==="gif"){
-        <img   [src]="this.media.url" alt="" [style]="{
-          'max-width': this.dimensionableSize?.maxWidth,
-          'max-height': this.dimensionableSize?.maxHeight
-        }">
-      }
-      @if(this.media.provider === "youtube"){
+    <span class=" overflow-hidden rounded-lg relative">
+         
+      <div>
+        @if(this.media.provider === "image" || this.media.provider  ==="gif"){
+          <img   [src]="this.media.url" alt="" [style]="{
+            'max-width': this.dimensionableSize?.maxWidth,
+            'max-height': this.dimensionableSize?.maxHeight
+          }">
+        }
+        @if(this.media.provider === "youtube"){
+          <app-youtube-player class="w-full" [url]="this.media.url "></app-youtube-player>  
+        }
+        @if(this.media.provider === "video") {
+          <video  [src]="this.media.url" controls="controls" [poster]="this.media.previsualizacion" [style]="{
+            'max-width': this.dimensionableSize?.maxWidth,
+            'max-height': this.dimensionableSize?.maxHeight
+          }" ></video>
+        }
+      </div>
 
-      }
-      @if(this.media.provider === "video") {
-        <video  [src]="this.media.url" controls="controls" [poster]="this.media.previsualizacion" [style]="{
-          'max-width': this.dimensionableSize?.maxWidth,
-          'max-height': this.dimensionableSize?.maxHeight
-        }"></video>
-      }
-      
+      <ng-content #dimensionable></ng-content>
     </span>
   </div>
 }

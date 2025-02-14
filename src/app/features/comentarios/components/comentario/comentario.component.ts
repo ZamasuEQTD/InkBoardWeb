@@ -10,12 +10,15 @@ import { MenuItem } from 'primeng/api';
 import { ComentariosService } from '../../services/comentarios.service';
 import { MenuModule } from 'primeng/menu';
 import { HiloPageService } from '../../../hilos/services/hilo-page.service';
+import { SpilerAdvertenciaComponent } from "../../../shared/components/spiler-advertencia/spiler-advertencia.component";
 
 @Component({
   selector: 'app-comentario',
   imports: [
     MenuModule,
-    TiempoTranscurridoPipe, MediaBoxComponent, ColorComentarioComponent, CommonModule, AutorRolePipe],
+    TiempoTranscurridoPipe, MediaBoxComponent, ColorComentarioComponent, CommonModule, AutorRolePipe,
+    SpilerAdvertenciaComponent
+],
   templateUrl: './comentario.component.html',
   styleUrl: './comentario.component.css',
 })

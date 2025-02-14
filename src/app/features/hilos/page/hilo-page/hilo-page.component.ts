@@ -130,6 +130,7 @@ export class HiloPageComponent implements OnInit , OnDestroy{
 
     if (file) {
       data.append('file', file.file!);
+      data.append('spoiler', this.comentarHiloForm.get('spoiler')?.value?.toString() || 'false')
     }
 
     this.comentariosService

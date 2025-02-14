@@ -57,12 +57,18 @@
   </div>
 
   @if (this.comentario.media) {
+
+    {{this.comentario.media |json}}
     <app-media-box 
-      [media]="this.comentario.media!" 
-      [dimensionableSize]="{
-        maxHeight: '500px',
-      }" 
-    /> 
+        [media]="this.comentario.media!" 
+        [dimensionableSize]="{
+          maxHeight: '500px',
+        }" 
+      >
+      @if(this.comentario.media!.spoiler){
+        <app-spiler-advertencia #dimensionable></app-spiler-advertencia>
+      }
+    </app-media-box> 
   }
   <div>
 
@@ -93,6 +99,4 @@
   /> 
 }
 
-<p-menu #menu [popup]="true" [model]="this.opciones">
-
-</p-menu>
+<p-menu #menu [popup]="true" [model]="this.opciones"></p-menu>
