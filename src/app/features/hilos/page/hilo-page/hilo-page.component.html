@@ -2,7 +2,7 @@
 <app-header class="sticky z-10 top-0"></app-header>
 
 <div
-  class="md:h-[calc(100vh-56px)] w-full flex flex-col md:flex-row md:overflow-hidden"
+  class="md:h-[calc(100vh-56px)] w-full flex flex-col md:flex-row md:overflow-hidden relative "
 >
   <div class="md:w-[55%] md:h-full">
     <div
@@ -85,7 +85,7 @@
         </div>
 
         <div class="px-2 flex flex-col gap-y-1">
-          @for (comentario of this.comentarios; track comentario.id + comentario.destacado) {
+          @for (comentario of this.comentarios; track $index) {
             <app-comentario [comentario]="comentario"  [scrollContainerRef]="ref" (onTagguear)="this.tagguear($event)" [hilo]="hilo!.id" />
           } 
           
@@ -138,4 +138,8 @@
 
     </div>
   </div>
+
+ 
+  
 </div>
+

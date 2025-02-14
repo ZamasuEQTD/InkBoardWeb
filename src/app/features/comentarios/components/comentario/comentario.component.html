@@ -74,7 +74,7 @@
         <a class="text-blue-600 cursor-pointer" target="_blank" [href]="section.content">{{section.content}}</a>
       }
       @case ("tag") {
-        <span class="text-blue-600" (mouseover)="this.mostrarRespuesta(section.content.slice(2))" (mouseleave)="this.ocultarRespuesta()">{{section.content}}</span>
+       <a href="https://google.com" (click)="this.irAComentario($event, section.content.slice(2))"> <span class="text-blue-600" (mouseover)="this.mostrarRespuesta(section.content.slice(2))" (mouseleave)="this.ocultarRespuesta()">{{section.content}}</span></a>
       }
     }
   }
@@ -84,9 +84,11 @@
 
 
 @if (hayComentarioSeleccionado()) {
-  <app-comentario class="fixed  p-2 bg-white shadow-lg rounded z-50 right-[45.5%]"
-  [style.top.px]="hoverPosition.top"
-  [comentario]="this.comentarioSeleccionado()!"></app-comentario>
+  <app-comentario 
+    class="fixed  p-2 bg-white shadow-lg rounded z-50 right-[45.5%]"
+    [style.top.px]="hoverPosition.top"
+    [comentario]="this.comentarioSeleccionado()!" 
+  /> 
 }
 
 <p-menu #menu [popup]="true" [model]="this.opciones">

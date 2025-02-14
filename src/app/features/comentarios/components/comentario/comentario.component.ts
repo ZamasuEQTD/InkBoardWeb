@@ -135,6 +135,9 @@ export class ComentarioComponent implements OnInit {
 
 
   mostrarRespuesta(tag:string) {
+
+    if(window.innerWidth < 640)return;
+
     var c:Comentario | undefined = this.pageService.comentariosDic[tag];
 
     if(c) {
@@ -162,6 +165,21 @@ export class ComentarioComponent implements OnInit {
       top: boxRect.top,
       left: containerRect.left - 150,
     };
+  }
+
+  irAComentario( event:MouseEvent ,tag:string){
+    
+    var c :Comentario |undefined = this.pageService.comentariosDic[tag];
+
+    if(!c){
+      return;
+    }
+
+    if(window.innerWidth < 640 ||  this.pageService.hayHitorialDeComentarios()){
+      event.preventDefault();
+     
+      this.pageService.historialDeComentariosSeleccionado.set([c])
+    }
   }
 }
 

@@ -27,6 +27,9 @@ export class HiloPageService {
 
   comentariosDic: { [key: string]: Comentario } = {}
 
+  historialDeComentariosSeleccionado = signal<Comentario[]>([]);
+
+  hayHitorialDeComentarios = computed<boolean>(()=> this.historialDeComentariosSeleccionado().length !== 0);
 
   constructor() { }
 
