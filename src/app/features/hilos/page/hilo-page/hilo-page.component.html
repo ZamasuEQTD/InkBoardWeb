@@ -138,8 +138,19 @@
 
     </div>
   </div>
-
- 
-  
 </div>
 
+
+@if(this.service.hayHitorialDeComentarios()){
+  <div class="fixed top-0 w-full h-full bg-black bg-opacity-30 z-20 flex justify-end flex-col" (click)="this.service.historialDeComentariosSeleccionado.set([])">
+    <div class="bg-white px-2   pb-2 rounded-t-2xl max-h-[70] overflow-y-auto" (click)="$event.stopPropagation()">
+      <div class="flex justify-center py-1">
+        <div class="h-2 w-[80px] bg-gray-200 rounded-lg"></div>
+      </div>
+      
+      @for (c of this.service.historialDeComentariosSeleccionado(); track c.id) {
+        <app-comentario [comentario]="c" (onTagguear)="this.tagguear($event)" /> 
+      }
+    </div>
+  </div>
+}

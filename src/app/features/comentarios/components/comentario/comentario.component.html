@@ -6,8 +6,7 @@
 
     <div class="flex flex-row items-center gap-x-1">
       <app-color-comentario [color]="this.comentario.color">
-        <span class="font-bold text-white">{{this.comentario.dados ?? (this.comentario.es_op &&
-          this.comentario.autor_role == "Anonimo" ? 'OP': this.comentario.autor_role | autorRole |uppercase)}}</span>
+        <span class="font-bold text-white">{{this.comentario.dados ?? (this.comentario.es_op && this.comentario.autor_role == "Anonimo" ? 'OP': this.comentario.autor_role | autorRole |uppercase)}}</span>
       </app-color-comentario>
 
       <div class="flex flex-wrap gap-x-1 gap-y-[2px] items-center mb">
@@ -50,7 +49,10 @@
 
   <div id="respuestas-comentario-wrap" class="flex flex-wrap gap-x-2 gap-y-2 cursor-pointer">
     @for (tag of this.comentario.respondido_por; track $index) {
-      <span class=" text-blue-600 text-sm" (mouseleave)="this.ocultarRespuesta()" (mouseover)="this.mostrarRespuesta(tag)">>>{{tag}}</span>
+      
+      <a href="" (click)="this.irAComentario($event,tag)">
+        <span class=" text-blue-600 text-sm" (mouseleave)="this.ocultarRespuesta()" (mouseover)="this.mostrarRespuesta(tag)">>>{{tag}}</span>
+      </a>
     }
   </div>
 
