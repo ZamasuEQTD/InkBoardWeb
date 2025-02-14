@@ -87,12 +87,10 @@ export class HiloPageComponent implements OnInit , OnDestroy{
     return this.service.hilo();
   }
 
-  get destacados(): Comentario[] {
-    return this.service.destacados();
-  }
+ 
 
   get comentarios(): Comentario[] {
-    return this.service.comentarios();
+    return [...this.service.destacados(),...this.service.comentarios()]
   }
 
   get cargandoComentarios(): boolean {

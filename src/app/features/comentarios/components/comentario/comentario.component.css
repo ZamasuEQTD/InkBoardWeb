@@ -10,4 +10,5 @@
 
 :host {
   display: block;
+  position: relative;
 }

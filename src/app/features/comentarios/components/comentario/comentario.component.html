@@ -1,29 +1,32 @@
 <div class="comentario-container" [ngClass]="{
   'border-t-2 border-yellow-500': this.comentario.destacado
-}">
+}" #comentarioRef>
 
   <div class="flex flex-row justify-between items-center mb-1">
 
     <div class="flex flex-row items-center gap-x-1">
       <app-color-comentario [color]="this.comentario.color">
-        <span class="font-bold text-white">{{this.comentario.dados ?? (this.comentario.es_op && this.comentario.autor_role == "Anonimo" ? 'OP': this.comentario.autor_role | autorRole |uppercase)}}</span>
+        <span class="font-bold text-white">{{this.comentario.dados ?? (this.comentario.es_op &&
+          this.comentario.autor_role == "Anonimo" ? 'OP': this.comentario.autor_role | autorRole |uppercase)}}</span>
       </app-color-comentario>
 
       <div class="flex flex-wrap gap-x-1 gap-y-[2px] items-center mb">
         <span class="text-sm font-bold">{{this.comentario.autor}}</span>
 
         @if (this.comentario.es_op) {
-          <div class="bg-white text-sm px-2 py-1 rounded-lg font-semibold">OP</div>
+        <div class="bg-white text-sm px-2 py-1 rounded-lg font-semibold">OP</div>
         }
 
         @if (this.comentario.destacado) {
-          <div class="bg-yellow-200 text-sm px-2 py-1 rounded-lg">Destacado</div>
+        <div class="bg-yellow-200 text-sm px-2 py-1 rounded-lg">Destacado</div>
         }
 
-        <div  class="bg-white text-sm px-2 py-1 rounded-lg cursor-pointer font-semibold" (click)="this.tagguear()">{{this.comentario.tag}}</div>
+        <div class="bg-white text-sm px-2 py-1 rounded-lg cursor-pointer font-semibold" (click)="this.tagguear()">
+          {{this.comentario.tag}}</div>
 
         @if (this.comentario.tag_unico) {
-          <div class="text-white text-sm px-2 py-1 rounded-lg font-semibold" [ngClass]="this.colorTagUnico()">{{this.comentario.tag_unico}}</div>
+        <div class="text-white text-sm px-2 py-1 rounded-lg font-semibold" [ngClass]="this.colorTagUnico()">
+          {{this.comentario.tag_unico}}</div>
         }
 
       </div>
@@ -37,7 +40,8 @@
       <button (click)="menu.toggle($event)">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
           class="size-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
         </svg>
       </button>
     </div>
@@ -46,17 +50,44 @@
 
   <div id="respuestas-comentario-wrap" class="flex flex-wrap gap-x-2 gap-y-2 cursor-pointer">
     @for (tag of this.comentario.respondido_por; track $index) {
-      <span class=" text-blue-600 text-sm">>>{{tag}}</span>
+      <span class=" text-blue-600 text-sm" (mouseleave)="this.ocultarRespuesta()" (mouseover)="this.mostrarRespuesta(tag)">>>{{tag}}</span>
     }
   </div>
 
   @if (this.comentario.media) {
-      <app-media-box class="" [media]="this.comentario.media"/>
+    <app-media-box 
+      [media]="this.comentario.media!" 
+      [dimensionableSize]="{
+        maxHeight: '500px',
+      }" 
+    /> 
   }
+  <div>
 
-  <app-texto [comentario]="this.comentario"></app-texto>
+  @for (section of this.sections; track $index) {
+
+    @switch (section.type) {
+      @case ("text") {
+        <span>{{section.content}}</span>
+      }
+      @case ("link") {
+        <a class="text-blue-600 cursor-pointer" target="_blank" [href]="section.content">{{section.content}}</a>
+      }
+      @case ("tag") {
+        <span class="text-blue-600" (mouseover)="this.mostrarRespuesta(section.content.slice(2))" (mouseleave)="this.ocultarRespuesta()">{{section.content}}</span>
+      }
+    }
+  }
+  </div>
+
 </div>
 
+
+@if (hayComentarioSeleccionado()) {
+  <app-comentario class="fixed  p-2 bg-white shadow-lg rounded z-50 right-[45.5%]"
+  [style.top.px]="hoverPosition.top"
+  [comentario]="this.comentarioSeleccionado()!"></app-comentario>
+}
 
 <p-menu #menu [popup]="true" [model]="this.opciones">
 

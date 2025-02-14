@@ -20,4 +20,6 @@ export class MediaBoxComponent implements OnInit {
   ngOnInit(): void {
     this.isDimensionable = MediaBoxComponent.dimensionables.includes(this.media.provider);
   }
+
+  @Input() dimensionableSize?: {maxWidth? : string,maxHeight? : string} 
 }

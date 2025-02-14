@@ -1,20 +1,24 @@
 @if (this.isDimensionable) {
 
-   <div class="w-full h-full">
-    @switch (this.media.provider) {
-      @case ('youtube') {
-        <app-youtube-player [url]="this.media.url"></app-youtube-player>
+  <div class="flex justify-center">
+    <span class=" overflow-hidden rounded-md">
+      
+      @if(this.media.provider === "image" || this.media.provider  ==="gif"){
+        <img   [src]="this.media.url" alt="" [style]="{
+          'max-width': this.dimensionableSize?.maxWidth,
+          'max-height': this.dimensionableSize?.maxHeight
+        }">
       }
-      @case ('video') {
-        <video [src]="this.media.url" class="h-full w-full object-contain"  [poster]="this.media.previsualizacion" controls="controls"></video>
-      }
-      @case ('image') {
-        <img [src]="this.media.url" class="h-full w-full object-contain" alt="imagen no visible">
-      }
+      @if(this.media.provider === "youtube"){
 
-      @case ('gif') {
-        <img [src]="this.media.url" class="h-full w-full object-contain" alt="imagen no visible">
       }
-    }
-   </div>
+      @if(this.media.provider === "video") {
+        <video  [src]="this.media.url" controls="controls" [poster]="this.media.previsualizacion" [style]="{
+          'max-width': this.dimensionableSize?.maxWidth,
+          'max-height': this.dimensionableSize?.maxHeight
+        }"></video>
+      }
+      
+    </span>
+  </div>
 }
