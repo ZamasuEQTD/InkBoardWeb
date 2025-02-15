@@ -11,11 +11,13 @@ import { ComentariosService } from '../../services/comentarios.service';
 import { MenuModule } from 'primeng/menu';
 import { HiloPageService } from '../../../hilos/services/hilo-page.service';
 import { SpilerAdvertenciaComponent } from "../../../shared/components/spiler-advertencia/spiler-advertencia.component";
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-comentario',
   imports: [
     MenuModule,
+    RouterModule,
     TiempoTranscurridoPipe, MediaBoxComponent, ColorComentarioComponent, CommonModule, AutorRolePipe,
     SpilerAdvertenciaComponent
 ],
@@ -24,6 +26,8 @@ import { SpilerAdvertenciaComponent } from "../../../shared/components/spiler-ad
 })
 export class ComentarioComponent implements OnInit {
   @Input() comentario!: Comentario;
+
+  route = inject(Router)
 
   @ViewChild("comentarioRef") comentarioRef!: ElementRef<HTMLDivElement>;
 
@@ -170,8 +174,21 @@ export class ComentarioComponent implements OnInit {
     };
   }
 
-  irAComentario( event:MouseEvent ,tag:string){
+  setHistorialDeRespuestas(){
+    const historial: Comentario [] = [];
     
+    this.comentario.respondido_por.forEach((tag)=> {
+      const comentario : Comentario | undefined = this.pageService.comentariosDic[tag];
+
+      if(comentario){
+        historial.push(comentario);
+      }
+    });
+  
+    this.pageService.historialDeComentariosSeleccionado.set(historial);
+  }
+
+ async irAComentario( event:MouseEvent ,tag:string){
     var c :Comentario |undefined = this.pageService.comentariosDic[tag];
 
     if(!c){
@@ -179,9 +196,23 @@ export class ComentarioComponent implements OnInit {
     }
 
     if(window.innerWidth < 640 ||  this.pageService.hayHitorialDeComentarios()){
+
+      console.log("prevenido");
+      
       event.preventDefault();
      
       this.pageService.historialDeComentariosSeleccionado.set([c])
+    } else {
+
+      await this.route.navigate(["/hilo", this.pageService.hilo()?.id])
+
+      await this.route.navigate([
+        "/hilo", this.pageService.hilo()?.id],{
+          replaceUrl:true,
+          queryParams : {
+            comentario:tag
+        }
+      })
     }
   }
 }

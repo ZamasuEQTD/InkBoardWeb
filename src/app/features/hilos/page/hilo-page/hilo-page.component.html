@@ -86,7 +86,7 @@
 
         <div class="px-2 flex flex-col gap-y-1">
           @for (comentario of this.comentarios; track $index) {
-            <app-comentario [comentario]="comentario"  [scrollContainerRef]="ref" (onTagguear)="this.tagguear($event)" [hilo]="hilo!.id" />
+            <app-comentario [id]="comentario.tag" [comentario]="comentario"  [scrollContainerRef]="ref" (onTagguear)="this.tagguear($event)" [hilo]="hilo!.id" />
           } 
           
           @if(!hilo || this.cargandoComentarios){ 

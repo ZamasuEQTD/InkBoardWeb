@@ -33,7 +33,7 @@ export class HiloPageService {
 
   constructor() { }
 
-  cargar(id: string) {
+  cargar(id: string, onComentariosCargados?: () => void) {
     this.hiloService.getHilo(id).subscribe((hilo) => {
 
       this.hilo.set(hilo);
@@ -45,8 +45,11 @@ export class HiloPageService {
           this.comentarios.set(response.comentarios);
           this.cargandoComentarios.set(false);
 
-          this.comentarios().forEach(c=> this.comentariosDic[c.tag] = c);
+          this.comentarios().forEach(c => this.comentariosDic[c.tag] = c);
 
+          if (onComentariosCargados) {
+            onComentariosCargados();
+          }
         });
     });
   }

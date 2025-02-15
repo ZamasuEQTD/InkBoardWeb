@@ -16,21 +16,21 @@ import { NotificacionesService } from '../../../notificaciones/serivces/notifica
   templateUrl: './notificaciones-button.component.html',
   styleUrl: './notificaciones-button.component.css',
 })
-export class NotificacionesButtonComponent implements OnInit{
-  
+export class NotificacionesButtonComponent implements OnInit {
+
   notificacionesService = inject(NotificacionesService);
 
   dialog = inject(Dialog);
-  
+
   ngOnInit(): void {
-    if(!this.notificacionesService.initialized){
+    if (!this.notificacionesService.initialized) {
       this.notificacionesService.init()
     }
   }
 
   show(): void {
     this.dialog.open(NotificacionesDialogComponent, {
-      closeOnNavigation:true,
+      closeOnNavigation: true,
     });
   }
 }

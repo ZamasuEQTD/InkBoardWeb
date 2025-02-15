@@ -13,7 +13,7 @@ import { NotificacionesService } from '../../serivces/notificaciones.service';
 export class NotificacionComponent {
   @Input() notificacion!: Notificacion;
 
-    private notificacionesService = inject(NotificacionesService);
+  private notificacionesService = inject(NotificacionesService);
 
   leer(id:string){
     this.notificacionesService.leer(id);

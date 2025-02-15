@@ -74,11 +74,23 @@ export class HiloPageComponent implements OnInit , OnDestroy{
   route = inject(ActivatedRoute);
 
   ngOnInit(): void {
-
+    
     this.route.paramMap.subscribe((params) => {
+      
       const id = params.get('id') as string;
       
-      this.service.cargar(id);
+      this.service.cargar(id, ()=>{
+        this.route.queryParams.subscribe(params => {
+          setTimeout(() => {
+            const comentario:string | undefined = params['comentario'];
+          
+            if(comentario){
+              this.scrollToComentario(comentario);
+            }
+          }, 500);
+        });
+    
+      });
     });
   }
 
@@ -142,6 +154,14 @@ export class HiloPageComponent implements OnInit , OnDestroy{
           file: undefined,
         });
       });
+  }
+
+  scrollToComentario(id:string){
+        var e = document.getElementById(id)
+        
+        if(e) {
+          e.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 
   get media(): PickedMedia | null | undefined {
