@@ -8,8 +8,14 @@
 
       <div class="flex-1 flex flex-col">
 
-        <span class="font-semibold">Usuario</span>
-        <span class="text-gray-600 text-xs">Unido desde 28/04/2025</span>
+       @if(this.usuario()){
+        <span class="font-semibold">{{this.usuario()?.straff_name?? 'Anonimo'}}</span>
+        <span class="text-gray-600 text-xs">Unido desde {{this.usuario()?.registrado_en | date:'dd/MM/yyyy'}}</span>
+       } @else {
+        <span class="text-skeleton w-28 h-4 mb-2"></span>
+        <span class="text-skeleton w-[200px] h-4"></span>
+
+       }
 
       </div>
 
@@ -34,8 +40,8 @@
 
   </div>
 
-  @for (registro of [1,2,3,4,5,6,7]; track $index) {
-    <app-registro />
+  @for (registro of this.registroSeleccionado() === 'hilos'? this.hilosPosteados() : hilosComentados(); track $index) {
+    <app-registro [registro]="registro"  [tipo]="this.registroSeleccionado()"/>
   }
 
 </app-dialog>

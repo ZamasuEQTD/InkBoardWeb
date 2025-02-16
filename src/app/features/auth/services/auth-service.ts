@@ -10,6 +10,7 @@ import { DecodedToken } from '../interfaces/decoded-tokent.interface';
 })
 export class AuthService {
   currentUser = signal<CurrentUser | null>(null);
+  
   accessToken = signal<string | null>(null);
 
   autenticado = computed<boolean>(()=> this.currentUser() != null);
@@ -17,6 +18,10 @@ export class AuthService {
   authenticando = signal<boolean>(false);
 
   private http = inject(HttpClient);
+
+  get isModerador ():boolean{
+    return this.currentUser()?.role.includes("Moderador") ? true : false;
+  }
 
   restaurarSesion() {
     const token = localStorage.getItem("token");

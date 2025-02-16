@@ -12,6 +12,9 @@ import { MenuModule } from 'primeng/menu';
 import { HiloPageService } from '../../../hilos/services/hilo-page.service';
 import { SpilerAdvertenciaComponent } from "../../../shared/components/spiler-advertencia/spiler-advertencia.component";
 import { Router, RouterModule } from '@angular/router';
+import { Dialog } from '@angular/cdk/dialog';
+import { RegistroUsuarioDialogComponent } from '../../../registros/components/registro-usuario-dialog/registro-usuario-dialog.component';
+import { AuthService } from '../../../auth/services/auth-service';
 
 @Component({
   selector: 'app-comentario',
@@ -20,7 +23,7 @@ import { Router, RouterModule } from '@angular/router';
     RouterModule,
     TiempoTranscurridoPipe, MediaBoxComponent, ColorComentarioComponent, CommonModule, AutorRolePipe,
     SpilerAdvertenciaComponent
-],
+  ],
   templateUrl: './comentario.component.html',
   styleUrl: './comentario.component.css',
 })
@@ -37,11 +40,13 @@ export class ComentarioComponent implements OnInit {
 
   @Input() scrollContainerRef!: HTMLDivElement;
 
-  comentarioSeleccionado = signal<Comentario|undefined> (undefined);
+  comentarioSeleccionado = signal<Comentario | undefined>(undefined);
 
-  hayComentarioSeleccionado = computed<boolean>(()=>this.comentarioSeleccionado() !== undefined );
+  hayComentarioSeleccionado = computed<boolean>(() => this.comentarioSeleccionado() !== undefined);
 
   pageService = inject(HiloPageService);
+
+  dialog = inject(Dialog);
 
   sections: TextoSection[] = [];
 
@@ -92,42 +97,58 @@ export class ComentarioComponent implements OnInit {
       });
     }
 
+    this.opciones = [
+      {
+        label: "Denunciar",
+      },
+
+      {
+        label: "Ocultar",
+        command: () => {
+          this.service.ocultar(this.comentario.id, this.hilo).subscribe()
+        }
+      },
+      ...(this.comentario.es_autor ? [
+        {
+          label: "Desactivar notificaciones",
+        },
+      ] : []),
+      ... (this.pageService.hilo()?.es_op ? [
+        {
+          label: "Destacar",
+          command: () => {
+            this.service.destacar(this.comentario.id, this.hilo).subscribe();
+          }
+        },
+      ] : []),
+      ...(this.auth.autenticado() && this.auth.isModerador ? [
+        {
+          label: "Eliminar",
+          command: () => {
+            this.service.eliminar(this.comentario.id, this.hilo).subscribe();
+          }
+        },
+        {
+          label: "Ver usuario",
+          command: () => {
+            this.dialog.open(RegistroUsuarioDialogComponent, {
+              data: {
+                usuario: this.comentario.autor_id!
+              }
+            })
+          }
+        }
+      ] : []
+      )
+    ]
   }
 
   private service = inject(ComentariosService);
 
+  private auth = inject(AuthService);
+
   public opciones: MenuItem[] = [
-    {
-      label: "Denunciar",
-    },
-    {
-      label: "Desactivar notificaciones",
-    },
 
-    {
-      label: "Ocultar",
-      command: () => {
-        this.service.ocultar(this.comentario.id, this.hilo).subscribe()
-      }
-    },
-    {
-      label: "Destacar",
-      command: () => {
-        this.service.destacar(this.comentario.id, this.hilo).subscribe();
-      }
-    },
-
-    {
-      label: "Eliminar",
-      command: () => {
-        this.service.eliminar(this.comentario.id, this.hilo).subscribe();
-      }
-    },
-    {
-      label: "Ver usuario",
-      command: (event) => {
-      }
-    }
   ];
 
   colorTagUnico(): string {
@@ -141,13 +162,13 @@ export class ComentarioComponent implements OnInit {
   hoverPosition = { top: 0, left: 0 };
 
 
-  mostrarRespuesta(tag:string) {
+  mostrarRespuesta(tag: string) {
 
-    if(window.innerWidth < 640)return;
+    if (window.innerWidth < 640) return;
 
-    var c:Comentario | undefined = this.pageService.comentariosDic[tag];
+    var c: Comentario | undefined = this.pageService.comentariosDic[tag];
 
-    if(c) {
+    if (c) {
       this.comentarioSeleccionado.set(c);
       this.calculateHoverPosition();
 
@@ -174,43 +195,43 @@ export class ComentarioComponent implements OnInit {
     };
   }
 
-  setHistorialDeRespuestas(){
-    const historial: Comentario [] = [];
-    
-    this.comentario.respondido_por.forEach((tag)=> {
-      const comentario : Comentario | undefined = this.pageService.comentariosDic[tag];
+  setHistorialDeRespuestas() {
+    const historial: Comentario[] = [];
 
-      if(comentario){
+    this.comentario.respondido_por.forEach((tag) => {
+      const comentario: Comentario | undefined = this.pageService.comentariosDic[tag];
+
+      if (comentario) {
         historial.push(comentario);
       }
     });
-  
+
     this.pageService.historialDeComentariosSeleccionado.set(historial);
   }
 
- async irAComentario( event:MouseEvent ,tag:string){
-    var c :Comentario |undefined = this.pageService.comentariosDic[tag];
+  async irAComentario(event: MouseEvent, tag: string) {
+    var c: Comentario | undefined = this.pageService.comentariosDic[tag];
 
-    if(!c){
+    if (!c) {
       return;
     }
 
-    if(window.innerWidth < 640 ||  this.pageService.hayHitorialDeComentarios()){
+    if (window.innerWidth < 640 || this.pageService.hayHitorialDeComentarios()) {
 
       console.log("prevenido");
-      
+
       event.preventDefault();
-     
+
       this.pageService.historialDeComentariosSeleccionado.set([c])
     } else {
 
       await this.route.navigate(["/hilo", this.pageService.hilo()?.id])
 
       await this.route.navigate([
-        "/hilo", this.pageService.hilo()?.id],{
-          replaceUrl:true,
-          queryParams : {
-            comentario:tag
+        "/hilo", this.pageService.hilo()?.id], {
+        replaceUrl: true,
+        queryParams: {
+          comentario: tag
         }
       })
     }

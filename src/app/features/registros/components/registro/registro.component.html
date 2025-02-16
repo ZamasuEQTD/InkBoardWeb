@@ -1,16 +1,43 @@
-<div class="flex flex-col p-2 bg-gray-100 rounded-lg mt-1">
+<div class="p-2 bg-gray-100 rounded-lg mt-1">
 
-  <div class="flex flex-row gap-x-3">
-    <div class="size-16 rounded-xl bg-red-300"></div>
+  <div class="flex flex-row items-center justify-between">
 
-    <div class="flex-1">
-      <span class="line-clamp-2 font-semibold text-sm">Ha comentado en : Los viernes de la jungla</span>
+    <div class="flex flex-col">
+      <div class="flex flex-row gap-x-3">
+        <div class="size-16 rounded-xl" 
+          [style.backgroundSize] = "'cover'"
+          [style.backgroundImage]="'url(' + registro.miniatura + ')'"></div>
+        <div class="flex-1">
+          <span class="line-clamp-2  text-sm">@switch (this.tipo) {
+            @case ('comentarios') {
+              Ha comentado en :
+            }
+            @case ('hilos') {
+              Ha posteado :
+            }
+          }
+          <span class="font-semibold">{{this.registro.titulo}} </span>
+        </span>
+        </div>
+    
+      </div>
+    
+      <span class="text-xs text-gray-400"> hace 2ms</span>
+    
+      <span class="text-sm"> {{this.registro.contenido}} </span>
     </div>
+
+    <a 
+      [routerLink]="'hilo/'+ this.registro.id"
+      [queryParams]="{
+        comentario: this.registro.comentario_tag
+      }"
+      target="_blank"
+      class="size-10 shrink-0  flex justify-center items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>
+    </a>
 
   </div>
 
-  <span class="text-xs text-gray-400"> hace 2ms</span>
-
-  <span class="text-sm"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima ipsa quam nemo distinctio eos, debitis soluta asperiores quaerat numquam eligendi!</span>
-
+ 
 </div>
