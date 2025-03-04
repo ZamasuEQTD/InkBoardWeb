@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import {FormGroup, FormControl, FormBuilder, FormArray, ReactiveFormsModule, RequiredValidator, Validators, ValidatorFn, ValidationErrors, AbstractControl} from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, FormArray, ReactiveFormsModule, RequiredValidator, Validators, ValidatorFn, ValidationErrors, AbstractControl } from '@angular/forms';
 
 import { DialogHeaderComponent } from "../../../shared/components/dialog-header/dialog-header.component";
 import { InputLabeledComponent } from "../../../shared/components/input-labeled/input-labeled.component";
@@ -29,7 +29,7 @@ import { YoutubeIdPipe } from '../../../shared/pipes/youtubeId.pipe';
     MediaBoxComponent,
     MediaPipe,
     DialogComponent,
-],
+  ],
   templateUrl: './postear-hilo-modal.component.html',
   styleUrl: './postear-hilo-modal.component.css',
 })
@@ -40,7 +40,7 @@ export class PostearHiloModalComponent {
 
   private http = inject(HttpClient);
   private router = inject(Router);
-  private fb : FormBuilder  = inject(FormBuilder);
+  private fb: FormBuilder = inject(FormBuilder);
 
   private dialog = inject(Dialog);
 
@@ -52,113 +52,118 @@ export class PostearHiloModalComponent {
     descripcion: ['',],
     subcategoria: this.fb.control<Subcategoria | null>(null),
     encuesta: this.fb.array<string>([]),
-    embed:['',[esYoutubeUrl()]],
+    embed: ['', [esYoutubeUrl()]],
     portada: this.fb.control<ContenidoCensurable<PickedMedia> | undefined>(undefined, {
       validators: [
         Validators.required
       ]
     }),
-    dados : [false],
+    dados: [false],
     idUnico: [false]
   });
 
-  get encuesta() : FormArray<FormControl<string | null>> {
+  get encuesta(): FormArray<FormControl<string | null>> {
     return (this.form.get('encuesta') as FormArray);
   }
 
-  get portada(){
+  get portada() {
     return (this.form.get('portada') as FormControl<ContenidoCensurable<PickedMedia> | undefined>).value;
   }
 
-  agregarPortada(pick: PickedMedia) :void {
+  agregarPortada(pick: PickedMedia): void {
     this.form.patchValue({
-      portada : {
-        ocultar : false,
-        contenido : pick
+      portada: {
+        ocultar: false,
+        contenido: pick
       }
     })
   }
 
-  agregarEmbed(){
-    if(this.form.get('embed')?.valid){
-      const url: string = this.form.get('embed')!.value  as string||'';
-      
+  agregarEmbed() {
+    if (this.form.get('embed')?.valid) {
+      const url: string = this.form.get('embed')!.value as string || '';
+
       this.agregarPortada({
         source: url,
         type: 'youtube'
-      })      
+      })
     }
   }
 
-  eliminarPortada() :void {
+  eliminarPortada(): void {
     this.form.patchValue({
       portada: undefined
     })
   }
 
-  togglesSpoiler() :void {
+  togglesSpoiler(): void {
     this.form.patchValue({
-      portada : {
-        ocultar :!this.portada!.ocultar,
-        contenido : this.portada!.contenido
+      portada: {
+        ocultar: !this.portada!.ocultar,
+        contenido: this.portada!.contenido
       }
     })
   }
 
-  agregarOpcionEncuesta() : void {
+  agregarOpcionEncuesta(): void {
     const encuestaArray = this.form.get('encuesta') as FormArray;
 
     encuestaArray.push(this.fb.control(''));
   }
 
-  eliminarOpcion(index : number) : void {
+  eliminarOpcion(index: number): void {
     this.encuesta.removeAt(index);
   }
 
-  seleccionarSubcategoria(){
-   var seleccionarSubcategoriaDialog =  this.dialog.open(SeleccionarSubcategoriaDialogComponent, {
-    data:{
-      onSubcategoriaSeleccionada: (subcategoria: Subcategoria) => {
-        this.form.patchValue({
-          subcategoria
-        })
-        seleccionarSubcategoriaDialog.close()
+  seleccionarSubcategoria() {
+    var seleccionarSubcategoriaDialog = this.dialog.open(SeleccionarSubcategoriaDialogComponent, {
+      data: {
+        onSubcategoriaSeleccionada: (subcategoria: Subcategoria) => {
+          this.form.patchValue({
+            subcategoria
+          })
+          seleccionarSubcategoriaDialog.close()
+        }
       }
-    }
-   })
+    })
   }
 
-  postear() : void {
-    if(this.posteando()) return;
+  postear(): void {
+    if (this.posteando()) return;
 
-    var data  = new FormData();
+    var data = new FormData();
 
     data.append("titulo", this.form.get("titulo")?.value || "");
 
     data.append("descripcion", this.form.get("descripcion")?.value || "");
 
-    data.append("Subcategoria",  this.form.get("subcategoria")?.value?.id || "");
+    data.append("Subcategoria", this.form.get("subcategoria")?.value?.id || "");
 
     data.append("DadosActivados", this.form.get("dados")?.value?.toString() || "false");
 
     data.append("IdUnicoActivado", this.form.get("idUnico")?.value?.toString() || "false");
 
+    const encuesta = this.form.get("encuesta")?.value || [];
+
+    encuesta.forEach((opcion: string | null, index: number) => {
+      data.append(`Encuesta[${index}]`, opcion!);
+    });
 
     const portada = this.form.get("portada")?.value;
 
     if (portada) {
-      if(this.form.get("embed")?.valid){
-        data.append("Embed", this.form.get("embed")?.value || "");      
+      if (this.form.get("embed")?.valid) {
+        data.append("Embed", this.form.get("embed")?.value || "");
       } else {
         data.append("File", portada.contenido.file!);
       }
-      
+
 
 
       data.append("Spoiler", portada.ocultar.toString());
     }
 
-    this.http.post<ApiResponse<string>>("/api/hilos/postear", data).subscribe((result)=> {
+    this.http.post<ApiResponse<string>>("/api/hilos/postear", data).subscribe((result) => {
       const hiloId = result.data;
 
       this.dialogRef.close();
@@ -170,11 +175,10 @@ export class PostearHiloModalComponent {
 
 
 
-export function esYoutubeUrl( ): ValidatorFn {
+export function esYoutubeUrl(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const esYoutube = YoutubeUtil.esYoutubeEnlace(control.value || '');
 
-    return !esYoutube ? {enlaceInvalido: {value: control.value}} : null;
+    return !esYoutube ? { enlaceInvalido: { value: control.value } } : null;
   };
 }
- 

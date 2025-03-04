@@ -64,9 +64,7 @@ export class ComentarioComponent implements OnInit {
 
   private auth = inject(AuthService);
 
-  public opciones: MenuItem[] = [
-
-  ];
+  public opciones: MenuItem[] = [];
 
   private generarTextoDeComentario() {
     const regexs = /(>>[A-Z0-9]{8})|(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*))/g;

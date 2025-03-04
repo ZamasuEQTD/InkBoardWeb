@@ -11,7 +11,8 @@
 
       <div class="flex flex-wrap gap-x-1 gap-y-[2px] items-center mb">
         <span class="text-xs font-bold">{{this.comentario.autor}}</span>
-
+        
+        <span class="text-xs font-semibold text-blue-500">{{this.comentario.autor_role}}</span>
         @if (this.comentario.es_op) {
           <div class="bg-white text-xs px-2 py-1 rounded-lg font-semibold">OP</div>
         }
