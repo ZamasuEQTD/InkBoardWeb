@@ -31,8 +31,6 @@ export class HiloPageService {
 
   hayHitorialDeComentarios = computed<boolean>(()=> this.historialDeComentariosSeleccionado().length !== 0);
 
-  constructor() { }
-
   cargar(id: string, onComentariosCargados?: () => void) {
     this.hiloService.getHilo(id).subscribe((hilo) => {
 

@@ -11,7 +11,7 @@ export interface Hilo {
   subcategoria:           Subcategoria;
   created_at:             Date;
   media:                  Media;
-  encuesta:               Encuesta;
+  encuesta?:               Encuesta;
   autor_role:             string;
   autor:         string
 }

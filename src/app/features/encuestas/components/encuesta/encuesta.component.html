@@ -1,0 +1,38 @@
+<div class="w-full bg-white p-4 rounded-lg">
+
+    @for (respuesta of this.encuesta().respuestas; track respuesta.id) {
+
+    @let porcentaje = (respuesta.votos > 0 ? (respuesta.votos / this.votosTotales() ) * 100 : 0).toFixed(2);
+    @let seleccionado = estaSeleccionado(respuesta.id);
+
+    <div (click)="seleccionarOpcion(respuesta.id)" class="rounded-xl border overflow-hidden relative mb-2 cursor-pointer" [ngClass]="[
+                seleccionado ? 'border-gray-300/50 bg-gray-300/5' : 'border-border hover:border-primary/30',
+                $last ? 'mb-2' : ''
+            ]">
+
+        <div class="bg-gray-500/20 bg-opacity-50 h-full absolute z-0" [style.width]="porcentaje + '%'"></div>
+
+        <div class="py-3 px-2 flex flex-row justify-between items-center relative text-sm">
+            <span class="break-words text-xs font-semibold">{{respuesta.respuesta}}</span>
+            <div class="shrink-0 flex flex-row items-center gap-x-1">
+                <span class="text-xs text-neutral-500/90">{{ respuesta.votos }} votos</span>
+
+                <span class="font-semibold">{{ porcentaje }}%</span>
+
+                @if(seleccionado) {
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
+                    stroke="currentColor" class="size-4 text-green-500">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+                }
+            </div>
+
+        </div>
+    </div>
+    }
+
+    <div class="flex flex-row justify-between  items-center">
+        <span class="text-neutral-500/90">Votos <span class="font-semibold">{{this.votosTotales()}}</span></span>
+        <button class="primary-button bg-gray-500/55 w-auto" (click)="votar()">Votar</button>
+    </div>
+</div>

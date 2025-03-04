@@ -34,6 +34,7 @@ import { catchError, throwError } from 'rxjs';
 import { Failure } from '../../../core/interfaces/failure';
 import { Dialog } from '@angular/cdk/dialog';
 import { EstasBaneadoDialogComponent } from '../../../baneos/components/estas-baneado-dialog/estas-baneado-dialog.component';
+import { EncuestaComponent } from "../../../encuestas/components/encuesta/encuesta.component";
 
 @Component({
   selector: 'hilo-page',
@@ -50,7 +51,8 @@ import { EstasBaneadoDialogComponent } from '../../../baneos/components/estas-ba
     SpoileablePickedMediaComponent,
     TiempoTranscurridoPipe,
     AutorRolePipe,
-  ],
+    EncuestaComponent
+],
   templateUrl: './hilo-page.component.html',
   styleUrl: './hilo-page.component.css',
 })
