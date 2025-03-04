@@ -22,7 +22,7 @@
 
 
   .semiscreen-on-mobile {
-    @apply w-full h-[80vh] rounded-t-2xl overflow-y-auto flex flex-col;
+    @apply w-full h-[80vh] rounded-t-2xl overflow-y-auto flex flex-col sm:h-auto;
   }
 
   .medium {

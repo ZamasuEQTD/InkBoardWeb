@@ -27,13 +27,13 @@ export class TiempoTranscurridoPipe implements PipeTransform {
       return `${months} ms`;
     }
     if (days > 0) {
-      return `${days} ds`;
+      return `${days} d`;
     } else if (hours > 0) {
       return `${hours} hs`;
     } else if (minutes > 0) {
-      return `${minutes} min`;
+      return `${minutes} mn`;
     } else {
-      return `${seconds} segs`;
+      return `${seconds} sgs`;
     }
   }
 }

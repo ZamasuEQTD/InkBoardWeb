@@ -1,78 +1,78 @@
-import { computed, inject, Injectable, signal } from '@angular/core';
+import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { CurrentUser } from '../interfaces/current-user.interface';
 import { jwtDecode } from "jwt-decode";
 import { HttpClient } from '@angular/common/http';
-import { catchError, EMPTY, finalize, map, Observable, throwError } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { ApiResponse } from '../../core/interfaces/api-response.interface';
 import { DecodedToken } from '../interfaces/decoded-tokent.interface';
+
+const AUTH_KEY = "token";
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  currentUser = signal<CurrentUser | null>(null);
-  
-  accessToken = signal<string | null>(null);
+  currentUser = signal<CurrentUser | undefined>(undefined);
 
-  autenticado = computed<boolean>(()=> this.currentUser() != null);
+  accessToken = signal<string | undefined>(loadToken());
+
+  autenticado = computed<boolean>(() => this.currentUser() != null);
 
   authenticando = signal<boolean>(false);
 
   private http = inject(HttpClient);
 
-  get isModerador ():boolean{
+  createUserFromToken = effect(() => {
+    if (this.accessToken()) {
+
+      const { name, sub, role }: DecodedToken = jwtDecode(this.accessToken()!);
+
+      this.currentUser.set({
+        id: sub,
+        username: name,
+        role: role
+      });
+    }
+  });
+
+  get isModerador(): boolean {
     return this.currentUser()?.role.includes("Moderador") ? true : false;
   }
 
-  restaurarSesion() {
-    const token = localStorage.getItem("token");
+  logout(): void {
+    this.currentUser.set(undefined);
 
-    if (!token) return;
+    this.accessToken.set(undefined);
 
-    this.crearSesion(token);
+    localStorage.removeItem(AUTH_KEY);
   }
-
-  logout() {
-    this.currentUser.set(null);
-
-    this.accessToken.set(null);
-
-    localStorage.removeItem("token");
-  }
-
 
   crearSesion(token: string): void {
-
-
-    const {name,sub, role} : DecodedToken = jwtDecode(token);
-
-    this.currentUser.set({
-      id: sub,
-      username: name,
-      role: role
-    });
-
-
     this.accessToken.set(token);
 
     localStorage.setItem("token", token);
   }
 
-  registrarse (form : AuthFormData): Observable<string>{
+  registrarse(form: AuthFormData): Observable<string> {
     return this.http.post<ApiResponse<string>>('/api/auth/registrarse', form).pipe(
       map(response => response.data),
     );
   }
 
-  login (form : AuthFormData): Observable<string>{
+  login(form: AuthFormData): Observable<string> {
     return this.http.post<ApiResponse<string>>('/api/auth/login', form).pipe(
       map(response => response.data),
     );
   }
-
-  
 }
 
 interface AuthFormData {
   username: string;
   password: string;
+}
+
+function loadToken(): string | undefined {
+  const token = localStorage.getItem(AUTH_KEY);
+
+  return token ? token : undefined;
 }

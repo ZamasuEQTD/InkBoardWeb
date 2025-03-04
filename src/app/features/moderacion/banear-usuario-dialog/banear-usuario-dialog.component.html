@@ -1,26 +1,57 @@
-<app-dialog [fullscreenOnMobile]="true" title="Banear usuario" >
-  <form action="" class="px-1">
+<app-dialog [fullscreenOnMobile]="true" title="Banear usuario">
+  <form [formGroup]="this.form" class="px-1">
 
-    <shared-input-labeled label="Duracion">
-      <button class="outlined-button flex flex-row justify-between">
-        <span>
-          Selecciona la duracion
-        </span>
+    <div class="relative">
+      <shared-input-labeled label="Duracion">
+        <button class="outlined-button flex flex-row justify-between" (click)="showDuraciones.set(true)">
+          <span>{{this.duracion?? 'Selecciona la duracion'}}</span>
 
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>
-      </button>
-    </shared-input-labeled>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-chevron-right">
+            <path d="m9 18 6-6-6-6" />
+          </svg>
+        </button>
+      </shared-input-labeled>
 
+      @if (showDuraciones()) {
+      <div class="z-10 w-full bg-white shadow-2xl rounded-lg absolute flex flex-col" 
+        style="box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); border: 1px solid #e2e8f0;">
+        @for (item of this.duraciones; track $index) {
+        <button (click)="this.form.patchValue({
+                duracion : item
+              });showDuraciones.set(false)" class="text-start">{{item.duracion}}</button>
+        }
+      </div>
+      }
 
-    <shared-input-labeled label="Razón">
-      <button class="outlined-button flex flex-row justify-between">
-        <span>
-          Selecciona la razón
-        </span>
+    </div>
+    <div class="relative">
 
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>
-      </button>
-    </shared-input-labeled>
+      <shared-input-labeled label="Razón">
+        <button (click)="showRazones.set(true)" class="outlined-button flex flex-row justify-between">
+          <span>{{this.razon?? 'Selecciona la razón'}}</span>
+
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-chevron-right">
+            <path d="m9 18 6-6-6-6" />
+          </svg>
+        </button>
+      </shared-input-labeled>
+
+      @if (showRazones()) {
+      <div class="z-10 w-full bg-white shadow-2xl rounded-lg absolute flex flex-col"
+        style="box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); border: 1px solid #e2e8f0;">
+        @for (item of this.razones; track $index) {
+        <button (click)="this.form.patchValue({
+              razon : item
+            });showRazones.set(false)" class="text-start">{{item.razon}}</button>
+        }
+      </div>
+      }
+    </div>
+
 
     <shared-input-labeled label="Mensaje (opcional)">
       <textarea name="" id="" placeholder="Mensaje" rows="4"></textarea>

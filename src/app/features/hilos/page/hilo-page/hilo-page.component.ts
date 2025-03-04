@@ -1,6 +1,7 @@
 import {
   Component,
   computed,
+  effect,
   inject,
   OnDestroy,
   OnInit,
@@ -29,6 +30,11 @@ import { CdkMenuModule } from '@angular/cdk/menu';
 import { TiempoTranscurridoPipe } from '../../../core/pipes/tiempoTranscurrido.pipe';
 import { AutorRolePipe } from '../../../core/pipes/autor_role.pipe';
 import { HiloPageService } from '../../services/hilo-page.service';
+import { catchError, throwError } from 'rxjs';
+import { Failure } from '../../../core/interfaces/failure';
+import { Dialog } from '@angular/cdk/dialog';
+import { EstasBaneadoDialogComponent } from '../../../baneos/components/estas-baneado-dialog/estas-baneado-dialog.component';
+
 @Component({
   selector: 'hilo-page',
   imports: [
@@ -48,8 +54,8 @@ import { HiloPageService } from '../../services/hilo-page.service';
   templateUrl: './hilo-page.component.html',
   styleUrl: './hilo-page.component.css',
 })
-export class HiloPageComponent implements OnInit , OnDestroy{
-  
+export class HiloPageComponent implements OnInit, OnDestroy {
+
   static cantidadMaximaDeTaggueos = 5;
 
   hiloService = inject(HiloService);
@@ -58,7 +64,23 @@ export class HiloPageComponent implements OnInit , OnDestroy{
 
   comentariosService = inject(ComentariosService);
 
+  failure = signal<Failure | undefined>(undefined);
+
   private fb: FormBuilder = inject(FormBuilder);
+
+  private readonly dialog: Dialog = inject(Dialog);
+
+
+  showBaneoFailure = effect(() => {
+    if(this.failure()?.baneo){
+      this.dialog.open(EstasBaneadoDialogComponent, {
+        data: {
+          baneo: this.failure()?.baneo!
+        }
+      });
+    }
+  });
+
   ngOnDestroy(): void {
     this.service.reiniciar();
   }
@@ -74,22 +96,22 @@ export class HiloPageComponent implements OnInit , OnDestroy{
   route = inject(ActivatedRoute);
 
   ngOnInit(): void {
-    
+
     this.route.paramMap.subscribe((params) => {
-      
+
       const id = params.get('id') as string;
-      
-      this.service.cargar(id, ()=>{
+
+      this.service.cargar(id, () => {
         this.route.queryParams.subscribe(params => {
           setTimeout(() => {
-            const comentario:string | undefined = params['comentario'];
-          
-            if(comentario){
+            const comentario: string | undefined = params['comentario'];
+
+            if (comentario) {
               this.scrollToComentario(comentario);
             }
           }, 500);
         });
-    
+
       });
     });
   }
@@ -99,10 +121,10 @@ export class HiloPageComponent implements OnInit , OnDestroy{
     return this.service.hilo();
   }
 
- 
+
 
   get comentarios(): Comentario[] {
-    return [...this.service.destacados(),...this.service.comentarios()]
+    return [...this.service.destacados(), ...this.service.comentarios()]
   }
 
   get cargandoComentarios(): boolean {
@@ -147,6 +169,16 @@ export class HiloPageComponent implements OnInit , OnDestroy{
 
     this.comentariosService
       .comentarHilo(this.hilo!.id, data)
+      .pipe(catchError((e) => {
+
+        var failure: Failure = e.error
+
+        this.failure.set(failure);
+
+        console.log(failure);
+
+        return throwError(() => e);
+      }))
       .subscribe(() => {
         this.comentarHiloForm.reset({
           texto: '',
@@ -156,11 +188,11 @@ export class HiloPageComponent implements OnInit , OnDestroy{
       });
   }
 
-  scrollToComentario(id:string){
-        var e = document.getElementById(id)
-        
-        if(e) {
-          e.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  scrollToComentario(id: string) {
+    var e = document.getElementById(id)
+
+    if (e) {
+      e.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
 

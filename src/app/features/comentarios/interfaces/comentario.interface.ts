@@ -27,8 +27,4 @@ export interface Comentario {
 
 }
 
-export interface Detalles {
-  tag:       string;
-  tag_unico?:string;
-  dados?:    string;
-}
+ 

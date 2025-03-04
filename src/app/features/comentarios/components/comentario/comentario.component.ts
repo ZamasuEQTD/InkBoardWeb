@@ -21,7 +21,11 @@ import { AuthService } from '../../../auth/services/auth-service';
   imports: [
     MenuModule,
     RouterModule,
-    TiempoTranscurridoPipe, MediaBoxComponent, ColorComentarioComponent, CommonModule, AutorRolePipe,
+    TiempoTranscurridoPipe,
+    MediaBoxComponent,
+    ColorComentarioComponent,
+    CommonModule,
+    AutorRolePipe,
     SpilerAdvertenciaComponent
   ],
   templateUrl: './comentario.component.html',
@@ -51,6 +55,20 @@ export class ComentarioComponent implements OnInit {
   sections: TextoSection[] = [];
 
   ngOnInit(): void {
+    this.generarTextoDeComentario();
+
+    this.generarOpcionesDeMenu();
+  }
+
+  private service = inject(ComentariosService);
+
+  private auth = inject(AuthService);
+
+  public opciones: MenuItem[] = [
+
+  ];
+
+  private generarTextoDeComentario() {
     const regexs = /(>>[A-Z0-9]{8})|(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*))/g;
     let lastIndex = 0;
     let match;
@@ -96,60 +114,65 @@ export class ComentarioComponent implements OnInit {
         content: this.comentario.texto.substring(lastIndex)
       });
     }
+  }
 
+  private generarOpcionesDeMenu() {
     this.opciones = [
       {
         label: "Denunciar",
       },
-
       {
         label: "Ocultar",
         command: () => {
-          this.service.ocultar(this.comentario.id, this.hilo).subscribe()
+          this.service.ocultar(this.comentario.id, this.hilo).subscribe();
         }
       },
-      ...(this.comentario.es_autor ? [
-        {
-          label: "Desactivar notificaciones",
-        },
-      ] : []),
-      ... (this.pageService.hilo()?.es_op ? [
-        {
-          label: "Destacar",
-          command: () => {
-            this.service.destacar(this.comentario.id, this.hilo).subscribe();
-          }
-        },
-      ] : []),
-      ...(this.auth.autenticado() && this.auth.isModerador ? [
-        {
-          label: "Eliminar",
-          command: () => {
-            this.service.eliminar(this.comentario.id, this.hilo).subscribe();
-          }
-        },
-        {
-          label: "Ver usuario",
-          command: () => {
-            this.dialog.open(RegistroUsuarioDialogComponent, {
-              data: {
-                usuario: this.comentario.autor_id!
-              }
-            })
-          }
-        }
-      ] : []
+      ...(this.comentario.es_autor ? this.autorOpciones : []),
+      ...(this.pageService.hilo()?.es_op ? this.opOpciones : []),
+      ...(this.auth.autenticado() && this.auth.isModerador ? this.staffOpciones : []
       )
-    ]
+    ];
   }
 
-  private service = inject(ComentariosService);
+  get autorOpciones(): MenuItem[] {
+    return [
+      {
+        label:this.comentario.recibir_notificaciones!? "Desactivar notificaciones":"Activar notificaciones",
+      },
+    ];
+  }
 
-  private auth = inject(AuthService);
+  get opOpciones(): MenuItem[] {
+    return [
+      {
+        label: this.comentario.destacado?"Dejar de destacar" : "Destacar",
+        command: () => {
+          this.service.destacar(this.comentario.id, this.hilo).subscribe();
+        }
+      },
+    ];
+  }
 
-  public opciones: MenuItem[] = [
-
-  ];
+  get staffOpciones(): MenuItem[] {
+    return [
+      {
+        label: "Eliminar",
+        command: () => {
+          this.service.eliminar(this.comentario.id, this.hilo).subscribe();
+        }
+      },
+      {
+        label: "Ver usuario",
+        command: () => {
+          this.dialog.open(RegistroUsuarioDialogComponent, {
+            data: {
+              usuario: this.comentario.autor_id!
+            }
+          });
+        }
+      }
+    ]
+  }
 
   colorTagUnico(): string {
     return ColorPicker.generar(this.comentario.tag_unico!);

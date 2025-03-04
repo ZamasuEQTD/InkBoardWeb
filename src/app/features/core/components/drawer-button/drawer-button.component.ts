@@ -29,7 +29,7 @@ export class DrawerButtonComponent {
 
   private dialog  = inject(Dialog);
 
-  get currentUser () : CurrentUser | null{
+  get currentUser () : CurrentUser | undefined{
     return this.authService.currentUser()
   }
 

@@ -26,9 +26,7 @@ export interface Respuesta {
   id:        string;
   respuesta: string;
   votos:     number;
-}
-
- 
+} 
 
 export interface Subcategoria {
   id:     string;

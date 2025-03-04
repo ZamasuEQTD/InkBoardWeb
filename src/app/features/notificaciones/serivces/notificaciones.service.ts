@@ -19,24 +19,21 @@ export class NotificacionesService {
 
   private readonly auth = inject(AuthService);
 
-  private http = inject(HttpClient);
+  private readonly http = inject(HttpClient);
 
-  constructor(private injector: Injector) {}
+  reiniciarNotificaciones = effect(
+    () => {
+      if (!this.auth.autenticado()) {
+        this.cantNotificaciones.set(0);
+
+        this.notificaciones.set([]);
+
+        this.initialized = false;
+      }
+    },
+  );
 
   init() {
-    effect(
-      () => {
-        if (!this.auth.autenticado()) {
-          this.cantNotificaciones.set(0);
-
-          this.notificaciones.set([]);
-
-          this.initialized = false;
-        }
-      },
-      { injector: this.injector }
-    );
-
     this.cargarNotificaciones();
 
     this.initialized = true;
@@ -51,13 +48,13 @@ export class NotificacionesService {
       );
   }
 
-  leer(id:string){
+  leer(id: string) {
     this.http.post(`/api/notificaciones/${id}/leer`, null).subscribe(response => {
-      this.notificaciones.update((notis)=> notis.filter(n=> n.id != id))
+      this.notificaciones.update((notis) => notis.filter(n => n.id != id))
     });
   }
 
-  leerTodas(){
+  leerTodas() {
     this.http.post(`/api/notificaciones/leer`, null).subscribe(response => {
       this.notificaciones.set([]);
     });

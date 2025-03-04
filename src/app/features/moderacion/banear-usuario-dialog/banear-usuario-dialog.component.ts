@@ -1,25 +1,82 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { DialogComponent } from "../../shared/components/dialog/dialog.component";
 import { InputLabeledComponent } from "../../shared/components/input-labeled/input-labeled.component";
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-banear-usuario-dialog',
-  imports: [DialogComponent, InputLabeledComponent],
+  imports: [DialogComponent, InputLabeledComponent, ReactiveFormsModule],
   templateUrl: './banear-usuario-dialog.component.html',
   styleUrl: './banear-usuario-dialog.component.css',
 })
 export class BanearUsuarioDialogComponent {
-  static razones : RazonDeBaneo[] = [
+  static razones: RazonDeBaneo[] = [
     {
       id: 0,
+      razon: "Spam"
+    },
+    {
+      id: 1,
       razon: "Contenido Inapropiado"
+    },
+    {
+      id: 2,
+      razon: "Categoria Incorrecta"
+    },
+    {
+      id: 3,
+      razon: "Otro"
     }
   ]
 
-  static duracions : DuracionDeBaneo [] = []
+  static duraciones: DuracionDeBaneo[] = [
+    {
+      id: 0,
+      duracion: "Cinco Minutos"
+    },
+    {
+      id: 1,
+      duracion: "Una Hora"
+    },
+    {
+      id: 2,
+      duracion: "Un Día"
+    },
+    {
+      id: 3,
+      duracion: "Una Semana"
+    },
+    {
+      id: 4,
+      duracion: "Un Mes"
+    },
+    {
+      id: 5,
+      duracion: "Permanente"
+    }
+  ]
 
-  private fb : FormBuilder  = inject(FormBuilder);
+  showDuraciones = signal(false);
+  showRazones = signal(false);
+
+
+  public get razones() {
+    return BanearUsuarioDialogComponent.razones;
+  }
+
+  public get duraciones() {
+    return BanearUsuarioDialogComponent.duraciones;
+  }
+
+  public get razon(): string | undefined {
+    return this.form.get('razon')?.value?.razon;
+  }
+
+  public get duracion(): string | undefined {
+    return this.form.get('duracion')?.value?.duracion;
+  }
+
+  private fb: FormBuilder = inject(FormBuilder);
 
   form = this.fb.group({
     razon: this.fb.control<RazonDeBaneo | undefined>(undefined),
@@ -30,11 +87,11 @@ export class BanearUsuarioDialogComponent {
 
 
 interface RazonDeBaneo {
-  id:number
+  id: number
   razon: string
 }
 
 interface DuracionDeBaneo {
-  id:number
+  id: number
   duracion: string
 }

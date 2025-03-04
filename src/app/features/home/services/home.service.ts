@@ -15,7 +15,7 @@ export class HomeService  {
   cargarPortadas():Observable<Portada[]> {
     return this.http.get<ApiResponse<Portada[]>>("/api/hilos")
     .pipe(
-      map((response)=> response.data)
+      map((response)=> response.data),
     );
   }
 }

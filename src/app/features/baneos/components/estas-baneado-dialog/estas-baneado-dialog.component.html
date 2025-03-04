@@ -1,0 +1,18 @@
+<app-dialog [fullscreenOnMobile]="false" #dialog>
+    <div class="flex justify-center flex-col">
+
+        <div class="flex flex-col">
+            <span class="text-2xl font-bold">Estás baneado</span>
+            <span class="text-stone-500">No puedes realizar esta accion</span>
+        </div>
+
+        <span class="text-lg">Razon: <span class="font-bold">{{data.baneo.razon}}</span></span>
+        <span>Moderador :<span class="font-bold">{{data.baneo.moderador}}</span></span>
+        <span>Finaliza :<span class="font-bold">{{data.baneo.finalizacion | date:'dd/MM/yyyy'}}</span></span>
+        <div class="rounded-md bg-gray-200 p-2 w-full min-h-[70px]">
+            <span>{{data.baneo.mensaje}}</span>
+        </div>
+
+        <button (click)="dialog.close()" >Aceptar</button>
+    </div>
+</app-dialog>

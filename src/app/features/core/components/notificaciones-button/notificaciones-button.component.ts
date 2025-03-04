@@ -12,7 +12,6 @@ import { NotificacionesService } from '../../../notificaciones/serivces/notifica
 
 @Component({
   selector: 'app-notificaciones-button',
-  imports: [DialogHeaderComponent, NotificacionComponent, NotificacionSkeletonComponent],
   templateUrl: './notificaciones-button.component.html',
   styleUrl: './notificaciones-button.component.css',
 })

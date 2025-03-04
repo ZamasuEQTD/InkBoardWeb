@@ -16,7 +16,7 @@
           [src]="hilo.subcategoria.imagen"
           alt=""
         />
-        <a routerLink="/" class="font-semibold text-blue-700" href=""
+        <a routerLink="/" class="font-semibold text-sm text-blue-700" href=""
           ><span>{{hilo.subcategoria.nombre}}</span></a
         >
       </div>
@@ -62,11 +62,9 @@
         ></app-media-box>
       </div>
 
-      <span class="titulo-hilo text-2xl font-bold break-words">
-        {{ hilo.titulo }}
-      </span>
+      <span class="titulo-hilo text-2xl font-bold break-words">{{ hilo.titulo }}</span>
 
-      <span class="break-words"> {{ hilo.descripcion }} </span>
+      <span class="break-words">{{ hilo.descripcion }}</span>
       } @else {
         <app-hilo-body-skeleton></app-hilo-body-skeleton>
       }

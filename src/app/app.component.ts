@@ -4,9 +4,7 @@ import { RouterOutlet } from '@angular/router';
 
 import { PrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
-import { environment } from '../environments/environment.development';
 import { AuthService } from './features/auth/services/auth-service';
 @Component({
     selector: 'app-root',
@@ -15,7 +13,7 @@ import { AuthService } from './features/auth/services/auth-service';
     templateUrl: './app.component.html',
     styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'InkBoard';
 
   private auth:AuthService = inject(AuthService)
@@ -31,9 +29,5 @@ export class AppComponent implements OnInit {
               }
           }
       })
-  }
-
-  ngOnInit(): void {
-    this.auth.restaurarSesion();
   }
 }

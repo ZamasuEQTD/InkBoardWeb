@@ -1,21 +1,21 @@
 <div class="portada-container relative overflow-hidden ">
-  <div [ngClass]="{ 'blur-md': this.portada.miniatura.spoiler}" class="w-full h-full bg-cover" style="background-image: url({{this.portada.miniatura.url}});"></div>
+  <div [ngClass]="{ 'blur-md': portada().miniatura.spoiler}" class="w-full h-full bg-cover" [style.backgroundImage]="'url(' + portada().miniatura.url + ')'"></div>
 
   <div  class=" w-full h-full absolute top-0" >
 
     <div class="fade-gradient absolute w-full h-full flex flex-col p-1 justify-between">
 
-      <a [routerLink]="'hilo/'+ this.portada.id" class="w-full h-full block absolute top-0 left-0 inset-0"></a>
+      <a [routerLink]="'hilo/'+ this.portada().id" class="w-full h-full block absolute top-0 left-0 inset-0"></a>
 
       <div class="flex flex-row text-sm text-white">
 
         <div class=" flex flex-wrap flex-1 gap-[0.125rem] ">
 
           <span class="bg-green-500 px-1 font-semibold rounded-md leading-5">
-            {{this.portada.subcategoria | uppercase}}
+            {{this.portada().subcategoria | uppercase}}
           </span>
 
-          @if(this.portada.es_nuevo){
+          @if(this.portada().es_nuevo){
             <span class="bg-blue-500 px-1 font-semibold rounded-md leading-5">
               Nuevo
             </span>
@@ -37,7 +37,7 @@
       </div>
 
       <span *ngIf="true" class="text-lg font-semibold line-clamp-2 text-white">
-        {{this.portada.titulo}}
+        {{this.portada().titulo}}
       </span>
 
     </div>
@@ -48,8 +48,6 @@
 
 
 
-
-
-<p-menu #menu [popup]="true" [model]="this.opciones">
+<p-menu #menu [popup]="true" [model]="this.opciones()">
 
 </p-menu>

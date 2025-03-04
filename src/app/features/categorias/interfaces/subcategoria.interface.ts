@@ -5,6 +5,6 @@ export interface Categoria {
 
 export interface Subcategoria {
   id: string
-  image : string
+  imagen : string
   nombre: string
 }
