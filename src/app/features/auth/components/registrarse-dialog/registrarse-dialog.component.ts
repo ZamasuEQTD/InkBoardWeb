@@ -1,9 +1,9 @@
 import { Component, EventEmitter, inject, Inject, Output } from '@angular/core';
-import { InputLabeledComponent } from '../../shared/components/input-labeled/input-labeled.component';
-import { DialogHeaderComponent } from "../../shared/components/dialog-header/dialog-header.component";
 import { DialogRef } from '@angular/cdk/dialog';
-import { AuthService} from '../services/auth-service';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { InputLabeledComponent } from '../../../shared/components/input-labeled/input-labeled.component';
+import { DialogHeaderComponent } from '../../../shared/components/dialog-header/dialog-header.component';
+import { AuthService } from '../../services/auth-service';
 
 @Component({
   selector: 'app-registrarse-dialog',

@@ -1,11 +1,10 @@
 import { DialogRef, Dialog } from '@angular/cdk/dialog';
 import { Component, inject, signal } from '@angular/core';
-import { DialogHeaderComponent } from '../../shared/components/dialog-header/dialog-header.component';
-import { DialogComponent } from '../../shared/components/dialog/dialog.component';
-import { InputLabeledComponent } from '../../shared/components/input-labeled/input-labeled.component';
-import { AuthService } from '../services/auth-service';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { InputLabeledComponent } from '../../../shared/components/input-labeled/input-labeled.component';
+import { DialogComponent } from '../../../shared/components/dialog/dialog.component';
+import { AuthService } from '../../services/auth-service';
 
 @Component({
   selector: 'app-login-dialog',
