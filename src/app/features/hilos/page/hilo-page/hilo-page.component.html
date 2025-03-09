@@ -3,7 +3,8 @@
 
 <div class="md:h-[calc(100vh-56px)] w-full flex flex-col md:flex-row md:overflow-hidden relative ">
   <div class="md:w-[55%] md:h-full">
-    <div class="flex flex-col md:overflow-y-auto md:w-full md:h-full px-2 py-3 rounded-lg md:rounded-none bg-gray-500/15">
+    <div
+      class="flex flex-col md:overflow-y-auto md:w-full md:h-full px-2 py-3 rounded-lg md:rounded-none bg-gray-500/15">
       @if (hilo) {
 
       <div class="hilo-section flex items-center gap-x-2">
@@ -43,13 +44,17 @@
       </div>
 
       @if (this.hilo?.encuesta) {
-        <app-encuesta class="mb-2" [encuesta]="this.hilo?.encuesta!"/>
+      <app-encuesta class="mb-2" [encuesta]="this.hilo?.encuesta!" />
       }
 
       <div class="flex justify-center mb-1">
-        <app-media-box [media]="hilo.media" [dimensionableSize]="{
-            maxHeight: '600px'
-          }"></app-media-box>
+        <div class="rounded-2xl overflow-hidden">
+          <app-spiler-advertencia [spoiler]="this.hilo!.media.spoiler" (onToggle)="this.toggleSpoiler()">
+            <app-media-box [media]="hilo.media" [dimensionableSize]="{
+              maxHeight: '600px'
+            }"></app-media-box>
+          </app-spiler-advertencia>
+        </div>
       </div>
 
       <span class="titulo-hilo text-2xl font-bold break-words">{{ hilo.titulo }}</span>

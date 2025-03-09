@@ -35,6 +35,7 @@ import { Failure } from '../../../core/interfaces/failure';
 import { Dialog } from '@angular/cdk/dialog';
 import { EstasBaneadoDialogComponent } from '../../../baneos/components/estas-baneado-dialog/estas-baneado-dialog.component';
 import { EncuestaComponent } from "../../../encuestas/components/encuesta/encuesta.component";
+import { SpilerAdvertenciaComponent } from "../../../shared/components/spiler-advertencia/spiler-advertencia.component";
 
 @Component({
   selector: 'hilo-page',
@@ -51,7 +52,8 @@ import { EncuestaComponent } from "../../../encuestas/components/encuesta/encues
     SpoileablePickedMediaComponent,
     TiempoTranscurridoPipe,
     AutorRolePipe,
-    EncuestaComponent
+    EncuestaComponent,
+    SpilerAdvertenciaComponent
 ],
   templateUrl: './hilo-page.component.html',
   styleUrl: './hilo-page.component.css',
@@ -118,12 +120,17 @@ export class HiloPageComponent implements OnInit, OnDestroy {
     });
   }
 
+  toggleSpoiler() :void {
+    this.service.hilo.update((h) => {
+      if (!h) return h;
+
+      return { ...h, media : {...h.media, spoiler: !h.media.spoiler} };
+    });
+  }
 
   get hilo(): Hilo | undefined {
     return this.service.hilo();
   }
-
-
 
   get comentarios(): Comentario[] {
     return [...this.service.destacados(), ...this.service.comentarios()]

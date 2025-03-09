@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, input, output, signal } from '@angular/core';
 
 @Component({
   selector: 'app-spiler-advertencia',
@@ -7,9 +7,13 @@ import { Component, signal } from '@angular/core';
   styleUrl: './spiler-advertencia.component.css',
 })
 export class SpilerAdvertenciaComponent {
-  spoiler = signal(true);
+
+  spoiler = input.required<boolean>();
+
+  onToggle = output<void>();
+
 
   toggle(){
-    this.spoiler.update(s=> !s);
+    this.onToggle.emit();
   }
 }

@@ -1,5 +1,11 @@
-@if (spoiler()) {
-    <div class="absolute top-0 bg-black bg-opacity-25 backdrop-blur-2xl w-full h-full flex justify-center items-center p-2">
-        <button class="outlined-button bg-transparent border-white text-white" (click)="toggle()"><span>Mostrar</span></button>
+<div class="relative">
+
+    <ng-content></ng-content>
+
+    @if (spoiler()) {
+    <div
+        class="absolute top-0 bg-black bg-opacity-25 backdrop-blur-2xl w-full h-full flex justify-center items-center p-2">
+        <button class="outlined-button bg-transparent border-white text-white" (click)="toggle()"><span>Ver contenido</span></button>
     </div>
-}
+    }
+</div>
