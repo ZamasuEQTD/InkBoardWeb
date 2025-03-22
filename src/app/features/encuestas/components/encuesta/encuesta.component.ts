@@ -20,7 +20,6 @@ export class EncuestaComponent {
   votosTotales = computed<number>(() => this.encuesta().respuestas.reduce((acc, respuesta) => acc + respuesta.votos, 0));
 
   votar(): void {
-
     if(!this.opcionSeleccionada()) return;
     
     this.http.post(`/api/encuestas/votar/encuesta/${this.encuesta().id}/respuesta/${this.opcionSeleccionada()}`, {}).subscribe();

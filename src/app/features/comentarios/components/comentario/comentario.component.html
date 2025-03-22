@@ -65,7 +65,7 @@
         }" 
       >
       @if(this.comentario.media!.spoiler){
-        <app-spiler-advertencia #dimensionable></app-spiler-advertencia>
+        <app-spiler-advertencia [spoiler]="false" #dimensionable></app-spiler-advertencia>
       }
     </app-media-box> 
   }
